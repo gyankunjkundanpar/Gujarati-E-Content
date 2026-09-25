@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="gu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ધોરણ 8 ગુજરાતી — બકોર પટેલનો કારેલાં પ્રયોગ</title>
+<style>
+:root{--sky:#e0f7ff;--sky2:#8edcff;--blue:#0284c7;--navy:#111827;--gold:#fbbf24;--gold2:#f59e0b;--purple:#7c3aed;--pink:#831843;--pink9:#4c0519;--green:#16a34a;--red:#dc2626;--ink:#172033}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:"Noto Sans Gujarati","Nirmala UI","Shruti",system-ui,sans-serif;color:var(--ink)}
+body{background:linear-gradient(135deg,#e9fbff,#d9f4ff 48%,#f3e8ff);overflow-x:hidden}button,input,select{font:inherit}button{cursor:pointer}.hide{display:none!important}
+#front{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 14px;background:radial-gradient(circle at 10% 10%,#fff 0 5%,transparent 25%),linear-gradient(135deg,#dff8ff,#bceeff 50%,#eee5ff)}
+.frontCard{width:min(980px,100%);padding:30px;border:2px solid white;border-radius:30px;background:#ffffffdf;box-shadow:0 25px 70px #0284c733;backdrop-filter:blur(12px)}
+.brand{text-align:center}.brand small{font-weight:1000;color:#075985;font-size:clamp(12px,1.8vw,17px)}.brand h1{margin:8px 0;color:#4c1d95;font-size:clamp(24px,4vw,43px);line-height:1.3}.brand p{margin:0 0 22px;color:#0369a1;font-weight:1000;font-size:20px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field label{display:block;font-weight:1000;color:#164e63;margin-bottom:7px}.field input,.field select{width:100%;padding:14px;border:2px solid #67e8f9;border-radius:16px;background:#f8fdff;color:#172554;font-weight:1000;font-size:18px;outline:none}.field input:focus,.field select:focus{border-color:#8b5cf6;box-shadow:0 0 0 4px #8b5cf622}.field input::placeholder{color:#7c3aed;font-weight:800}
+.start,.primary{border:0;border-radius:17px;padding:13px 22px;color:white;font-weight:1000;background:linear-gradient(135deg,#0284c7,#7c3aed);box-shadow:0 7px 0 #075985,0 12px 25px #0284c733}.start{display:block;margin:24px auto 5px;font-size:20px;min-width:245px}.hint{text-align:center;font-weight:800;color:#475569}
+#game{display:none;min-height:100vh}.top{background:linear-gradient(90deg,#0b1220,#1e1b4b,#0f172a);color:#fde68a;text-align:center;padding:8px;border-bottom:2px solid var(--gold);font-weight:1000;font-size:clamp(11px,1.6vw,15px)}
+header{background:linear-gradient(135deg,#111827,#1e1b4b,#0f172a);color:#fff;text-align:center;padding:12px 14px;position:sticky;top:0;z-index:20;border-bottom:2px solid var(--gold)}
+.lo{color:#67e8f9;font-weight:1000;font-size:clamp(14px,2vw,20px)}.chapter{margin:4px auto;font-size:clamp(20px,3.5vw,35px);line-height:1.3;color:#fde68a;font-weight:1000}.dash{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}.pill{padding:7px 13px;border:1px solid #ffffff33;border-radius:999px;background:#ffffff12;font-weight:1000}.pname{color:#f0abfc}.pscore{color:#86efac}.pprog{color:#93c5fd}
+.tabs{display:flex;gap:9px;overflow:auto;padding:11px 14px;background:#e0f2fe;border-bottom:1px solid #bae6fd}.tab{white-space:nowrap;padding:10px 15px;border:2px solid #7dd3fc;border-radius:14px;background:#fff;color:#075985;font-weight:1000}.tab.active{background:linear-gradient(135deg,#0ea5e9,#7c3aed);color:#fff;border-color:#7c3aed}
+main{width:min(1120px,100%);margin:auto;padding:17px 14px 70px}.activity{padding:18px;border-radius:22px;background:#ffffffed;border:2px solid #bae6fd;box-shadow:0 12px 35px #0c4a6e22;margin-bottom:16px}.activity h2{margin:0;color:#7c2d12;font-size:clamp(20px,3vw,30px);line-height:1.4}.activity p{font-weight:800;color:#475569}
+.qcard{background:#fff;border:2px solid #bae6fd;border-radius:24px;padding:19px;box-shadow:0 12px 35px #0c4a6e22;margin-bottom:16px}.qtop{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}.qnum{background:#0ea5e9;color:#fff;border-radius:999px;padding:7px 12px;font-weight:1000}.tag{background:#fef3c7;color:#92400e;border-radius:999px;padding:7px 12px;font-weight:1000}.qtext{font-size:clamp(19px,2.7vw,29px);font-weight:1000;line-height:1.55;color:#172554;margin:12px 0}
+.opts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.opt{min-height:70px;border:0;border-radius:19px;padding:14px;background:linear-gradient(145deg,#effcff,#e8e2ff);box-shadow:inset 0 -5px 0 #94a3b8,0 8px 18px #0f172a18;color:#172033;font-weight:1000;font-size:clamp(17px,2.3vw,23px);transition:.18s}.opt:hover:not(:disabled){transform:translateY(-3px)}.opt.correct{background:#dcfce7;box-shadow:inset 0 -5px 0 #16a34a,0 0 0 4px #22c55e44;animation:pulse .5s}.opt.wrong{background:#fee2e2;box-shadow:inset 0 -5px 0 #dc2626,0 0 0 4px #ef444444;animation:shake .45s}
+@keyframes pulse{50%{transform:scale(1.03)}}@keyframes shake{25%,75%{transform:translateX(-6px)}50%{transform:translateX(6px)}}
+.feedback{display:none;margin-top:14px;padding:14px;border-radius:17px;font-weight:900;line-height:1.65}.feedback.show{display:block}.good{background:#dcfce7;border:2px solid #86efac;color:#166534}.bad{background:#fee2e2;border:2px solid #fca5a5;color:#991b1b}
+.controls{display:flex;gap:9px;justify-content:space-between;flex-wrap:wrap;margin-top:15px}.ctrl,.explain{border:2px solid #93c5fd;border-radius:14px;background:#fff;color:#1e3a8a;padding:10px 15px;font-weight:1000}.explain{background:#fef3c7;color:#92400e;border:0}.ctrl:disabled{opacity:.4}
+.footer{position:fixed;bottom:0;left:0;right:0;z-index:30;overflow:hidden;white-space:nowrap;padding:9px 0;background:linear-gradient(90deg,#4c0519,#831843,#4c0519);border-top:3px solid #fbbf24;color:#fcd34d;font-weight:1000;text-shadow:0 2px 5px #000}.ticker{display:inline-block;padding-left:100%;animation:scroll 18s linear infinite}@keyframes scroll{to{transform:translateX(-100%)}}
+.overlay{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:15px;background:#020617aa;backdrop-filter:blur(5px)}.modal{width:min(650px,100%);background:white;border:3px solid #fbbf24;border-radius:25px;padding:23px;text-align:center;box-shadow:0 25px 80px #0008}.modal h3{color:#7c2d12;font-size:28px;margin:5px}.modal p{font-weight:800;line-height:1.7}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+#balloons{position:fixed;inset:0;pointer-events:none;z-index:90;overflow:hidden}.balloon{position:absolute;bottom:-100px;width:45px;height:55px;border-radius:50%;animation:up 3s ease-out forwards;box-shadow:inset -8px -8px 12px #0002,inset 7px 5px 10px #fff7}.balloon:after{content:"";position:absolute;left:50%;bottom:-20px;width:2px;height:24px;background:#64748b}@keyframes up{to{transform:translateY(-115vh) rotate(15deg);opacity:0}}
+#certScreen{display:none;min-height:100vh;padding:18px;background:linear-gradient(135deg,#dff8ff,#fff7d6,#fce7f3)}.certActions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-bottom:15px}.cert{width:min(1000px,100%);margin:auto;min-height:700px;text-align:center;padding:35px 25px;background:linear-gradient(145deg,#fffef7,#effbff,#fff7ed);border:12px double #d97706;box-shadow:0 20px 60px #92400e33;position:relative}.cert:before{content:"";position:absolute;inset:14px;border:3px solid #fbbf24}.cert>*{position:relative}.ctop{font-weight:1000;color:#075985;font-size:clamp(13px,1.8vw,18px)}.ctitle{font-size:clamp(30px,5vw,54px);font-weight:1000;color:#92400e;margin:17px}.csub{font-weight:1000;color:#4c1d95;font-size:clamp(16px,2.3vw,24px)}.cname{display:inline-block;color:#0369a1;font-size:clamp(30px,5vw,55px);font-weight:1000;margin:23px;padding:0 22px 8px;border-bottom:3px dashed #f59e0b}.cinfo{max-width:760px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:9px;text-align:left}.cinfo div{background:#fff;padding:10px 13px;border-radius:13px;border:1px solid #fde68a;font-weight:900}.performance{font-size:clamp(22px,3.4vw,35px);font-weight:1000;color:#15803d;margin:24px}.seal{margin:auto;width:90px;height:90px;border:5px solid #d97706;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#92400e;font-weight:1000}.cfooter{margin-top:25px;color:#475569;font-weight:900}
+@media(max-width:700px){.grid,.opts,.cinfo{grid-template-columns:1fr}.frontCard{padding:20px}.qcard{padding:14px}.controls{justify-content:center}.ctrl{flex:1;min-width:95px}.cert{min-height:620px;padding:25px 13px}}
+</style>
+</head>
+<body>
+
+<section id="front">
+<div class="frontCard">
+<div class="brand">
+<small>મહારાણીશ્રીગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત</small>
+<h1>ગુજરાતી E-Content ધોરણ 6 થી 8</h1>
+<p>ધોરણ: 8 ગુજરાતી (સત્ર-1) એકમ-6 — બકોર પટેલનો કારેલાં પ્રયોગ</p>
+</div>
+<div class="grid">
+<div class="field"><label>વિદ્યાર્થીનું નામ</label><input id="name" placeholder="તમારું નામ લખો"></div>
+<div class="field"><label>શાળાનું નામ</label><input id="school" placeholder="શાળાનું નામ લખો"></div>
+<div class="field"><label>ધોરણ</label><select id="std"><option value="">ધોરણ પસંદ કરો</option><option>6</option><option>7</option><option>8</option></select></div>
+<div class="field"><label>સ્થળ</label><input id="place" placeholder="સ્થળ લખો"></div>
+</div>
+<button class="start" onclick="start()">🚀 ગેમ શરૂ કરો</button>
+<div class="hint">એક પ્રશ્ન • એક પ્રયત્ન • શીખો • રમો • પ્રમાણપત્ર મેળવો</div>
+</div>
+</section>
+
+<section id="game">
+<div class="top">મહારાણીશ્રીગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8</div>
+<header>
+<div class="lo">LO 5.2.1 — આપેલી સામગ્રીમાંથી વાક્ય રચના અને શબ્દોમાં થતી ચમત્કૃતિ પારખે છે.</div>
+<div class="chapter">ધોરણ: 8 ગુજરાતી (સત્ર-1) એકમ-6 — બકોર પટેલનો કારેલાં પ્રયોગ</div>
+<div class="dash"><span class="pill pname">નામ: <b id="dname"></b></span><span class="pill pscore">સ્કોર: <b id="dscore">0</b> / <b id="total">17</b></span><span class="pill pprog">પ્રશ્ન: <b id="dprogress">1</b> / <b id="alltotal">17</b></span></div>
+</header>
+<nav class="tabs"><button class="tab active" id="t1" onclick="setActivity(1)">પ્રવૃત્તિ 1</button><button class="tab" id="t2" onclick="setActivity(2)">પ્રવૃત્તિ 2</button><button class="tab" id="t3" onclick="setActivity(3)">પ્રવૃત્તિ 3</button></nav>
+
+<main>
+<div class="activity"><h2 id="activityTitle"></h2><p id="activityHelp"></p></div>
+<div id="questionArea"></div>
+</main>
+<div class="footer"><span class="ticker">Disclaimer : આ કન્ટેન્ટ મહારાણીશ્રીગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા નિર્મિત કરવામાં આવ્યું છે</span></div>
+</section>
+
+<section id="certScreen">
+<div class="certActions"><button class="primary" onclick="downloadPNG()">🖼️ પ્રમાણપત્ર ઈમેજ</button><button class="primary" onclick="downloadPDF()">📄 પ્રમાણપત્ર PDF</button><button class="ctrl" onclick="restart()">🔄 ફરીથી રમો</button></div>
+<div class="cert" id="certificate">
+<div class="ctop">મહારાણીશ્રીગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત<br>ગુજરાતી E-Content ધોરણ 6 થી 8</div>
+<div class="ctitle">પ્રમાણપત્ર</div>
+<div class="csub">LO 5.2.1 — આપેલી સામગ્રીમાંથી વાક્ય રચના અને શબ્દોમાં થતી ચમત્કૃતિ પારખે છે.</div>
+<div class="csub">ધોરણ: 8 ગુજરાતી (સત્ર-1) એકમ-6 — બકોર પટેલનો કારેલાં પ્રયોગ</div>
+<div class="cname" id="cname"></div>
+<div class="cinfo"><div>શાળા: <span id="cschool"></span></div><div>ધોરણ: <span id="cstd"></span></div><div>સ્થળ: <span id="cplace"></span></div><div>તારીખ: <span id="cdate"></span></div><div>મેળવેલ ગુણ: <span id="cscore"></span></div><div>કુલ ગુણ: <span id="ctotal"></span></div></div>
+<div class="performance" id="performance"></div>
+<div class="seal">E-CONTENT<br>BHUJ</div><div class="cfooter">અભિનંદન! શીખતા રહો, આગળ વધતા રહો.</div>
+</div>
+</section>
+
+<div id="overlay" class="overlay hide"><div class="modal"><div id="micon" style="font-size:58px">💡</div><h3 id="mtitle"></h3><p id="mtext"></p><div class="actions"><button class="primary" id="mbtn">બરાબર</button></div></div></div>
+<div id="balloons"></div>
+
+<script>
+const activities={
+1:{
+ title:"પ્રવૃત્તિ 1: નીચે આપેલ શબ્દોમાંથી દ્વિરુક્ત અને રવાનુકારી શબ્દો અલગ પાડો.",
+ help:"યોગ્ય પ્રકાર પસંદ કરો. દરેક પ્રશ્નમાં એક જ પ્રયત્ન મળશે.",
+ qs:[
+ {q:"અડખેપડખે",a:"દ્વિરુક્ત",e:"‘અડખેપડખે’માં મૂળ શબ્દના પુનરાવર્તનથી બનેલી રચના છે, તેથી તે દ્વિરુક્ત શબ્દ છે."},
+ {q:"ટપટપ",a:"રવાનુકારી",e:"‘ટપટપ’ શબ્દ અવાજનું અનુકરણ કરાવે છે, તેથી તે રવાનુકારી શબ્દ છે."},
+ {q:"ઢમઢમ",a:"રવાનુકારી",e:"‘ઢમઢમ’ ઢોલ જેવા અવાજનું અનુકરણ કરે છે, તેથી તે રવાનુકારી શબ્દ છે."},
+ {q:"લાભાલાભ",a:"દ્વિરુક્ત",e:"‘લાભાલાભ’માં સમાન ધ્વનિ/શબ્દના પુનરાવર્તનથી રચના થયેલી છે, તેથી તે દ્વિરુક્ત શબ્દ છે."},
+ {q:"છનનન",a:"રવાનુકારી",e:"‘છનનન’ ઝણઝણાટ જેવા અવાજનું અનુકરણ કરાવે છે, તેથી તે રવાનુકારી શબ્દ છે."},
+ {q:"ચોપડી-બોપડી",a:"દ્વિરુક્ત",e:"‘ચોપડી-બોપડી’માં સમાન પ્રકારના શબ્દનું પુનરાવર્તન છે, તેથી તે દ્વિરુક્ત શબ્દ છે."},
+ {q:"વરસોવરસ",a:"દ્વિરુક્ત",e:"‘વરસોવરસ’માં ‘વરસ’ શબ્દના પુનરાવર્તનથી રચના થઈ છે, તેથી તે દ્વિરુક્ત શબ્દ છે."},
+ {q:"ધબધબ",a:"રવાનુકારી",e:"‘ધબધબ’ ધબકારા જેવા અવાજનું અનુકરણ કરે છે, તેથી તે રવાનુકારી શબ્દ છે."},
+ {q:"શાક-બાક",a:"દ્વિરુક્ત",e:"‘શાક-બાક’માં સમાન પ્રકારની પુનરાવર્તિત રચના છે, તેથી તે દ્વિરુક્ત શબ્દ છે."},
+ {q:"બુડબુડ",a:"રવાનુકારી",e:"‘બુડબુડ’ પાણીમાં થતા બબડાટ/બબલ જેવા અવાજનું અનુકરણ કરે છે, તેથી તે રવાનુકારી શબ્દ છે."}
+]},
+2:{
+ title:"પ્રવૃત્તિ 2: ઉદાહરણ મુજબ આપેલ શબ્દનો વિરોધી શબ્દ વાક્યમાંથી શોધો.",
+ help:"વાક્યમાંથી યોગ્ય વિરોધી શબ્દ પસંદ કરો.",
+ qs:[
+ {q:"બસ મોડી હતી, તેથી રાત્રે મોડા ઘરે પહોંચ્યા.",a:"દિવસ",e:"‘દિવસ’નો વિરોધી શબ્દ ‘રાત્રિ/રાત’ છે. વાક્યમાં ‘રાત્રે’ આપેલું હોવાથી અહીં શોધવાનો શબ્દ ‘રાત્રે’ છે અને આપેલી જોડી દિવસ × રાત્રે છે.",display:"દિવસ × ______"},
+ {q:"શબનમ પ્રામાણિક છે.",a:"પ્રામાણિક",e:"‘અપ્રામાણિક’નો વિરોધી શબ્દ ‘પ્રામાણિક’ છે અને તે વાક્યમાં આપેલો છે.",display:"અપ્રામાણિક × ______"},
+ {q:"બહું ગળ્યું ખાવું સ્વાસ્થ્ય માટે હાનિકારક છે.",a:"ગળ્યું",e:"‘કડવું’નો વિરોધી શબ્દ ‘ગળ્યું’ છે અને તે વાક્યમાં આપેલો છે.",display:"કડવું × ______"},
+ {q:"નિરોગી શરીર એ ઈશ્વર કૃપા છે.",a:"નિરોગી",e:"‘રોગી’નો વિરોધી શબ્દ ‘નિરોગી’ છે અને તે વાક્યમાં આપેલો છે.",display:"રોગી × ______"},
+ {q:"પુણ્યશાળી વ્યક્તિ જ અહીં પહોંચી શકે છે.",a:"પુણ્યશાળી",e:"‘પાપી’નો વિરોધી શબ્દ ‘પુણ્યશાળી’ છે અને તે વાક્યમાં આપેલો છે.",display:"પાપી × ______"}
+]},
+3:{
+ title:"પ્રવૃત્તિ 3: નીચે આપેલા શબ્દોની ઉદાહરણ પ્રમાણે સમાનાર્થી અને વિરોધી શબ્દોની જોડી બનાવો.",
+ help:"દરેક પ્રશ્નમાં આપેલા ત્રણ શબ્દોમાંથી યોગ્ય સમાનાર્થી અથવા વિરોધી શબ્દ પસંદ કરો.",
+ qs:[
+ {q:"કડવું — મધુર, કડવાશ, કટકો",a:"કડવાશ",kind:"સમાનાર્થી",e:"આ પ્રશ્નમાં અપાયેલ સૂચના મુજબ ‘કડવું - કડવાશ’ સમાનાર્થી જોડી છે. ‘મધુર’ વિરોધી અર્થ આપે છે."},
+ {q:"કડવું — મધુર, કડવાશ, કટકો",a:"મધુર",kind:"વિરોધાર્થી",e:"‘કડવું’નો વિરોધી અર્થ ‘મધુર’ છે."},
+ {q:"સ્વાદિષ્ટ — બેસ્વાદ, સ્વાદ, રુચિકર",a:"રુચિકર",kind:"સમાનાર્થી",e:"‘સ્વાદિષ્ટ’ અને ‘રુચિકર’ બંનેનો અર્થ સ્વાદવાળું/ગમતું એવો થાય છે, તેથી તે સમાનાર્થી છે."},
+ {q:"સ્વાદિષ્ટ — બેસ્વાદ, સ્વાદ, રુચિકર",a:"બેસ્વાદ",kind:"વિરોધાર્થી",e:"‘સ્વાદિષ્ટ’નો વિરોધી અર્થ ‘બેસ્વાદ’ છે."},
+ {q:"વખાણ — ટકોર, ટીકા, પ્રશંસા",a:"પ્રશંસા",kind:"સમાનાર્થી",e:"‘વખાણ’ અને ‘પ્રશંસા’ સમાન અર્થવાળા શબ્દો છે."},
+ {q:"વખાણ — ટકોર, ટીકા, પ્રશંસા",a:"ટીકા",kind:"વિરોધાર્થી",e:"આ પ્રવૃત્તિની આપેલી જોડી મુજબ ‘વખાણ × ટીકા’ છે; તેથી યોગ્ય જવાબ ‘ટીકા’ છે."},
+ {q:"અમૃત — અમર, વિષ, સુધા",a:"સુધા",kind:"સમાનાર્થી",e:"‘અમૃત’ અને ‘સુધા’ સમાન અર્થવાળા શબ્દો છે."},
+ {q:"અમૃત — અમર, વિષ, સુધા",a:"વિષ",kind:"વિરોધાર્થી",e:"‘અમૃત’ અને ‘વિષ’ પરસ્પર વિરોધી અર્થ દર્શાવે છે."},
+ {q:"સાવધ — સચેત, અસાવધ, અસાધારણ",a:"સચેત",kind:"સમાનાર્થી",e:"‘સાવધ’ અને ‘સચેત’ બંનેનો અર્થ સાવધાન/જાગૃત એવો થાય છે."},
+ {q:"સાવધ — સચેત, અસાવધ, અસાધારણ",a:"અસાવધ",kind:"વિરોધાર્થી",e:"‘સાવધ’નો વિરોધી શબ્દ ‘અસાવધ’ છે."}
+]}
+};
+
+let user={}, activity=1, order=[], pos=0, score=0, answered={};
+
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function start(){
+ const name=document.getElementById("name").value.trim(),school=document.getElementById("school").value.trim(),std=document.getElementById("std").value,place=document.getElementById("place").value.trim();
+ if(!name||!school||!std||!place){alert("કૃપા કરીને તમામ માહિતી ભરો.");return}
+ user={name,school,std,place};score=0;activity=1;answered={};document.getElementById("front").style.display="none";document.getElementById("game").style.display="block";document.getElementById("certScreen").style.display="none";document.getElementById("dname").textContent=name;document.getElementById("total").textContent=17;document.getElementById("alltotal").textContent=17;setActivity(1)
+}
+function setActivity(n){
+ if(n>1 && !activityDone(activity))return alert("પહેલા વર્તમાન પ્રવૃત્તિ પૂર્ણ કરો.");
+ activity=n;pos=0;order=shuffle(activities[n].qs).map((q,i)=>({...q,opts:shuffle(n===1?["દ્વિરુક્ત","રવાનુકારી"]:n===2?["રાત્રે","પ્રામાણિક","ગળ્યું","નિરોગી","પુણ્યશાળી"].includes(q.a)?[q.a,"અન્ય શબ્દ","વાક્યમાં નથી"]:["પ્રશંસા","ટીકા","રુચિકર","બેસ્વાદ","સચેત","અસાવધ","વિષ","સુધા","મધુર","કડવાશ"].filter(x=>x!==q.a).slice(0,2).concat(q.a))}))); 
+ // activity 2 and 3 use question-specific answer plus distractors
+ order=shuffle(activities[n].qs).map(q=>{
+   let opts;
+   if(n===1) opts=shuffle(["દ્વિરુક્ત","રવાનુકારી"]);
+   else if(n===2) opts=shuffle([q.a, q.a==="પ્રામાણિક"?"અપ્રામાણિક":"અન્ય વિકલ્પ","રાત્રે","નિરોગી","ગળ્યું","પુણ્યશાળી"].filter((x,i,a)=>x&&a.indexOf(x)===i).slice(0,3));
+   else opts=shuffle([q.a,...(["મધુર","કડવાશ","રુચિકર","બેસ્વાદ","પ્રશંસા","ટીકા","સુધા","વિષ","સચેત","અસાવધ"].filter(x=>x!==q.a))].slice(0,3));
+   return {...q,opts}
+ });
+ document.querySelectorAll(".tab").forEach((b,i)=>b.classList.toggle("active",i===n-1));
+ document.getElementById("activityTitle").textContent=activities[n].title;document.getElementById("activityHelp").textContent=activities[n].help;render()
+}
+function render(){
+ const q=order[pos], key=activity+"-"+pos, old=answered[key], area=document.getElementById("questionArea");
+ document.getElementById("dscore").textContent=score;document.getElementById("dprogress").textContent=(pos+1);
+ let text=q.display||q.q;if(activity===3)text+=` — ${q.kind}`;
+ area.innerHTML=`<div class="qcard"><div class="qtop"><span class="qnum">પ્રશ્ન ${pos+1}</span><span class="tag">એક જ પ્રયત્ન</span></div><div class="qtext">${text}</div><div class="opts">${q.opts.map(x=>`<button class="opt" onclick="answer('${esc(x)}',this)" ${old?"disabled":""}>${x}</button>`).join("")}</div><div id="fb" class="feedback"></div><div class="controls"><button class="ctrl" onclick="back()" ${pos===0?"disabled":""}>← પાછળ</button><button class="explain" onclick="explain()">💡 સમજૂતી</button><button class="ctrl" onclick="retry()">↻ ફરી પ્રયાસ કરો</button><button class="primary ctrl" onclick="next()" ${old?"":"disabled"}>આગળ →</button></div></div>`;
+ if(old)restore(old)
+}
+function esc(s){return s.replace(/'/g,"&#39;")}
+function answer(value,btn){
+ const key=activity+"-"+pos;if(answered[key])return;const q=order[pos],ok=value===q.a;answered[key]={value,ok};document.querySelectorAll(".opt").forEach(b=>b.disabled=true);btn.classList.add(ok?"correct":"wrong");if(!ok)document.querySelectorAll(".opt").forEach(b=>{if(b.textContent===q.a)b.classList.add("correct")});if(ok){score++;balloons();tone(true)}else{tone(false);showModal("👎","પ્રયત્ન સરસ!",`સાચો જવાબ: <b>${q.a}</b><br>${q.e}`,"આગળ",closeModal)}restore(answered[key]);document.querySelector(".primary.ctrl").disabled=false;document.getElementById("dscore").textContent=score}
+function restore(st){const q=order[pos],fb=document.getElementById("fb");if(!fb)return;fb.className="feedback show "+(st.ok?"good":"bad");fb.innerHTML=st.ok?"સાચો જવાબ! <b>+1 ગુણ</b> 🌟":`ખોટો જવાબ. સાચો જવાબ: <b>${q.a}</b><br>${q.e}`;document.querySelectorAll(".opt").forEach(b=>{if(b.textContent===st.value)b.classList.add(st.ok?"correct":"wrong");if(!st.ok&&b.textContent===q.a)b.classList.add("correct")})}
+function explain(){const q=order[pos];showModal("💡","સમજૂતી",`<b>${q.q}</b><br><br>${q.e}`,"બરાબર",closeModal)}
+function next(){if(!answered[activity+"-"+pos])return;if(pos<order.length-1){pos++;render()}else{if(activity<3)showModal("🎉","પ્રવૃત્તિ પૂર્ણ!",`પ્રવૃત્તિ ${activity} પૂર્ણ થઈ છે.<br>હવે નવી પ્રવૃત્તિ પર જાઓ.`,"નવી પ્રવૃત્તિ",()=>{closeModal();setActivity(activity+1)}) ;else finish()}}
+function back(){if(pos>0){pos--;render()}}
+function retry(){if(confirm("આ પ્રવૃત્તિ ફરીથી શરૂ કરવી છે? આ પ્રવૃત્તિના ગુણ રીસેટ થશે.")){Object.keys(answered).filter(k=>k.startsWith(activity+"-")).forEach(k=>delete answered[k]);score-=Object.values(answered).filter(x=>x.ok).length;pos=0;order=shuffle(activities[activity].qs).map(q=>({...q,opts:shuffle(activity===1?["દ્વિરુક્ત","રવાનુકારી"]:activity===2?[q.a,"અન્ય વિકલ્પ","બીજો વિકલ્પ"]:shuffle([q.a,"વિકલ્પ A","વિકલ્પ B"]))}));render()}}
+function activityDone(n){return order.length>0&&order.every((_,i)=>answered[n+"-"+i])}
+function finish(){showModal("🏆","બધી પ્રવૃત્તિ પૂર્ણ!",`અભિનંદન! કુલ સ્કોર <b>${score} / 25</b> છે.<br>પ્રમાણપત્ર મેળવવા આગળ વધો.`,"પ્રમાણપત્ર જુઓ",certificate)}
+function showModal(icon,title,text,button,fn){document.getElementById("micon").textContent=icon;document.getElementById("mtitle").textContent=title;document.getElementById("mtext").innerHTML=text;const b=document.getElementById("mbtn");b.textContent=button;b.onclick=fn;document.getElementById("overlay").classList.remove("hide")}
+function closeModal(){document.getElementById("overlay").classList.add("hide")}
+function balloons(){const box=document.getElementById("balloons");box.innerHTML="";for(let i=0;i<15;i++){let b=document.createElement("div");b.className="balloon";b.style.left=Math.random()*100+"%";b.style.animationDelay=Math.random()*.35+"s";b.style.background=`hsl(${Math.random()*360},85%,62%)`;box.appendChild(b)}setTimeout(()=>box.innerHTML="",3500)}
+function tone(good){try{const c=new AudioContext(),ns=good?[523,659,784]:[330,262];ns.forEach((f,i)=>{let o=c.createOscillator(),g=c.createGain();o.frequency.value=f;o.type=good?"triangle":"sine";g.gain.setValueAtTime(.0001,c.currentTime+i*.12);g.gain.exponentialRampToValueAtTime(.12,c.currentTime+i*.12+.03);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+i*.12+.25);o.connect(g);g.connect(c.destination);o.start(c.currentTime+i*.12);o.stop(c.currentTime+i*.12+.27)})}catch(e){}}
+function certificate(){closeModal();document.getElementById("game").style.display="none";document.getElementById("certScreen").style.display="block";document.getElementById("cname").textContent=user.name;document.getElementById("cschool").textContent=user.school;document.getElementById("cstd").textContent=user.std;document.getElementById("cplace").textContent=user.place;document.getElementById("cscore").textContent=score;document.getElementById("ctotal").textContent=25;document.getElementById("cdate").textContent=new Date().toLocaleDateString("gu-IN");document.getElementById("performance").textContent=score/25>=.5?"શાનદાર પ્રદર્શન":"હજુ વધુ મહેનત કરો"}
+function restart(){location.reload()}
+
+function canvasCert(){
+ const c=document.createElement("canvas");c.width=1600;c.height=1120;let x=c.getContext("2d"),g=x.createLinearGradient(0,0,1600,1120);g.addColorStop(0,"#e0f7ff");g.addColorStop(.5,"#fffdf0");g.addColorStop(1,"#fce7f3");x.fillStyle=g;x.fillRect(0,0,1600,1120);x.strokeStyle="#d97706";x.lineWidth=28;x.strokeRect(35,35,1530,1050);x.strokeStyle="#fbbf24";x.lineWidth=7;x.strokeRect(62,62,1476,996);x.textAlign="center";x.fillStyle="#075985";x.font='bold 30px "Nirmala UI",sans-serif';x.fillText("મહારાણીશ્રીગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત",800,125);x.fillText("ગુજરાતી E-Content ધોરણ 6 થી 8",800,170);x.fillStyle="#92400e";x.font='bold 72px "Nirmala UI",sans-serif';x.fillText("પ્રમાણપત્ર",800,280);x.fillStyle="#4c1d95";x.font='bold 31px "Nirmala UI",sans-serif';x.fillText("LO 5.2.1 — આપેલી સામગ્રીમાંથી વાક્ય રચના અને શબ્દોમાં થતી ચમત્કૃતિ પારખે છે.",800,340);x.fillText("ધોરણ: 8 ગુજરાતી (સત્ર-1) એકમ-6 — બકોર પટેલનો કારેલાં પ્રયોગ",800,390);x.fillStyle="#0369a1";x.font='bold 64px "Nirmala UI",sans-serif';x.fillText(user.name,800,500);x.strokeStyle="#f59e0b";x.lineWidth=4;x.beginPath();x.moveTo(500,525);x.lineTo(1100,525);x.stroke();x.fillStyle="#334155";x.font='bold 27px "Nirmala UI",sans-serif';let r=[`શાળા: ${user.school}`,`ધોરણ: ${user.std}`,`સ્થળ: ${user.place}`,`મેળવેલ ગુણ: ${score}`,`કુલ ગુણ: 25`,`તારીખ: ${new Date().toLocaleDateString("gu-IN")}`];r.forEach((t,i)=>{let col=i%2,row=Math.floor(i/2);x.fillStyle="#fff";x.fillRect(260+col*560,570+row*72,520,52);x.fillStyle="#334155";x.fillText(t,520+col*560,605+row*72)});x.fillStyle=score/25>=.5?"#15803d":"#b45309";x.font='bold 45px "Nirmala UI",sans-serif';x.fillText(score/25>=.5?"શાનદાર પ્રદર્શન":"હજુ વધુ મહેનત કરો",800,830);x.strokeStyle="#d97706";x.lineWidth=6;x.beginPath();x.arc(800,940,65,0,7);x.stroke();x.fillStyle="#92400e";x.font="bold 18px sans-serif";x.fillText("E-CONTENT",800,935);x.fillText("BHUJ",800,960);return c
+}
+async function downloadPNG(){let c=canvasCert(),a=document.createElement("a");a.download="ગુજરાતી_E_Content_પ્રમાણપત્ર.png";a.href=c.toDataURL("image/png");a.click()}
+async function downloadPDF(){let c=canvasCert(),jpg=c.toDataURL("image/jpeg",.92).split(",")[1],bin=atob(jpg),bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);let W=1600,H=1120,objs=[];objs.push("<< /Type /Catalog /Pages 2 0 R >>");objs.push("<< /Type /Pages /Kids [3 0 R] /Count 1 >>");objs.push("<< /Type /Page /Parent 2 0 R /MediaBox [0 0 800 560] /Resources << /XObject << /Im1 5 0 R >> >> /Contents 4 0 R >>");let stream="q 800 0 0 560 0 0 cm /Im1 Do Q";objs.push(`<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`);objs.push(`<< /Type /XObject /Subtype /Image /Width ${W} /Height ${H} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${bytes.length} >>\nstream\n`);let pdf="%PDF-1.4\n",off=[0];for(let i=0;i<objs.length;i++){off[i+1]=pdf.length;pdf+=(i+1)+" 0 obj\n";if(i===4)pdf+=objs[i]+String.fromCharCode(...bytes)+"\nendstream\nendobj\n";else pdf+=objs[i]+"\nendobj\n"}let xref=pdf.length;pdf+="xref\n0 "+(objs.length+1)+"\n0000000000 65535 f \n";for(let i=1;i<=objs.length;i++)pdf+=String(off[i]).padStart(10,"0")+" 00000 n \n";pdf+="trailer\n<< /Size "+(objs.length+1)+" /Root 1 0 R >>\nstartxref\n"+xref+"\n%%EOF";let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([pdf],{type:"application/pdf"}));a.download="ગુજરાતી_E_Content_પ્રમાણપત્ર.pdf";a.click()}
+</script>
+</body>
+</html>
