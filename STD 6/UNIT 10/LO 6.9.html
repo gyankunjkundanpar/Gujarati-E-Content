@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ગુજરાતી E-Content - ધોરણ 6 થી 8 | DIET ભુજ - કચ્છ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti / Particle Animation support -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pinkgold: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f472b6',
+                            500: '#ec4899',
+                            700: '#be185d',
+                            800: '#831843',
+                            900: '#4c0519',
+                        },
+                        amber: {
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Gujarati', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Hind Vadodara', 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 50%, #fef3c7 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Input styling with bright golden text */
+        .golden-input {
+            color: #fef08a !important;
+            font-weight: 700;
+            background-color: rgba(76, 5, 25, 0.85);
+            border: 2px solid #f59e0b;
+            text-shadow: 0 0 5px rgba(254, 240, 138, 0.5);
+        }
+
+        .golden-input::placeholder {
+            color: #fcd34d;
+            opacity: 0.7;
+        }
+
+        /* 3D Glossy Buttons */
+        .btn-glossy {
+            background: linear-gradient(180deg, #ec4899 0%, #be185d 100%);
+            box-shadow: 0 6px 0 #831843, 0 10px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.1s ease;
+        }
+
+        .btn-glossy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #831843, 0 12px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-glossy:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #831843, 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-option-3d {
+            background: linear-gradient(145deg, #ffffff, #fce7f3);
+            border: 2px solid #f472b6;
+            box-shadow: 0 5px 0 #db2777, 0 6px 12px rgba(0,0,0,0.1);
+            transition: all 0.15s ease-in-out;
+        }
+
+        .btn-option-3d:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(145deg, #fdf2f8, #fbcfe8);
+            box-shadow: 0 8px 0 #db2777, 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .btn-option-3d:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #db2777, 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Animations */
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 22s linear infinite;
+        }
+
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        /* Thumbs down bounce animation */
+        @keyframes thumbsDownAnim {
+            0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+            50% { transform: scale(1.2) rotate(10deg); opacity: 1; }
+            70% { transform: scale(0.9) rotate(-10deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .thumbs-down-pop {
+            animation: thumbsDownAnim 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Canvas Balloon Layer */
+        #balloonCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fce7f3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #be185d;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased selection:bg-pinkgold-300 selection:text-white">
+
+    <canvas id="balloonCanvas"></canvas>
+
+    <!-- MAIN APP CONTAINER -->
+    <div class="flex-1 flex flex-col min-h-screen">
+
+        <!-- 1. FRONT SCREEN CONTAINER -->
+        <div id="frontScreen" class="flex-1 flex items-center justify-center p-4 md:p-6 my-auto">
+            <div class="w-full max-w-2xl bg-gradient-to-b from-pinkgold-900 via-pinkgold-800 to-pinkgold-900 rounded-3xl p-6 md:p-10 shadow-2xl border-4 border-amber-400 relative overflow-hidden">
+                
+                <!-- Decorative background elements -->
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-amber-400/20 rounded-full blur-2xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-pinkgold-500/30 rounded-full blur-2xl"></div>
+
+                <!-- Header Title on Front Screen -->
+                <div class="text-center mb-8">
+                    <div class="inline-block p-3 rounded-2xl bg-amber-400/10 border border-amber-400/30 mb-3">
+                        <i class="fa-solid fa-graduation-cap text-amber-300 text-3xl md:text-4xl animate-bounce"></i>
+                    </div>
+                    <h1 class="text-xl md:text-2xl font-bold text-amber-300 leading-relaxed shadow-sm drop-shadow-md">
+                        મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8
+                    </h1>
+                    <p class="text-pink-200 text-sm md:text-base mt-2 font-medium">
+                        ડિજિટલ લર્નિંગ મોડ્યુલ - રમત ગમત સાથે શિક્ષણ
+                    </p>
+                </div>
+
+                <!-- Registration Form -->
+                <form id="studentForm" onsubmit="startGame(event)" class="space-y-5">
+                    <div>
+                        <label class="block text-amber-300 font-semibold mb-1 text-sm md:text-base">
+                            <i class="fa-solid fa-user-graduate mr-2"></i>વિદ્યાર્થીનું નામ:
+                        </label>
+                        <input type="text" id="inputName" required placeholder="તમારું આખું નામ લખો" class="w-full px-4 py-3 rounded-xl golden-input focus:outline-none focus:ring-2 focus:ring-amber-300 text-base md:text-lg">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-amber-300 font-semibold mb-1 text-sm md:text-base">
+                                <i class="fa-solid fa-school mr-2"></i>શાળાનું નામ:
+                            </label>
+                            <input type="text" id="inputSchool" required placeholder="તમારી શાળાનું નામ લખો" class="w-full px-4 py-3 rounded-xl golden-input focus:outline-none focus:ring-2 focus:ring-amber-300 text-base md:text-lg">
+                        </div>
+
+                        <div>
+                            <label class="block text-amber-300 font-semibold mb-1 text-sm md:text-base">
+                                <i class="fa-solid fa-location-dot mr-2"></i>સ્થળ / ગામ:
+                            </label>
+                            <input type="text" id="inputPlace" required placeholder="તમારું ગામ/સ્થળ લખો" class="w-full px-4 py-3 rounded-xl golden-input focus:outline-none focus:ring-2 focus:ring-amber-300 text-base md:text-lg">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-amber-300 font-semibold mb-1 text-sm md:text-base">
+                            <i class="fa-solid fa-layer-group mr-2"></i>ધોરણ પસંદ કરો:
+                        </label>
+                        <select id="selectStd" class="w-full px-4 py-3 rounded-xl golden-input focus:outline-none focus:ring-2 focus:ring-amber-300 text-base md:text-lg cursor-pointer">
+                            <option value="6" selected class="bg-pinkgold-900 text-amber-300">ધોરણ - 6</option>
+                            <option value="7" class="bg-pinkgold-900 text-amber-300">ધોરણ - 7</option>
+                            <option value="8" class="bg-pinkgold-900 text-amber-300">ધોરણ - 8</option>
+                        </select>
+                    </div>
+
+                    <div class="pt-4 text-center">
+                        <button type="submit" class="w-full md:w-auto px-10 py-4 rounded-2xl btn-glossy text-amber-300 font-bold text-xl uppercase tracking-wider border-2 border-amber-300 transition duration-200 hover:scale-105 active:scale-95 flex items-center justify-center gap-3 mx-auto">
+                            <span>પ્રવૃત્તિ શરૂ કરો</span>
+                            <i class="fa-solid fa-circle-play text-2xl"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 2. MAIN GAME SCREEN (Hidden initially) -->
+        <div id="gameScreen" class="hidden flex-1 flex flex-col w-full max-w-7xl mx-auto p-2 sm:p-4 md:p-6">
+            
+            <!-- Dashboard Header Bar -->
+            <header class="bg-gradient-to-r from-pinkgold-900 via-pinkgold-800 to-pinkgold-900 text-white rounded-2xl shadow-xl border-2 border-amber-400 p-4 mb-4 text-center">
+                <!-- Top Line (Small) -->
+                <p class="text-xs sm:text-sm font-semibold text-amber-300 tracking-wide mb-1">
+                    મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8
+                </p>
+                
+                <!-- LO Line (Medium) -->
+                <div class="my-1.5 inline-block bg-pinkgold-900/80 px-4 py-1 rounded-full border border-amber-400/40">
+                    <p class="text-sm sm:text-base font-bold text-yellow-200">
+                        LO 6.9 શબ્દસમૂહ માટે એક શબ્દનો ઉપયોગ કરે.
+                    </p>
+                </div>
+
+                <!-- Unit Name (Large Bold) -->
+                <h2 class="text-lg sm:text-xl md:text-2xl font-black text-amber-300 mt-1 mb-2 tracking-wide">
+                    ધોરણ:6 ગુજરાતી (સત્ર-1) એકમ-10 લેખણ ઝાલી નો રહી
+                </h2>
+
+                <!-- Dashboard Stats Strip -->
+                <div class="mt-3 pt-3 border-t border-pinkgold-700/60 flex flex-wrap justify-between items-center gap-2 px-2 text-xs sm:text-sm">
+                    <div class="flex items-center gap-2 bg-pinkgold-900/90 px-3 py-1.5 rounded-lg border border-amber-300/30">
+                        <i class="fa-solid fa-user text-amber-300"></i>
+                        <span class="text-gray-200 font-medium">વિદ્યાર્થી:</span>
+                        <span id="dashStudentName" class="text-amber-300 font-bold">-</span>
+                    </div>
+
+                    <div class="flex items-center gap-2 bg-pinkgold-900/90 px-3 py-1.5 rounded-lg border border-amber-300/30">
+                        <i class="fa-solid fa-book-open text-amber-300"></i>
+                        <span class="text-gray-200 font-medium">ધોરણ:</span>
+                        <span id="dashStd" class="text-amber-300 font-bold">6</span>
+                    </div>
+
+                    <div class="flex items-center gap-2 bg-pinkgold-900/90 px-3 py-1.5 rounded-lg border border-amber-300/30">
+                        <i class="fa-solid fa-star text-amber-300"></i>
+                        <span class="text-gray-200 font-medium">કુલ સ્કોર:</span>
+                        <span id="dashScore" class="text-amber-300 font-black text-base md:text-lg">0 / 0</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tabs Navigation -->
+            <div class="flex flex-wrap gap-2 mb-4">
+                <button onclick="switchTab(1)" id="tabBtn1" class="flex-1 min-w-[140px] py-3 px-4 rounded-xl font-bold text-sm sm:text-base border-2 border-pinkgold-500 bg-pinkgold-800 text-amber-300 shadow-md transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>પ્રવૃત્તિ - 1</span>
+                </button>
+                <button onclick="showCertificate()" id="tabBtnCert" class="flex-1 min-w-[140px] py-3 px-4 rounded-xl font-bold text-sm sm:text-base border-2 border-amber-400 bg-amber-100 text-pinkgold-900 shadow-sm transition-all flex items-center justify-center gap-2 hover:bg-amber-200">
+                    <i class="fa-solid fa-award text-amber-600"></i>
+                    <span>પ્રમાણપત્ર</span>
+                </button>
+            </div>
+
+            <!-- Activity Container -->
+            <main class="flex-1 bg-white/90 backdrop-blur-md rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl border-2 border-pinkgold-300 flex flex-col justify-between">
+                
+                <div id="quizContent" class="space-y-6">
+                    <!-- Instruction Header -->
+                    <div class="flex flex-wrap justify-between items-center gap-2 bg-pinkgold-50 p-3.5 rounded-xl border-l-4 border-pinkgold-700">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-question text-pinkgold-700 text-xl"></i>
+                            <h3 id="activityInstruction" class="font-bold text-pinkgold-900 text-base sm:text-lg">
+                                નીચેના શબ્દસમૂહ માટે એક શબ્દ આપો.
+                            </h3>
+                        </div>
+                        <span id="questionCounter" class="bg-pinkgold-900 text-amber-300 text-xs sm:text-sm font-bold px-3 py-1 rounded-full">
+                            પ્રશ્ન 1 / 5
+                        </span>
+                    </div>
+
+                    <!-- TTS & Explanation Toolbar -->
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <!-- Read Question Button (TTS Dynamic Toggle) -->
+                        <button id="btnTTS" onclick="toggleReadQuestionTTS()" class="px-5 py-2.5 rounded-xl font-bold text-sm text-white bg-purple-700 hover:bg-purple-800 shadow-md transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-volume-high"></i>
+                            <span id="ttsBtnText">પ્રશ્ન સાંભળો</span>
+                        </button>
+
+                        <!-- Explanation Button -->
+                        <button onclick="openExplanationModal()" class="px-5 py-2.5 rounded-xl font-bold text-sm text-pinkgold-900 bg-amber-300 hover:bg-amber-400 border border-amber-500 shadow-md transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb text-amber-800"></i>
+                            <span>સમજૂતી જુઓ</span>
+                        </button>
+                    </div>
+
+                    <!-- Question Box -->
+                    <div class="bg-gradient-to-r from-pinkgold-900 to-pinkgold-800 p-6 rounded-2xl text-center shadow-lg border-2 border-amber-400 min-h-[110px] flex items-center justify-center">
+                        <h4 id="questionText" class="text-xl sm:text-2xl md:text-3xl font-bold text-amber-300 leading-snug">
+                            <!-- Question Text dynamically injected here -->
+                        </h4>
+                    </div>
+
+                    <!-- Options Grid (3D Glossy Buttons) -->
+                    <div id="optionsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <!-- Dynamically populated options -->
+                    </div>
+                </div>
+
+                <!-- Navigation Controls Bar -->
+                <div class="mt-8 pt-4 border-t border-pinkgold-200 flex flex-wrap justify-between items-center gap-3">
+                    <button onclick="prevQuestion()" id="btnPrev" class="px-4 py-2.5 rounded-xl font-bold text-sm bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>પાછળનો પ્રશ્ન</span>
+                    </button>
+
+                    <button onclick="retryCurrentQuestion()" id="btnRetry" class="px-4 py-2.5 rounded-xl font-bold text-sm bg-amber-200 text-amber-900 hover:bg-amber-300 border border-amber-400 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>ફરી પ્રયાસ કરો</span>
+                    </button>
+
+                    <button onclick="nextQuestion()" id="btnNext" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-pinkgold-700 text-white hover:bg-pinkgold-800 shadow-md transition-all flex items-center gap-2">
+                        <span>આગળનો પ્રશ્ન</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </main>
+        </div>
+
+        <!-- 3. CERTIFICATE CONTAINER (Hidden by default) -->
+        <div id="certificateScreen" class="hidden flex-1 flex flex-col items-center justify-center p-4 md:p-8">
+            <div id="certificateCard" class="w-full max-w-4xl bg-gradient-to-b from-amber-50 via-pinkgold-50 to-amber-100 p-6 md:p-10 rounded-3xl border-8 border-amber-500 shadow-2xl relative text-center text-pinkgold-900">
+                
+                <!-- Inner Decorative Frame -->
+                <div class="border-2 border-dashed border-pinkgold-700 p-6 md:p-8 rounded-2xl">
+                    
+                    <!-- Certificate Header -->
+                    <div class="flex justify-center items-center gap-4 mb-3">
+                        <div class="w-16 h-16 md:w-20 md:h-20 bg-pinkgold-900 rounded-full flex items-center justify-center border-2 border-amber-400 shadow-md">
+                            <i class="fa-solid fa-award text-3xl md:text-4xl text-amber-300"></i>
+                        </div>
+                    </div>
+
+                    <h2 class="text-sm sm:text-base font-bold text-pinkgold-900 uppercase tracking-wide">
+                        મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત
+                    </h2>
+                    <p class="text-xs sm:text-sm font-semibold text-pinkgold-700 mb-2">
+                        ગુજરાતી E-Content ધોરણ 6 થી 8
+                    </p>
+
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-amber-600 my-4 tracking-wider uppercase drop-shadow-sm">
+                        ઈ - પ્રમાણપત્ર
+                    </h1>
+
+                    <p class="text-sm md:text-base font-medium text-gray-700">આથી પ્રમાણિત કરવામાં આવે છે કે</p>
+                    
+                    <div class="my-3 py-2 border-b-2 border-amber-400 inline-block min-w-[280px]">
+                        <span id="certStudentName" class="text-2xl md:text-3xl font-extrabold text-pinkgold-900">
+                            -
+                        </span>
+                    </div>
+
+                    <p class="text-sm md:text-base text-gray-800 leading-relaxed max-w-2xl mx-auto my-2">
+                        શાળા: <span id="certSchool" class="font-bold text-pinkgold-900">-</span> | 
+                        સ્થળ: <span id="certPlace" class="font-bold text-pinkgold-900">-</span> | 
+                        ધોરણ: <span id="certStd" class="font-bold text-pinkgold-900">6</span>
+                    </p>
+
+                    <p class="text-sm md:text-base text-gray-800 leading-relaxed max-w-2xl mx-auto my-2">
+                        એમણે <span class="font-bold">ધોરણ:6 ગુજરાતી (સત્ર-1) એકમ-10 "લેખણ ઝાલી નો રહી"</span> અંતર્ગત 
+                        <span class="font-bold text-pinkgold-800">LO 6.9 (શબ્દસમૂહ માટે એક શબ્દનો ઉપયોગ કરે)</span> ની ડિજિટલ પ્રવૃત્તિઓ સફળતાપૂર્વક પૂર્ણ કરી છે.
+                    </p>
+
+                    <!-- Score Card on Certificate -->
+                    <div class="my-6 inline-flex flex-col sm:flex-row items-center justify-center gap-4 bg-white/80 px-6 py-4 rounded-2xl border border-amber-400 shadow-sm">
+                        <div>
+                            <span class="text-xs text-gray-500 block uppercase font-bold">મેળવેલ ગુણ</span>
+                            <span id="certScore" class="text-xl md:text-2xl font-black text-pinkgold-900">0 / 0</span>
+                        </div>
+                        <div class="hidden sm:block h-8 w-px bg-amber-300"></div>
+                        <div>
+                            <span class="text-xs text-gray-500 block uppercase font-bold">ટકાવારી</span>
+                            <span id="certPercentage" class="text-xl md:text-2xl font-black text-pinkgold-900">0%</span>
+                        </div>
+                        <div class="hidden sm:block h-8 w-px bg-amber-300"></div>
+                        <div>
+                            <span class="text-xs text-gray-500 block uppercase font-bold">મૂલ્યાંકન</span>
+                            <span id="certRemark" class="text-lg md:text-xl font-black px-3 py-1 rounded-lg bg-emerald-100 text-emerald-800">
+                                શાનદાર પ્રદર્શન
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Footer Signatures & Date -->
+                    <div class="mt-6 flex flex-wrap justify-between items-end gap-4 text-xs md:text-sm text-gray-700 pt-4 border-t border-pinkgold-200">
+                        <div class="text-left">
+                            <p><i class="fa-solid fa-calendar-day mr-1 text-pinkgold-700"></i> તારીખ: <span id="certDate" class="font-semibold">-</span></p>
+                            <p><i class="fa-solid fa-location-dot mr-1 text-pinkgold-700"></i> સ્થળ: DIET ભુજ - કચ્છ</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-1 border border-amber-500 rounded-full flex items-center justify-center bg-amber-100 text-amber-800 font-bold text-[10px] shadow-inner">
+                                DIET SEAL
+                            </div>
+                            <p class="font-bold text-pinkgold-900">જિલ્લા શિક્ષણ અને તાલીમ ભવન</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download Buttons -->
+            <div class="mt-6 flex flex-wrap justify-center gap-4">
+                <button onclick="printCertificate()" class="px-6 py-3 rounded-xl font-bold bg-amber-500 text-pinkgold-900 hover:bg-amber-400 shadow-lg transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-print"></i>
+                    <span>પ્રિન્ટ / PDF ડાઉનલોડ</span>
+                </button>
+                <button onclick="backToQuiz()" class="px-6 py-3 rounded-xl font-bold bg-pinkgold-800 text-amber-300 hover:bg-pinkgold-900 shadow-lg transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>પાછા પ્રવૃત્તિ તરફ</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 4. FOOTER DISCLAIMER -->
+        <footer class="mt-auto bg-gradient-to-r from-pinkgold-900 via-pinkgold-800 to-pinkgold-900 border-t-4 border-amber-300 py-3 px-4 shadow-inner overflow-hidden">
+            <div class="w-full overflow-hidden">
+                <p class="animate-marquee font-bold text-amber-300 text-sm sm:text-base drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                    Disclaimer : આ કન્ટેન્ટ મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા નિર્મિત કરવામાં આવ્યું છે.
+                </p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- MODAL 1: EXPLANATION MODAL -->
+    <div id="modalExplanation" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border-4 border-amber-400 animate-scale-up">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <h3 class="text-xl font-bold text-pinkgold-900 flex items-center gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                    <span>પ્રશ્નની સમજૂતી</span>
+                </h3>
+                <button onclick="closeExplanationModal()" class="text-gray-400 hover:text-gray-700 text-2xl font-bold">&times;</button>
+            </div>
+            <p id="explanationContent" class="text-base text-gray-800 leading-relaxed mb-6 font-medium bg-amber-50 p-4 rounded-xl border border-amber-200">
+                <!-- Explanation text -->
+            </p>
+            <div class="text-right">
+                <button onclick="closeExplanationModal()" class="px-6 py-2.5 bg-pinkgold-800 text-amber-300 font-bold rounded-xl hover:bg-pinkgold-900 transition-all">
+                    સમજાઈ ગયું
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: WRONG ANSWER POPUP MODAL -->
+    <div id="modalWrongAnswer" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border-4 border-rose-500 text-center relative overflow-hidden">
+            
+            <!-- Thumbs down icon container -->
+            <div class="w-20 h-20 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-rose-400 thumbs-down-pop">
+                <i class="fa-solid fa-thumbs-down text-4xl"></i>
+            </div>
+
+            <h3 class="text-2xl font-black text-rose-600 mb-1">અરેરે! ખોટો જવાબ</h3>
+            <p class="text-gray-600 text-sm mb-4">નિરાશ થશો નહીં, શીખતા રહો!</p>
+
+            <div class="bg-rose-50 p-4 rounded-2xl border border-rose-200 text-left mb-4 space-y-2">
+                <div>
+                    <span class="text-xs font-bold text-rose-500 uppercase block">સાચો જવાબ:</span>
+                    <p id="wrongModalCorrectAns" class="text-lg font-bold text-emerald-700"></p>
+                </div>
+                <div class="border-t border-rose-200 pt-2">
+                    <span class="text-xs font-bold text-gray-500 uppercase block">સમજૂતી:</span>
+                    <p id="wrongModalExpl" class="text-sm font-medium text-gray-800 leading-relaxed"></p>
+                </div>
+            </div>
+
+            <button onclick="closeWrongAnswerModal()" class="w-full py-3 bg-pinkgold-800 text-amber-300 font-bold rounded-xl hover:bg-pinkgold-900 transition-all">
+                આગળ વધો
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 3: ACTIVITY COMPLETED POPUP MODAL -->
+    <div id="modalActivityComplete" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border-4 border-amber-400 text-center">
+            <div class="w-20 h-20 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-amber-400">
+                <i class="fa-solid fa-trophy text-4xl"></i>
+            </div>
+
+            <h3 class="text-2xl font-black text-pinkgold-900 mb-2">અભિનંદન! પ્રવૃત્તિ પૂર્ણ થયેલ છે</h3>
+            <p id="actCompleteMsg" class="text-gray-700 text-base mb-6 font-medium">
+                તમે આ પ્રવૃત્તિ સફળતાપૂર્વક પૂર્ણ કરી લીધી છે. હવે નવી પ્રવૃત્તિ અથવા પ્રમાણપત્ર મેળવવા માટે આગળ વધો.
+            </p>
+
+            <div class="flex flex-col gap-3">
+                <button id="btnNextActivityModal" onclick="proceedNextActivity()" class="w-full py-3 bg-pinkgold-800 text-amber-300 font-bold rounded-xl hover:bg-pinkgold-900 transition-all">
+                    બીજી પ્રવૃત્તિ શરૂ કરો
+                </button>
+                <button onclick="showCertificate()" class="w-full py-3 bg-amber-300 text-pinkgold-900 font-bold rounded-xl hover:bg-amber-400 transition-all">
+                    પ્રમાણપત્ર જુઓ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let studentData = {
+            name: '',
+            school: '',
+            place: '',
+            std: '6'
+        };
+
+        // Questions Data according to prompt LO 6.9 for Gujarati Std 6 Unit 10 (Activity 1 only)
+        const activitiesData = {
+            1: {
+                title: "પ્રવૃત્તિ:1 નીચેના શબ્દસમૂહ માટે એક શબ્દ લખો.",
+                questions: [
+                    {
+                        question: "મૃત્યુની જાણ કરતો પત્ર",
+                        answer: "કાળોત્રી",
+                        options: ["કાળોત્રી", "કંકોત્રી", "પરબીડિયું", "અહેવાલ"],
+                        explanation: "મૃત્યુ કે અશુભ સમાચાર જણાવવા માટે જે પત્ર લખવામાં આવે છે તેને કાળોત્રી કહેવાય છે."
+                    },
+                    {
+                        question: "મરણ પછી બારમા દિવસે થતો વિધિ",
+                        answer: "કારજ",
+                        options: ["કારજ", "ઉજવણી", "સીમંત", "શ્રાદ્ધપક્ષ"],
+                        explanation: "વ્યક્તિના મૃત્યુ પછી ૧૨મા દિવસે કરવામાં આવતી ધાર્મિક વિધિને કારજ કહેવાય છે."
+                    },
+                    {
+                        question: "પાઘડીના જેવો વિસ્તાર",
+                        answer: "પાઘડીપનો",
+                        options: ["પાઘડીપનો", "ગોળાઈવાળો", "ચોરસપનો", "પહોળો"],
+                        explanation: "પાઘડી જેવા લંબગોળ અને સાંકડા વિસ્તારને પાઘડીપનો વિસ્તાર કહેવામાં આવે છે."
+                    },
+                    {
+                        question: "માટીનું ભીંતનું નાનું ઘર",
+                        answer: "ખોરડું",
+                        options: ["ખોરડું", "હવેલી", "મહેલ", "બંગલો"],
+                        explanation: "કાચી માટીની ભીંતવાળું નાનું સાદું ઘર કે ઝૂંપડીને ખોરડું કહેવાય છે."
+                    },
+                    {
+                        question: "તરત લગી સુધી",
+                        answer: "ઘડીસાત",
+                        options: ["ઘડીસાત", "કાયમ માટે", "અનંતકાળ", "આજીવન"],
+                        explanation: "થોડીવાર કે થોડા સમય પૂરતું એટલે કે ઘડીસાત."
+                    }
+                ]
+            }
+        };
+
+        let currentTab = 1;
+        let currentQuestionIdx = 0;
+        let activeQuestionsList = [];
+        let userAnswers = {}; // key: `actIndex_qIndex`, val: boolean (true/false)
+        let totalPossibleScore = 0;
+        let speechSynth = window.speechSynthesis;
+        let currentUtterance = null;
+        let isSpeaking = false;
+
+        function playSound(type) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (type === 'correct') {
+                    // Beautiful melodic bell chime (C5 -> E5 -> G5 -> C6 harmonic melody)
+                    const notes = [523.25, 659.25, 783.99, 1046.50];
+                    notes.forEach((freq, index) => {
+                        const now = audioCtx.currentTime + index * 0.09;
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now);
+
+                        gain.gain.setValueAtTime(0, now);
+                        gain.gain.linearRampToValueAtTime(0.3, now + 0.02);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+
+                        osc.start(now);
+                        osc.stop(now + 0.6);
+                    });
+                } else {
+                    // Soft encouraging wrong answer tone
+                    const now = audioCtx.currentTime;
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(260, now);
+                    osc.frequency.exponentialRampToValueAtTime(180, now + 0.3);
+
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start(now);
+                    osc.stop(now + 0.35);
+                }
+            } catch (e) {
+                console.log("Audio API error or silent mode:", e);
+            }
+        }
+
+        function triggerBalloonAnimation() {
+            const canvas = document.getElementById('balloonCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const balloons = [];
+            const colors = ['#f43f5e', '#ec4899', '#8b5cf6', '#3b82f6', '#10b981', '#f59e0b'];
+
+            for (let i = 0; i < 25; i++) {
+                balloons.push({
+                    x: Math.random() * canvas.width,
+                    y: canvas.height + Math.random() * 200,
+                    radius: 20 + Math.random() * 15,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: 3 + Math.random() * 4,
+                    swing: Math.random() * 2
+                });
+            }
+
+            let startTime = Date.now();
+            function animateBalloons() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let elapsed = Date.now() - startTime;
+
+                balloons.forEach(b => {
+                    b.y -= b.speed;
+                    b.x += Math.sin(b.y / 30) * b.swing;
+
+                    // Draw Balloon
+                    ctx.beginPath();
+                    ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = b.color;
+                    ctx.fill();
+
+                    // String
+                    ctx.beginPath();
+                    ctx.moveTo(b.x, b.y + b.radius);
+                    ctx.lineTo(b.x, b.y + b.radius + 20);
+                    ctx.strokeStyle = 'rgba(100,100,100,0.5)';
+                    ctx.stroke();
+                });
+
+                if (elapsed < 3000) {
+                    requestAnimationFrame(animateBalloons);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            animateBalloons();
+
+            if (window.confetti) {
+                confetti({
+                    particleCount: 60,
+                    spread: 70,
+                    origin: { y: 0.7 }
+                });
+            }
+        }
+
+        function startGame(e) {
+            e.preventDefault();
+            studentData.name = document.getElementById('inputName').value.trim();
+            studentData.school = document.getElementById('inputSchool').value.trim();
+            studentData.place = document.getElementById('inputPlace').value.trim();
+            studentData.std = document.getElementById('selectStd').value;
+
+            // Update UI
+            document.getElementById('dashStudentName').innerText = studentData.name;
+            document.getElementById('dashStd').innerText = studentData.std;
+
+            document.getElementById('frontScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('hidden');
+
+            // Initialize total score count (Activity 1 only)
+            totalPossibleScore = activitiesData[1].questions.length;
+
+            loadTabActivity(1);
+        }
+
+        function shuffleArray(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function switchTab(tabNum) {
+            stopTTS();
+            currentTab = tabNum;
+
+            // Update button styles
+            const btn1 = document.getElementById('tabBtn1');
+            const btnCert = document.getElementById('tabBtnCert');
+
+            btn1.className = tabNum === 1 
+                ? "flex-1 min-w-[140px] py-3 px-4 rounded-xl font-bold text-sm sm:text-base border-2 border-pinkgold-500 bg-pinkgold-800 text-amber-300 shadow-md transition-all flex items-center justify-center gap-2"
+                : "flex-1 min-w-[140px] py-3 px-4 rounded-xl font-bold text-sm sm:text-base border-2 border-pinkgold-300 bg-white/80 text-pinkgold-900 shadow-sm transition-all flex items-center justify-center gap-2 hover:bg-pinkgold-100";
+
+            btnCert.className = "flex-1 min-w-[140px] py-3 px-4 rounded-xl font-bold text-sm sm:text-base border-2 border-amber-400 bg-amber-100 text-pinkgold-900 shadow-sm transition-all flex items-center justify-center gap-2 hover:bg-amber-200";
+
+            document.getElementById('certificateScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('hidden');
+
+            loadTabActivity(tabNum);
+        }
+
+        function loadTabActivity(tabNum) {
+            currentTab = tabNum;
+            currentQuestionIdx = 0;
+
+            // Load and shuffle questions for this activity session
+            const rawQuestions = activitiesData[tabNum].questions;
+            activeQuestionsList = shuffleArray(rawQuestions).map(q => ({
+                ...q,
+                shuffledOptions: shuffleArray(q.options)
+            }));
+
+            document.getElementById('activityInstruction').innerText = activitiesData[tabNum].title;
+            renderCurrentQuestion();
+        }
+
+        function renderCurrentQuestion() {
+            stopTTS();
+            const q = activeQuestionsList[currentQuestionIdx];
+            const qKey = `${currentTab}_${currentQuestionIdx}`;
+            const answered = userAnswers.hasOwnProperty(qKey);
+
+            document.getElementById('questionCounter').innerText = `પ્રશ્ન ${currentQuestionIdx + 1} / ${activeQuestionsList.length}`;
+            document.getElementById('questionText').innerText = q.question;
+
+            const grid = document.getElementById('optionsGrid');
+            grid.innerHTML = '';
+
+            q.shuffledOptions.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = "btn-option-3d p-4 rounded-xl font-bold text-base sm:text-lg text-pinkgold-900 text-center transition-all flex items-center justify-between";
+                
+                let iconClass = "fa-regular fa-circle-dot text-pinkgold-400";
+                
+                if (answered) {
+                    btn.disabled = true;
+                    if (opt === q.answer) {
+                        btn.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900');
+                        iconClass = "fa-solid fa-circle-check text-emerald-600";
+                    } else if (userAnswers[qKey] === false && opt === q.selectedOption) {
+                        btn.classList.add('bg-rose-100', 'border-rose-500', 'text-rose-900');
+                        iconClass = "fa-solid fa-circle-xmark text-rose-600";
+                    } else {
+                        btn.classList.add('opacity-50');
+                    }
+                } else {
+                    btn.onclick = () => selectAnswer(opt);
+                }
+
+                btn.innerHTML = `<span>${opt}</span><i class="${iconClass} text-xl"></i>`;
+                grid.appendChild(btn);
+            });
+
+            updateScoreDisplay();
+        }
+
+        function selectAnswer(selectedOpt) {
+            stopTTS();
+            const q = activeQuestionsList[currentQuestionIdx];
+            const qKey = `${currentTab}_${currentQuestionIdx}`;
+
+            q.selectedOption = selectedOpt;
+            const isCorrect = (selectedOpt === q.answer);
+            userAnswers[qKey] = isCorrect;
+
+            renderCurrentQuestion();
+
+            if (isCorrect) {
+                playSound('correct');
+                triggerBalloonAnimation();
+            } else {
+                playSound('wrong');
+                // Show wrong answer modal
+                document.getElementById('wrongModalCorrectAns').innerText = q.answer;
+                document.getElementById('wrongModalExpl').innerText = q.explanation;
+                document.getElementById('modalWrongAnswer').classList.remove('hidden');
+            }
+
+            updateScoreDisplay();
+
+            // Check if activity is finished
+            const allAnsweredInTab = activeQuestionsList.every((_, idx) => userAnswers.hasOwnProperty(`${currentTab}_${idx}`));
+            if (allAnsweredInTab) {
+                setTimeout(() => {
+                    showActivityCompleteModal();
+                }, 1200);
+            }
+        }
+
+        function calculateScore() {
+            let correctCount = 0;
+            Object.values(userAnswers).forEach(val => {
+                if (val === true) correctCount++;
+            });
+            return correctCount;
+        }
+
+        function updateScoreDisplay() {
+            const score = calculateScore();
+            document.getElementById('dashScore').innerText = `${score} / ${totalPossibleScore}`;
+        }
+
+        function prevQuestion() {
+            stopTTS();
+            if (currentQuestionIdx > 0) {
+                currentQuestionIdx--;
+                renderCurrentQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            stopTTS();
+            if (currentQuestionIdx < activeQuestionsList.length - 1) {
+                currentQuestionIdx++;
+                renderCurrentQuestion();
+            } else {
+                showActivityCompleteModal();
+            }
+        }
+
+        function retryCurrentQuestion() {
+            stopTTS();
+            const qKey = `${currentTab}_${currentQuestionIdx}`;
+            delete userAnswers[qKey];
+            renderCurrentQuestion();
+        }
+
+        function toggleReadQuestionTTS() {
+            if (isSpeaking) {
+                stopTTS();
+            } else {
+                startTTS();
+            }
+        }
+
+        function startTTS() {
+            if (!('speechSynthesis' in window)) {
+                alert("તમારા બ્રાઉઝરમાં ઓડિયો ટેક્સ્ટ-ટુ-સ્પીચ સપોર્ટેડ નથી.");
+                return;
+            }
+
+            stopTTS();
+
+            const textToRead = activeQuestionsList[currentQuestionIdx].question;
+            currentUtterance = new SpeechSynthesisUtterance(textToRead);
+            currentUtterance.lang = 'gu-IN';
+            currentUtterance.rate = 0.95;
+            currentUtterance.pitch = 1.0;
+
+            // Try to find Gujarati voice
+            const voices = speechSynth.getVoices();
+            const guVoice = voices.find(v => v.lang.includes('gu'));
+            if (guVoice) {
+                currentUtterance.voice = guVoice;
+            }
+
+            currentUtterance.onstart = function() {
+                isSpeaking = true;
+                const btn = document.getElementById('btnTTS');
+                btn.className = "px-5 py-2.5 rounded-xl font-bold text-sm text-white bg-rose-600 hover:bg-rose-700 shadow-md transition-all flex items-center gap-2";
+                document.getElementById('ttsBtnText').innerText = "વાંચવાનું બંધ કરો";
+            };
+
+            currentUtterance.onend = function() {
+                resetTTSButton();
+            };
+
+            currentUtterance.onerror = function() {
+                resetTTSButton();
+            };
+
+            speechSynth.speak(currentUtterance);
+        }
+
+        function stopTTS() {
+            if (speechSynth && speechSynth.speaking) {
+                speechSynth.cancel();
+            }
+            resetTTSButton();
+        }
+
+        function resetTTSButton() {
+            isSpeaking = false;
+            const btn = document.getElementById('btnTTS');
+            if (btn) {
+                btn.className = "px-5 py-2.5 rounded-xl font-bold text-sm text-white bg-purple-700 hover:bg-purple-800 shadow-md transition-all flex items-center gap-2";
+                document.getElementById('ttsBtnText').innerText = "પ્રશ્ન સાંભળો";
+            }
+        }
+
+        function openExplanationModal() {
+            stopTTS();
+            const q = activeQuestionsList[currentQuestionIdx];
+            document.getElementById('explanationContent').innerText = q.explanation;
+            document.getElementById('modalExplanation').classList.remove('hidden');
+        }
+
+        function closeExplanationModal() {
+            document.getElementById('modalExplanation').classList.add('hidden');
+        }
+
+        function closeWrongAnswerModal() {
+            document.getElementById('modalWrongAnswer').classList.add('hidden');
+        }
+
+        function showActivityCompleteModal() {
+            stopTTS();
+            const nextBtn = document.getElementById('btnNextActivityModal');
+            nextBtn.innerText = "પ્રમાણપત્ર જુઓ";
+            nextBtn.onclick = () => {
+                closeActivityCompleteModal();
+                showCertificate();
+            };
+            document.getElementById('modalActivityComplete').classList.remove('hidden');
+        }
+
+        function closeActivityCompleteModal() {
+            document.getElementById('modalActivityComplete').classList.add('hidden');
+        }
+
+        function proceedNextActivity() {
+            closeActivityCompleteModal();
+            showCertificate();
+        }
+
+        function showCertificate() {
+            stopTTS();
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('certificateScreen').classList.remove('hidden');
+
+            const score = calculateScore();
+            const percentage = Math.round((score / totalPossibleScore) * 100);
+
+            document.getElementById('certStudentName').innerText = studentData.name || "વિદ્યાર્થી";
+            document.getElementById('certSchool').innerText = studentData.school || "પ્રાથમિક શાળા";
+            document.getElementById('certPlace').innerText = studentData.place || "કચ્છ";
+            document.getElementById('certStd').innerText = studentData.std;
+            document.getElementById('certScore').innerText = `${score} / ${totalPossibleScore}`;
+            document.getElementById('certPercentage').innerText = `${percentage}%`;
+
+            const remarkElem = document.getElementById('certRemark');
+            if (percentage >= 50) {
+                remarkElem.innerText = "શાનદાર પ્રદર્શન";
+                remarkElem.className = "text-lg md:text-xl font-black px-4 py-1.5 rounded-xl bg-emerald-100 text-emerald-800 border border-emerald-300";
+            } else {
+                remarkElem.innerText = "હજુ વધુ મહેનત કરો";
+                remarkElem.className = "text-lg md:text-xl font-black px-4 py-1.5 rounded-xl bg-amber-100 text-amber-800 border border-amber-300";
+            }
+
+            const now = new Date();
+            document.getElementById('certDate').innerText = now.toLocaleDateString('gu-IN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function backToQuiz() {
+            document.getElementById('certificateScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('hidden');
+        }
+
+        function printCertificate() {
+            window.print();
+        }
+
+        // Initialize voice list on load
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.getVoices();
+            };
+        }
+    </script>
+</body>
+</html>
