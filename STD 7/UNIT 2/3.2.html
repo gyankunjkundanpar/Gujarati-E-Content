@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ધોરણ:7 ગુજરાતી (સત્ર-1) એકમ-2 ગુપ્તદાન</title>
+    <!-- jsPDF and html2canvas for Certificate Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #1a1a2e;
+            --header-bg: #16213e;
+            --gold: #f39c12;
+            --gold-light: #f1c40f;
+            --emerald: #0f5132;
+            --emerald-dark: #0a3622;
+            --rose: #dc3545;
+            --purple: #6f42c1;
+            --cream: #fffdf5;
+            --text-dark: #111;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Aspect Ratio Container (16:9 for desktop/smartboards) */
+        .game-wrapper {
+            width: 100%;
+            max-width: 1100px;
+            min-height: 650px;
+            background: #fff;
+            color: var(--text-dark);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--gold);
+        }
+
+        /* Front Screen */
+        #front-screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .front-title {
+            color: var(--gold-light);
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            width: 100%;
+            max-width: 400px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--gold-light);
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #8B8000; /* Dark Yellow/Gold Text */
+            background-color: #fff;
+            outline: none;
+        }
+
+        .btn-start {
+            background: linear-gradient(180deg, var(--gold-light), var(--gold));
+            color: #000;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4);
+            margin-top: 15px;
+            transition: transform 0.2s;
+        }
+
+        .btn-start:hover {
+            transform: scale(1.05);
+        }
+
+        /* Dashboard Header */
+        header {
+            background: var(--header-bg);
+            color: #fff;
+            padding: 12px;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+            position: relative;
+        }
+
+        .header-top { font-size: 0.85rem; color: #ffeb3b; font-weight: bold; }
+        .header-mid { font-size: 1.1rem; color: #00ffe0; font-weight: bold; margin: 3px 0; }
+        .header-main { font-size: 1.4rem; color: #ffffff; font-weight: bold; text-shadow: 1px 1px 2px #000; }
+
+        .dashboard-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.3);
+            padding: 8px 15px;
+            margin-top: 8px;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--gold-light);
+            font-weight: bold;
+        }
+
+        /* Tabs System */
+        .tabs {
+            display: flex;
+            background: #222;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            background: #333;
+            color: #fff;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            border-right: 1px solid #444;
+        }
+
+        .tab-btn.active {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .tab-btn:disabled {
+            background: #111;
+            color: #555;
+            cursor: not-allowed;
+        }
+
+        /* Main Light-Card Area */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .light-card {
+            width: 100%;
+            max-width: 800px;
+            background: var(--cream);
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .instruction-box {
+            font-weight: bold;
+            color: var(--purple);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            border-bottom: 2px stroke #ddd;
+            padding-bottom: 5px;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--emerald-dark);
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+
+        .btn-tts { background-color: var(--purple); }
+        .btn-tts.speaking { background-color: var(--rose); }
+        .btn-nav { background-color: #0d6efd; }
+        .btn-explain { background-color: #17a2b8; }
+
+        /* 3D Option Buttons */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .option-btn {
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--emerald-dark);
+            cursor: pointer;
+            box-shadow: 3px 5px 0px rgba(0,0,0,0.2);
+            transition: all 0.1s;
+            text-align: center;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 3px 7px 0px rgba(0,0,0,0.2);
+        }
+
+        .option-btn:active {
+            transform: translateY(2px);
+            box-shadow: 1px 2px 0px rgba(0,0,0,0.2);
+        }
+
+        .option-btn.correct {
+            background: #d4edda !important;
+            border-color: #28a745 !important;
+            color: #155724 !important;
+            animation: pulse-green 0.5s;
+        }
+
+        .option-btn.wrong {
+            background: #f8d7da !important;
+            border-color: #dc3545 !important;
+            color: #721c24 !important;
+            animation: shake 0.5s;
+        }
+
+        /* Footer Marquee */
+        footer {
+            background: #111;
+            color: #fff;
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 2px solid var(--gold);
+        }
+
+        .marquee {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 25s linear infinite;
+            color: var(--gold-light);
+            font-weight: bold;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* Modals & Animations */
+        .modal {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            color: #000;
+            border: 3px solid var(--gold);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        /* Certificate Styling */
+        #cert-modal .modal-content {
+            max-width: 800px;
+            background: #fffdf0;
+            border: 10px double var(--gold);
+            padding: 30px;
+            position: relative;
+        }
+
+        .cert-header { color: #0a3622; font-size: 1.1rem; font-weight: bold; margin-bottom: 10px; }
+        .cert-title { font-size: 2rem; color: var(--gold); font-weight: bold; text-decoration: underline; margin: 15px 0; }
+        .cert-body { font-size: 1.2rem; line-height: 1.6; color: #333; margin: 20px 0; }
+
+        /* Animation Keyframes */
+        @keyframes pulse-green {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        /* Thumbs Down Animation Overlay */
+        #anim-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 150;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .thumbs-down {
+            font-size: 100px;
+            animation: popFade 1s forwards;
+        }
+
+        @keyframes popFade {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+
+        /* Balloon styling */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 50px;
+            height: 70px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            animation: floatUp 3s ease-in forwards;
+        }
+
+        @keyframes floatUp {
+            to { transform: translateY(-700px); opacity: 0; }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .options-grid { grid-template-columns: 1fr; }
+            .header-main { font-size: 1.1rem; }
+            .header-mid { font-size: 0.95rem; }
+            .front-title { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-wrapper">
+    <!-- FRONT SCREEN -->
+    <div id="front-screen">
+        <div class="front-title">
+            મહારાણીશ્રી ગંગાબા સાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8
+        </div>
+        <div class="form-group">
+            <label>વિદ્યાર્થીનું નામ:</label>
+            <input type="text" id="studentName" placeholder="તમારું નામ લખો...">
+        </div>
+        <div class="form-group">
+            <label>શાળાનું નામ:</label>
+            <input type="text" id="schoolName" placeholder="શાળાનું નામ લખો...">
+        </div>
+        <div class="form-group">
+            <label>ધોરણ:</label>
+            <select id="stdSelect">
+                <option value="6">6</option>
+                <option value="7" selected>7</option>
+                <option value="8">8</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>સ્થળ:</label>
+            <input type="text" id="placeName" placeholder="સ્થળ લખો...">
+        </div>
+        <button class="btn-start" onclick="startGame()">રમવાનું શરૂ કરો</button>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header>
+        <div class="header-top">મહારાણીશ્રી ગંગાબા સાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8</div>
+        <div class="header-mid">LO: 3.2 સામગ્રીની સમજ વિકસાવવા પરિપૃચ્છા કરે છે.</div>
+        <div class="header-main">ધોરણ:7 ગુજરાતી (સત્ર-1) એકમ-2 ગુપ્તદાન</div>
+        <div class="dashboard-bar">
+            <span>વિદ્યાર્થી: <span id="dispName" style="color:#fff;">-</span></span>
+            <span>સ્કોર: <span id="scoreDisp" style="color:#00ffe0;">0</span></span>
+        </div>
+    </header>
+
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab-btn active" id="tab1" onclick="switchTab(1)">પ્રવૃત્તિ 1</button>
+        <button class="tab-btn" id="tab2" disabled onclick="switchTab(2)">પ્રવૃત્તિ 2</button>
+        <button class="tab-btn" id="tabCert" disabled onclick="showCertificate()">પ્રમાણપત્ર</button>
+    </div>
+
+    <!-- MAIN CARD CONTAINER -->
+    <div class="main-content">
+        <div class="light-card">
+            <div class="instruction-box" id="instructionText">સૂચના: આપેલાં વાક્યો ખરાં છે કે ખોટાં તે જણાવો.</div>
+            
+            <div class="audio-controls">
+                <button class="btn-action btn-tts" id="ttsBtn" onclick="toggleReadQuestionTTS()">
+                    🔊 પ્રશ્ન સાંભળો
+                </button>
+                <button class="btn-action btn-explain" onclick="showExplanation()">💡 સમજૂતી</button>
+                <button class="btn-action btn-nav" onclick="retryQuestion()">🔄 ફરી પ્રયાસ કરો</button>
+            </div>
+
+            <div class="question-text" id="questionText">પ્રશ્ન લોડ થઈ રહ્યો છે...</div>
+
+            <div class="options-grid" id="optionsGrid">
+                <!-- Dynamic Options -->
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="marquee">
+            Disclaimer : આ કન્ટેન્ટ મહારાણીશ્રી ગંગાબા સાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા નિર્મિત કરવામાં આવ્યું છે.
+        </div>
+    </footer>
+
+    <!-- ANIMATION OVERLAY -->
+    <div id="anim-overlay"></div>
+
+    <!-- EXPLANATION MODAL -->
+    <div class="modal" id="explainModal">
+        <div class="modal-content">
+            <h3>પ્રશ્ન સમજૂતી</h3>
+            <p id="explainContent" style="margin: 15px 0; font-size: 1.1rem; line-height: 1.5;"></p>
+            <button class="btn-action btn-nav" style="margin:0 auto;" onclick="closeModal('explainModal')">બંધ કરો</button>
+        </div>
+    </div>
+
+    <!-- WRONG ANSWER POPUP -->
+    <div class="modal" id="wrongModal">
+        <div class="modal-content">
+            <h3 style="color:var(--rose);">અરેરે! જવાબ ખોટો છે</h3>
+            <p id="wrongExplain" style="margin: 15px 0; font-size: 1.1rem;"></p>
+            <p id="correctAnsDisp" style="font-weight:bold; color:var(--emerald-dark); margin-bottom:15px;"></p>
+            <button class="btn-action btn-nav" style="margin:0 auto;" onclick="nextQuestion()">આગળનો પ્રશ્ન</button>
+        </div>
+    </div>
+
+    <!-- ACTIVITY COMPLETION POPUP -->
+    <div class="modal" id="actCompleteModal">
+        <div class="modal-content">
+            <h2 style="color:var(--gold);">અભિનંદન! 🎉</h2>
+            <p style="margin: 15px 0; font-size: 1.2rem;">પ્રવૃત્તિ પૂર્ણ થયેલ છે. હવે નવી પ્રવૃત્તિ પર જાઓ.</p>
+            <button class="btn-action btn-start" style="margin:0 auto;" onclick="proceedToNextActivity()">નવી પ્રવૃત્તિ શરૂ કરો</button>
+        </div>
+    </div>
+
+    <!-- CERTIFICATE MODAL -->
+    <div class="modal" id="cert-modal">
+        <div class="modal-content" id="certificatePrintable">
+            <div class="cert-header">મહારાણીશ્રી ગંગાબા સાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8</div>
+            <hr style="border:1px solid var(--gold); margin: 10px 0;">
+            <div class="cert-title">પ્રમાણપત્ર</div>
+            <div class="cert-body">
+                આથી પ્રમાણપત્ર આપવામાં આવે છે કે વિદ્યાર્થી/ વિદ્યાર્થીની <b id="certStudent" style="color:var(--purple);">-</b>,<br>
+                શાળા: <b id="certSchool">-</b>, સ્થળ: <b id="certPlace">-</b> એ ધોરણ:7 ગુજરાતી (સત્ર-1) એકમ-2 <b>"ગુપ્તદાન"</b> (LO: 3.2 સામગ્રીની સમજ વિકસાવવા પરિપૃચ્છા કરે છે) ની તમામ પ્રવૃત્તિઓ સફળતાપૂર્વક પૂર્ણ કરેલ છે.<br><br>
+                મેળવેલ ગુણ: <b id="certScore">0</b> / <b id="certTotal">10</b><br>
+                પ્રદર્શન: <span id="certGrade" style="font-size:1.4rem; font-weight:bold;">-</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:30px; font-weight:bold;">
+                <div>તારીખ: <span id="certDate"></span></div>
+                <div>સ્થળ: ભુજ - કચ્છ</div>
+            </div>
+            <div style="margin-top: 25px; display:flex; gap:10px; justify-content:center;" class="no-print">
+                <button class="btn-action btn-nav" onclick="downloadCertPDF()">PDF ડાઉનલોડ</button>
+                <button class="btn-action btn-tts" onclick="downloadCertImage()">ઈમેજ ડાઉનલોડ</button>
+                <button class="btn-action btn-explain" onclick="closeModal('cert-modal')">બંધ કરો</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // DATA SETS
+    const act1Data = [
+        { q: "ગંગાપુર એક મોટું ગામ હતું.", ans: "ખોટું", exp: "ગંગાપુર એ એક નાનું સુંદર ગામ હતું." },
+        { q: "ભીખાશેઠે ખૂબ જ કંજૂસ વ્યક્તિ હતા.", ans: "ખોટું", exp: "ભીખાશેઠ ખૂબ જ ઉદાર અને પરોપકારી વ્યક્તિ હતા." },
+        { q: "ગામમાં ટપાલ અઠવાડિયામાં ત્રણ દિવસ આવતી હતી.", ans: "ખરું", exp: "પાઠના આધારે ગામમાં ટપાલ અઠવાડિયામાં ત્રણ દિવસ જ આવતી હતી." },
+        { q: "ભીખાશેઠે ડૉક્ટરની મદદ કરી હતી.", ans: "ખરું", exp: "ભીખાશેઠે છુપી રીતે ડૉક્ટરને આર્થિક મદદ કરી હતી." },
+        { q: "ભીખાશેઠ ગામમાં પૈસાદાર હતા.", ans: "ખરું", exp: "ભીખાશેઠ ગામના ધનિક અને આબરૂદાર શેઠ હતા." }
+    ];
+
+    const act2Data = [
+        { q: "મને ભીખાશેઠનું વર્તન અકળ લાગ્યા કરતું હતું.", ans: "ડૉક્ટર", options: ["ભીખાશેઠ", "ડૉક્ટર", "સાધુ", "શેઠાણી", "લેખક"], exp: "આ વાક્ય ડૉક્ટર દ્વારા બોલાયેલ/અનુભવાયેલ છે." },
+        { q: "તમારે કોઈને કહેવું નહીં કે, “મેં તમને આ મદદ કરી છે.”", ans: "ભીખાશેઠ", options: ["ભીખાશેઠ", "ડૉક્ટર", "સાધુ", "શેઠાણી", "લેખક"], exp: "ભીખાશેઠ ગુપ્તદાનમાં માનતા હોવાથી આ વાક્ય બોલે છે." },
+        { q: "કંઈક નામના તો કરો!", ans: "શેઠાણી", options: ["ભીખાશેઠ", "ડૉક્ટર", "સાધુ", "શેઠાણી", "લેખક"], exp: "શેઠાણી ભીખાશેઠને દાનની જાહેરાત કરી નામના મેળવવા કહે છે." },
+        { q: "જો તું જમણે હાથે દાન આપે તો ડાબો હાથ પણ ન જાણે.", ans: "સાધુ", options: ["ભીખાશેઠ", "ડૉક્ટર", "સાધુ", "શેઠાણી", "લેખક"], exp: "સાધુ મહાત્માએ ગુપ્તદાનનો આ મહિમા સમજાવ્યો હતો." },
+        { q: "‘રસીયો જીવ ખેતરને ખોળે’ ભાગ-1 અને 2 એ મારી જાણીતી રચનાઓ છે.", ans: "લેખક", options: ["ભીખાશેઠ", "ડૉક્ટર", "સાધુ", "શેઠાણી", "લેખક"], exp: "આ કૃતિના સર્જક/લેખક પરિચયમાંથી આપેલ છે." }
+    ];
+
+    // GAME STATE
+    let currentAct = 1;
+    let questions = [];
+    let qIndex = 0;
+    let score = 0;
+    let studentData = {};
+    let isSpeaking = false;
+    let synth = window.speechSynthesis;
+
+    // AUDIO SYNTHESIS (Audio Context Pitch/Chime)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playChime() {
+        // Victory Chime
+        let notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+            let osc = audioCtx.createOscillator();
+            let gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime + idx * 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.1 + 0.3);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(audioCtx.currentTime + idx * 0.1);
+            osc.stop(audioCtx.currentTime + idx * 0.1 + 0.3);
+        });
+    }
+
+    function playWrongSound() {
+        let osc = audioCtx.createOscillator();
+        let gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(60, audioCtx.currentTime + 0.4);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.4);
+    }
+
+    // UTILS
+    function shuffle(array) {
+        let arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function startGame() {
+        const name = document.getElementById('studentName').value.trim();
+        const school = document.getElementById('schoolName').value.trim();
+        const place = document.getElementById('placeName').value.trim();
+
+        if (!name || !school || !place) {
+            alert("કૃપા કરીને તમામ વિગતો ભરો.");
+            return;
+        }
+
+        studentData = { name, school, place, std: document.getElementById('stdSelect').value };
+        document.getElementById('dispName').innerText = name;
+        document.getElementById('front-screen').style.display = 'none';
+
+        loadActivity(1);
+    }
+
+    function loadActivity(actNum) {
+        currentAct = actNum;
+        qIndex = 0;
+        stopTTS();
+
+        if (actNum === 1) {
+            document.getElementById('instructionText').innerText = "સૂચના: આપેલાં વાક્યો ખરાં છે કે ખોટાં તે જણાવો.";
+            questions = shuffle(act1Data);
+        } else if (actNum === 2) {
+            document.getElementById('instructionText').innerText = "સૂચના: મને ઓળખી મારું નામ લખો.";
+            questions = shuffle(act2Data);
+        }
+
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        stopTTS();
+        const currentQ = questions[qIndex];
+        document.getElementById('questionText').innerText = currentQ.q;
+        
+        const optionsGrid = document.getElementById('optionsGrid');
+        optionsGrid.innerHTML = '';
+
+        let opts = [];
+        if (currentAct === 1) {
+            opts = ["ખરું", "ખોટું"];
+        } else {
+            opts = shuffle(currentQ.options);
+        }
+
+        opts.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(opt, btn);
+            optionsGrid.appendChild(btn);
+        });
+    }
+
+    function checkAnswer(selectedOpt, btnElement) {
+        stopTTS();
+        const currentQ = questions[qIndex];
+        const allBtns = document.querySelectorAll('.option-btn');
+        allBtns.forEach(b => b.style.pointerEvents = 'none'); // Disable further clicks
+
+        if (selectedOpt === currentQ.ans) {
+            btnElement.classList.add('correct');
+            playChime();
+            triggerBalloons();
+            score += 1;
+            document.getElementById('scoreDisp').innerText = score;
+            
+            setTimeout(() => {
+                nextQuestion();
+            }, 1500);
+        } else {
+            btnElement.classList.add('wrong');
+            playWrongSound();
+            triggerThumbsDown();
+
+            setTimeout(() => {
+                document.getElementById('wrongExplain').innerText = currentQ.exp;
+                document.getElementById('correctAnsDisp').innerText = "સાચો જવાબ: " + currentQ.ans;
+                document.getElementById('wrongModal').style.display = 'flex';
+            }, 1000);
+        }
+    }
+
+    function nextQuestion() {
+        closeModal('wrongModal');
+        qIndex++;
+        if (qIndex < questions.length) {
+            renderQuestion();
+        } else {
+            // Activity Completed
+            if (currentAct === 1) {
+                document.getElementById('tab2').disabled = false;
+                document.getElementById('actCompleteModal').style.display = 'flex';
+            } else if (currentAct === 2) {
+                document.getElementById('tabCert').disabled = false;
+                showCertificate();
+            }
+        }
+    }
+
+    function proceedToNextActivity() {
+        closeModal('actCompleteModal');
+        switchTab(2);
+    }
+
+    function switchTab(actNum) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab' + actNum).classList.add('active');
+        loadActivity(actNum);
+    }
+
+    function retryQuestion() {
+        renderQuestion();
+    }
+
+    function showExplanation() {
+        document.getElementById('explainContent').innerText = questions[qIndex].exp;
+        document.getElementById('explainModal').style.display = 'flex';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    // TTS FUNCTIONALITY (Google Cloud Chirp / Browser Gujarati Fallback)
+    function toggleReadQuestionTTS() {
+        if (isSpeaking) {
+            stopTTS();
+        } else {
+            startTTS();
+        }
+    }
+
+    function startTTS() {
+        if ('speechSynthesis' in window) {
+            synth.cancel();
+            const text = questions[qIndex].q;
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = 'gu-IN';
+            utter.rate = 0.95;
+
+            // Voice selection logic
+            let voices = synth.getVoices();
+            let guVoice = voices.find(v => v.lang.includes('gu'));
+            if (guVoice) utter.voice = guVoice;
+
+            utter.onstart = () => {
+                isSpeaking = true;
+                const btn = document.getElementById('ttsBtn');
+                btn.classList.add('speaking');
+                btn.innerHTML = '⏹️ વાંચવાનું બંધ કરો';
+            };
+
+            utter.onend = () => {
+                stopTTS();
+            };
+
+            utter.onerror = () => {
+                stopTTS();
+            };
+
+            synth.speak(utter);
+        } else {
+            alert("તમારા બ્રાઉઝરમાં અવાજ સપોર્ટ કરતું નથી.");
+        }
+    }
+
+    function stopTTS() {
+        if (synth) synth.cancel();
+        isSpeaking = false;
+        const btn = document.getElementById('ttsBtn');
+        if (btn) {
+            btn.classList.remove('speaking');
+            btn.innerHTML = '🔊 પ્રશ્ન સાંભળો';
+        }
+    }
+
+    // ANIMATIONS
+    function triggerBalloons() {
+        const overlay = document.getElementById('anim-overlay');
+        const colors = ['#f39c12', '#e74c3c', '#2ecc71', '#3498db', '#9b59b6'];
+        for (let i = 0; i < 15; i++) {
+            const b = document.createElement('div');
+            b.className = 'balloon';
+            b.style.left = Math.random() * 90 + '%';
+            b.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            b.style.animationDelay = Math.random() * 0.5 + 's';
+            overlay.appendChild(b);
+            setTimeout(() => b.remove(), 3000);
+        }
+    }
+
+    function triggerThumbsDown() {
+        const overlay = document.getElementById('anim-overlay');
+        const td = document.createElement('div');
+        td.className = 'thumbs-down';
+        td.innerText = '👎';
+        overlay.appendChild(td);
+        setTimeout(() => td.remove(), 1000);
+    }
+
+    // CERTIFICATE GENERATION
+    function showCertificate() {
+        stopTTS();
+        document.getElementById('certStudent').innerText = studentData.name;
+        document.getElementById('certSchool').innerText = studentData.school;
+        document.getElementById('certPlace').innerText = studentData.place;
+        document.getElementById('certScore').innerText = score;
+        document.getElementById('certTotal').innerText = 10;
+        
+        const today = new Date();
+        document.getElementById('certDate').innerText = today.toLocaleDateString('gu-IN');
+
+        const percentage = (score / 10) * 100;
+        const gradeElem = document.getElementById('certGrade');
+        if (percentage >= 50) {
+            gradeElem.innerText = "શાનદાર પ્રદર્શન 🌟";
+            gradeElem.style.color = "green";
+        } else {
+            gradeElem.innerText = "હજુ વધુ મહેનત કરો 📘";
+            gradeElem.style.color = "orange";
+        }
+
+        document.getElementById('cert-modal').style.display = 'flex';
+    }
+
+    function downloadCertImage() {
+        const node = document.getElementById('certificatePrintable');
+        const noPrints = node.querySelectorAll('.no-print');
+        noPrints.forEach(el => el.style.display = 'none');
+
+        html2canvas(node).then(canvas => {
+            const link = document.createElement('a');
+            link.download = `${studentData.name}_Certificate.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            noPrints.forEach(el => el.style.display = 'flex');
+        });
+    }
+
+    function downloadCertPDF() {
+        const { jsPDF } = window.jspdf;
+        const node = document.getElementById('certificatePrintable');
+        const noPrints = node.querySelectorAll('.no-print');
+        noPrints.forEach(el => el.style.display = 'none');
+
+        html2canvas(node).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('l', 'mm', 'a4');
+            const imgProps = pdf.getImageProperties(imgData);
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            
+            pdf.addImage(imgData, 'PNG', 0, 10, pdfWidth, pdfHeight);
+            pdf.save(`${studentData.name}_Certificate.pdf`);
+            noPrints.forEach(el => el.style.display = 'flex');
+        });
+    }
+
+    // Load synth voices
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = () => {
+            window.speechSynthesis.getVoices();
+        };
+    }
+</script>
+</body>
+</html>

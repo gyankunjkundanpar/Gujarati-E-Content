@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ધોરણ:7 ગુજરાતી (સત્ર-1) એકમ-6 અવિરામ યુદ્ધ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- html2canvas for downloading certificate as image -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandDarkGreen: '#012e22',
+                        brandGreen: '#044d38',
+                        brandEmerald: '#047857',
+                        brandGold: '#eab308',
+                        brandOrange: '#d97706',
+                        softCream: '#fffdf0',
+                        emeraldText: '#022c22'
+                    },
+                    fontFamily: {
+                        gujarati: ['"Hind Vadodara"', 'sans-serif'],
+                        english: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Hind Vadodara', sans-serif;
+            background: radial-gradient(circle at center, #044d38 0%, #012e22 100%);
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+        }
+
+        /* Front screen input bold yellow styling matching screenshot */
+        .golden-input {
+            color: #facc15 !important; /* Bold yellow/golden */
+            font-weight: 700 !important;
+            background-color: #033829 !important;
+            border: 2px solid #eab308 !important;
+            text-shadow: 0px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .golden-input::placeholder {
+            color: #9ca3af;
+            font-weight: 400;
+        }
+
+        /* 3D Glossy Buttons matching screenshot */
+        .btn-start-gold {
+            background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+            border: 2px solid #fbbf24;
+            box-shadow: 0 6px 0 #78350f, 0 8px 15px rgba(0,0,0,0.4);
+            transition: all 0.15s ease;
+        }
+        .btn-start-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #78350f, 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .btn-start-gold:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #78350f, 0 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .btn-option-3d {
+            background: linear-gradient(180deg, #ffffff 0%, #fef3c7 100%);
+            border: 2px solid #f59e0b;
+            box-shadow: 0 4px 0 #b45309, 0 4px 10px rgba(0,0,0,0.08);
+            transition: all 0.2s ease;
+            color: #064e3b;
+        }
+        .btn-option-3d:hover {
+            background: linear-gradient(180deg, #fef9c3 0%, #fde047 100%);
+            transform: translateY(-2px);
+        }
+        .btn-option-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #b45309;
+        }
+
+        /* Correct and Wrong Feedback Styles */
+        .option-correct {
+            background: linear-gradient(180deg, #4ade80 0%, #16a34a 100%) !important;
+            border-color: #15803d !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 0 #14532d !important;
+            animation: pulse-green 0.5s ease-in-out;
+        }
+
+        .option-wrong {
+            background: linear-gradient(180deg, #f87171 0%, #dc2626 100%) !important;
+            border-color: #991b1b !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 0 #7f1d1d !important;
+            animation: shake-red 0.4s ease-in-out;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake-red {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        /* Light Card Theme for Questions */
+        .light-card {
+            background-color: #fffdf0;
+            border: 3px solid #f59e0b;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Marquee Footer */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            background: #011f17;
+            border-top: 2px solid #d97706;
+        }
+        .marquee-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 25s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* Certificate Styling */
+        .certificate-border {
+            border: 12px double #d97706;
+            background: #ffffff;
+            position: relative;
+        }
+
+        /* Canvas for balloons overlay */
+        #balloonCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen justify-between">
+
+    <!-- Balloons Canvas Overlay -->
+    <canvas id="balloonCanvas"></canvas>
+
+    <!-- Thumbs Down Overlay Modal -->
+    <div id="thumbsDownModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 text-center max-w-md w-full border-4 border-red-500 shadow-2xl transform scale-90 animate-bounce">
+            <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-red-400">
+                <i class="fa-solid fa-thumbs-down text-4xl text-red-600 animate-pulse"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-red-700 mb-2">અરેરે! ખોટો જવાબ</h3>
+            <div class="bg-red-50 p-3 rounded-xl border border-red-200 mb-4 text-left">
+                <p class="text-xs text-red-500 font-bold mb-1">સાચો જવાબ અને સમજૂતી:</p>
+                <p id="thumbsDownMsg" class="text-gray-800 text-sm font-medium">સમજુતી અહીં આવશે.</p>
+            </div>
+            <button onclick="closeThumbsDownAndNext()" class="px-8 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-full shadow-lg text-base">
+                આગળ વધો <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Explanation Modal -->
+    <div id="explanationModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-amber-50 rounded-2xl p-6 max-w-md w-full border-4 border-amber-500 shadow-2xl relative">
+            <button onclick="closeExplanation()" class="absolute top-3 right-3 text-amber-900 hover:text-red-600 text-2xl font-bold">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+            <div class="flex items-center gap-3 mb-3">
+                <i class="fa-solid fa-lightbulb text-3xl text-amber-500"></i>
+                <h3 class="text-xl font-bold text-amber-900">પ્રશ્નની સમજૂતી</h3>
+            </div>
+            <p id="explanationText" class="text-base text-emerald-950 font-medium leading-relaxed bg-white p-4 rounded-xl border border-amber-200 shadow-inner">
+                જવાબ અંગેની સમજૂતી અહીં પ્રદર્શિત થશે.
+            </p>
+            <div class="mt-4 text-right">
+                <button onclick="closeExplanation()" class="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl shadow">
+                    સમજાઈ ગયું
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activity Complete Popup Modal -->
+    <div id="activityCompleteModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gradient-to-b from-emerald-800 to-teal-950 rounded-3xl p-8 max-w-md w-full border-4 border-yellow-400 text-center shadow-2xl text-white">
+            <div class="w-20 h-20 bg-yellow-400 text-emerald-900 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg text-4xl">
+                🏆
+            </div>
+            <h2 class="text-2xl font-bold text-yellow-300 mb-2">અભિનંદન!</h2>
+            <p id="activityCompleteText" class="text-base text-emerald-100 mb-6">પ્રવૃત્તિ પૂર્ણ થયેલ છે, હવે નવી પ્રવૃત્તિ પર જાઓ.</p>
+            <button onclick="proceedToNextActivity()" class="w-full py-3.5 btn-start-gold text-emerald-950 font-bold text-lg rounded-2xl">
+                આગળની પ્રવૃત્તિ શરૂ કરો <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- FRONT SCREEN CONTAINER (EXACT MATCH WITH USER IMAGE) -->
+    <div id="frontScreen" class="flex-grow flex items-center justify-center p-3 sm:p-6 my-auto">
+        <div class="bg-[#023e2f] border-2 border-yellow-500/80 rounded-2xl p-6 sm:p-8 max-w-xl w-full shadow-2xl text-white">
+            
+            <!-- Top Pill Badge -->
+            <div class="text-center mb-3">
+                <span class="bg-[#055c45] border border-yellow-500/60 text-yellow-300 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full inline-flex items-center gap-2 shadow">
+                    <i class="fa-solid fa-gear text-yellow-400"></i> રાજ્ય કક્ષાનું શ્રેષ્ઠ શૈક્ષણિક ઈ-કન્ટેન્ટ
+                </span>
+            </div>
+
+            <!-- Title Line 1 & Line 2 -->
+            <div class="text-center mb-3">
+                <h1 class="text-lg sm:text-xl font-bold text-white leading-tight">
+                    મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત
+                </h1>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-[#2dd4bf] mt-1">
+                    ગુજરાતી E-Content ધોરણ 6 થી 8
+                </h2>
+                <!-- Gold Accent Bar -->
+                <div class="w-28 h-1 bg-yellow-400 mx-auto my-3 rounded-full"></div>
+                <!-- Chapter Subtitle -->
+                <p class="text-xs sm:text-sm font-bold text-gray-200">
+                    ધોરણ:7 ગુજરાતી (સત્ર-1) એકમ-6 અવિરામ યુદ્ધ
+                </p>
+            </div>
+
+            <!-- Input Form Section -->
+            <form onsubmit="handleStartGame(event)" class="space-y-4 mt-6">
+                <!-- Field 1: Student Name -->
+                <div>
+                    <label class="block text-yellow-300 font-bold text-sm mb-1">
+                        <i class="fa-solid fa-user mr-1 text-yellow-400"></i> વિદ્યાર્થીનું નામ:
+                    </label>
+                    <input type="text" id="studentName" required placeholder="તમારું પૂરું નામ લખો..." 
+                           class="w-full px-4 py-3 rounded-xl golden-input focus:outline-none focus:ring-2 focus:ring-yellow-400 text-base">
+                </div>
+
+                <!-- Field 2: School Name -->
+                <div>
+                    <label class="block text-yellow-300 font-bold text-sm mb-1">
+                        <i class="fa-solid fa-school mr-1 text-yellow-400"></i> શાળાનું નામ:
+                    </label>
+                    <input type="text" id="schoolName" required placeholder="તમારી શાળાનું નામ લખો..." 
+                           class="w-full px-4 py-3 rounded-xl golden-input focus:outline-none focus:ring-2 focus:ring-yellow-400 text-base">
+                </div>
+
+                <!-- Field 3 & 4: Grade Dropdown & Place -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-yellow-300 font-bold text-sm mb-1">
+                            <i class="fa-solid fa-layer-group mr-1 text-yellow-400"></i> ધોરણ પસંદ કરો:
+                        </label>
+                        <select id="studentGrade" required class="w-full px-4 py-3 rounded-xl golden-input focus:outline-none focus:ring-2 focus:ring-yellow-400 text-base">
+                            <option value="6">ધોરણ 6</option>
+                            <option value="7" selected>ધોરણ 7</option>
+                            <option value="8">ધોરણ 8</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-yellow-300 font-bold text-sm mb-1">
+                            <i class="fa-solid fa-location-dot mr-1 text-yellow-400"></i> સ્થળ / ગામ:
+                        </label>
+                        <input type="text" id="studentPlace" required placeholder="તમારું સ્થળ/ગામ..." 
+                               class="w-full px-4 py-3 rounded-xl golden-input focus:outline-none focus:ring-2 focus:ring-yellow-400 text-base">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-4 text-center">
+                    <button type="submit" class="w-full py-3.5 btn-start-gold text-emerald-950 font-extrabold text-xl rounded-2xl cursor-pointer flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-circle-play text-2xl"></i> રમત શરૂ કરો
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- MAIN GAME SCREEN (HIDDEN INITIALLY) -->
+    <div id="gameScreen" class="hidden flex-col flex-grow w-full max-w-5xl mx-auto p-2 sm:p-4">
+        
+        <!-- Header Banner Section -->
+        <header class="bg-[#022e23] text-white rounded-2xl border-2 border-yellow-500 p-3 sm:p-4 mb-3 text-center shadow-lg relative overflow-hidden">
+            <!-- Header Line 1: Small Font -->
+            <p class="text-xs sm:text-sm font-semibold text-yellow-300 mb-1 leading-snug">
+                મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8
+            </p>
+            
+            <!-- Header Line 2: LO Number with Statement (Medium Font) -->
+            <div class="bg-[#044d38] my-1 py-1 px-3 rounded-lg border border-yellow-500/40 inline-block max-w-full">
+                <p class="text-xs sm:text-sm font-bold text-yellow-200">
+                    <span class="bg-amber-600 text-white px-2 py-0.5 rounded text-xs mr-1">LO 6.1</span> 
+                    અપરિચિત શબ્દોના અર્થની ધારણા કરે શોધખોળ કરે અને તારવે છે.
+                </p>
+            </div>
+
+            <!-- Header Line 3: Chapter Name (Large Font) -->
+            <h2 class="text-lg sm:text-2xl font-extrabold text-amber-400 tracking-wide mt-1">
+                ધોરણ:7 ગુજરાતી (સત્ર-1) એકમ-6 અવિરામ યુદ્ધ
+            </h2>
+        </header>
+
+        <!-- Dashboard Bar (Score & Name) -->
+        <div class="bg-[#033a2c] border-2 border-yellow-400 rounded-xl p-3 mb-3 flex flex-wrap items-center justify-between text-white gap-2 shadow-md">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-emerald-950 font-bold text-xl shadow">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+                <div>
+                    <p class="text-xs text-amber-200">વિદ્યાર્થી</p>
+                    <p id="dashStudentInfo" class="font-bold text-sm sm:text-base text-yellow-300">નામ (ધોરણ 7)</p>
+                </div>
+            </div>
+
+            <!-- Dashboard Center: Score Badge -->
+            <div class="flex items-center gap-4 bg-[#011f17] px-4 py-1.5 rounded-xl border border-yellow-500/50">
+                <div class="text-center">
+                    <p class="text-xs text-amber-300">કુલ ગુણ</p>
+                    <p id="scoreDisplay" class="text-lg sm:text-xl font-bold text-yellow-400">0 / 13</p>
+                </div>
+            </div>
+
+            <!-- Sound Toggle Button -->
+            <button onclick="toggleAudioMute()" id="muteBtn" class="px-3 py-1.5 bg-emerald-800 hover:bg-emerald-700 border border-amber-400 rounded-lg text-xs sm:text-sm font-semibold text-amber-200 flex items-center gap-2">
+                <i class="fa-solid fa-volume-high text-yellow-400" id="muteIcon"></i> <span id="muteText">અવાજ ચાલુ</span>
+            </button>
+        </div>
+
+        <!-- Navigation Tabs for Activities -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-4">
+            <button onclick="switchTab('act1')" id="tab-act1" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-sm sm:text-base flex items-center gap-2 bg-amber-500 text-emerald-950 shadow-md">
+                <i class="fa-solid fa-list-check"></i> પ્રવૃત્તિ 1
+            </button>
+            <button onclick="switchTab('act2')" id="tab-act2" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-sm sm:text-base flex items-center gap-2 bg-emerald-900 text-emerald-200 hover:bg-emerald-800">
+                <i class="fa-solid fa-font"></i> પ્રવૃત્તિ 2 <i id="lock-act2" class="fa-solid fa-lock text-xs ml-1"></i>
+            </button>
+            <button onclick="switchTab('act3')" id="tab-act3" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-sm sm:text-base flex items-center gap-2 bg-emerald-900 text-emerald-200 hover:bg-emerald-800">
+                <i class="fa-solid fa-magnifying-glass"></i> પ્રવૃત્તિ 3 <i id="lock-act3" class="fa-solid fa-lock text-xs ml-1"></i>
+            </button>
+            <button onclick="switchTab('cert')" id="tab-cert" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-sm sm:text-base flex items-center gap-2 bg-emerald-900 text-emerald-200 hover:bg-emerald-800">
+                <i class="fa-solid fa-award"></i> પ્રમાણપત્ર <i id="lock-cert" class="fa-solid fa-lock text-xs ml-1"></i>
+            </button>
+        </div>
+
+        <!-- ACTIVITY QUESTION CONTAINER (LIGHT CARD THEME) -->
+        <main id="activityContainer" class="flex-grow flex flex-col justify-center">
+            
+            <div class="light-card rounded-3xl p-4 sm:p-6 max-w-3xl w-full mx-auto relative overflow-hidden">
+                
+                <!-- Activity Instruction Header -->
+                <div class="flex flex-wrap items-center justify-between border-b-2 border-amber-200 pb-3 mb-4 gap-2">
+                    <span id="actInstruction" class="text-xs sm:text-sm font-bold text-emerald-900 bg-amber-100 px-3 py-1 rounded-lg border border-amber-300">
+                        સૂચના: આપેલા શબ્દના નજીકના અર્થ સામે પસંદગી કરો.
+                    </span>
+                    <span id="questionProgress" class="text-xs sm:text-sm font-bold text-amber-800 bg-amber-200/80 px-3 py-1 rounded-full">
+                        પ્રશ્ન 1 / 5
+                    </span>
+                </div>
+
+                <!-- Explanation Button (સમજૂતી) -->
+                <div class="text-right mb-2">
+                    <button onclick="showExplanation()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-emerald-950 font-bold text-xs sm:text-sm rounded-lg shadow inline-flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-lightbulb"></i> સમજૂતી જુઓ
+                    </button>
+                </div>
+
+                <!-- Main Question Text Block -->
+                <div class="bg-white rounded-2xl p-4 border-2 border-amber-300 shadow-inner mb-6">
+                    <h3 id="questionText" class="text-xl sm:text-2xl font-bold text-emeraldText text-center leading-relaxed">
+                        પ્રશ્ન અહીં આવશે...
+                    </h3>
+                </div>
+
+                <!-- Options Grid Container -->
+                <div id="optionsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                    <!-- Option buttons will be dynamically rendered here -->
+                </div>
+
+                <!-- Control Buttons Footer -->
+                <div class="flex flex-wrap items-center justify-between border-t-2 border-amber-200 pt-4 gap-2">
+                    
+                    <button onclick="prevQuestion()" id="btnPrev" class="px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-xs sm:text-sm flex items-center gap-1">
+                        <i class="fa-solid fa-arrow-left"></i> પાછળનો પ્રશ્ન
+                    </button>
+
+                    <!-- Listen Question TTS Toggle Button -->
+                    <button onclick="toggleReadQuestionTTS()" id="btnTTS" class="px-4 py-2 bg-purple-700 hover:bg-purple-800 text-white font-bold rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow transition">
+                        <i id="ttsIcon" class="fa-solid fa-volume-high"></i> <span id="ttsText">પ્રશ્ન સાંભળો</span>
+                    </button>
+
+                    <button onclick="retryCurrentQuestion()" id="btnRetry" class="px-3 py-2 bg-amber-200 hover:bg-amber-300 text-amber-900 font-bold rounded-xl text-xs sm:text-sm flex items-center gap-1">
+                        <i class="fa-solid fa-rotate-right"></i> ફરી પ્રયાસ કરો
+                    </button>
+
+                    <button onclick="nextQuestion()" id="btnNext" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs sm:text-sm flex items-center gap-1">
+                        આગળનો પ્રશ્ન <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- CERTIFICATE SECTION (HIDDEN INITIALLY) -->
+        <section id="certificateSection" class="hidden flex-grow flex flex-col items-center justify-center p-2 sm:p-4">
+            <div id="certificateContainer" class="certificate-border max-w-4xl w-full p-6 sm:p-10 rounded-2xl shadow-2xl text-center bg-white text-gray-800 relative">
+                
+                <!-- Decorative Corner Badges -->
+                <div class="absolute top-4 left-4 text-amber-600 text-3xl"><i class="fa-solid fa-ribbon"></i></div>
+                <div class="absolute top-4 right-4 text-amber-600 text-3xl"><i class="fa-solid fa-ribbon"></i></div>
+
+                <!-- Certificate Institution Title -->
+                <p class="text-xs sm:text-sm font-bold text-amber-800 uppercase tracking-widest mb-1">
+                    મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8
+                </p>
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-emerald-900 my-2 font-gujarati tracking-wide">
+                    પ્રમાણપત્ર (CERTIFICATE)
+                </h1>
+                
+                <!-- Full Unit Title & LO Statement -->
+                <div class="bg-amber-50 border border-amber-300 rounded-xl p-3 my-2 max-w-2xl mx-auto text-left sm:text-center shadow-inner">
+                    <p class="text-sm font-extrabold text-emerald-950">
+                        📌 ધોરણ: 7 ગુજરાતી (સત્ર-1) એકમ-6 "અવિરામ યુદ્ધ"
+                    </p>
+                    <p class="text-xs sm:text-sm font-bold text-amber-900 mt-1">
+                        🎯 LO 6.1: અપરિચિત શબ્દોના અર્થની ધારણા કરે શોધખોળ કરે અને તારવે છે.
+                    </p>
+                </div>
+
+                <!-- Certification Text Body -->
+                <div class="my-5 space-y-2">
+                    <p class="text-base sm:text-lg">આથી પ્રમાણિત કરવામાં આવે છે કે વિદ્યાર્થી/વિદ્યાર્થીની</p>
+                    <h2 id="certStudentName" class="text-2xl sm:text-3xl font-bold text-emerald-800 border-b-2 border-emerald-600 inline-block px-8 py-1">
+                        વિદ્યાર્થીનું નામ
+                    </h2>
+                    <p class="text-base sm:text-lg mt-2">
+                        શાળા: <span id="certSchoolName" class="font-bold text-gray-900">શાળાનું નામ</span> | 
+                        ધોરણ: <span id="certGrade" class="font-bold text-gray-900">7</span> | 
+                        સ્થળ: <span id="certPlace" class="font-bold text-gray-900">સ્થળ</span>
+                    </p>
+                    <p class="text-sm sm:text-base max-w-2xl mx-auto leading-relaxed text-gray-700">
+                        તેમણે ગુજરાતી E-Content ડિજિટલ રમતની તમામ પ્રવૃત્તિઓ સફળતાપૂર્વક પૂર્ણ કરેલ છે.
+                    </p>
+                </div>
+
+                <!-- Score and Performance Rating -->
+                <div class="bg-gradient-to-r from-amber-50 via-yellow-100 to-amber-50 border-2 border-amber-300 rounded-2xl p-4 max-w-md mx-auto my-3 flex items-center justify-around shadow">
+                    <div>
+                        <p class="text-xs text-amber-800 font-bold">મેળવેલ ગુણ</p>
+                        <p id="certScore" class="text-xl sm:text-2xl font-bold text-emerald-900">0 / 13</p>
+                    </div>
+                    <div class="h-10 w-0.5 bg-amber-300"></div>
+                    <div>
+                        <p class="text-xs text-amber-800 font-bold">પ્રદર્શન મુલ્યાંકન</p>
+                        <p id="certGradeBadge" class="text-lg sm:text-xl font-bold text-amber-700">શાનદાર પ્રદર્શન</p>
+                    </div>
+                </div>
+
+                <!-- Footer Signatures & Date -->
+                <div class="flex justify-between items-end mt-6 pt-3 border-t border-gray-200 text-xs sm:text-sm font-bold text-gray-700">
+                    <div class="text-left">
+                        <p>તારીખ: <span id="certDate" class="text-emerald-900">05/08/2026</span></p>
+                        <p>સ્થળ: ભુજ - કચ્છ</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-14 h-14 bg-amber-500/20 rounded-full border border-amber-500 flex items-center justify-center mx-auto mb-1 text-amber-800 text-2xl">
+                            <i class="fa-solid fa-stamp"></i>
+                        </div>
+                        <p class="text-emerald-900">DIET ભુજ - કચ્છ</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Download Buttons -->
+            <div class="mt-6 flex flex-wrap gap-4 justify-center">
+                <button onclick="downloadCertificateImage()" class="px-6 py-3 btn-start-gold text-emerald-950 font-bold text-base rounded-xl flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i> પ્રમાણપત્ર ઈમેજ ડાઉનલોડ કરો
+                </button>
+                <button onclick="window.print()" class="px-6 py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-base rounded-xl flex items-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-print"></i> પ્રિન્ટ / PDF સાચવો
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER DISCLAIMER MARQUEE -->
+    <footer class="marquee-container py-2 text-amber-300 text-xs sm:text-sm font-semibold">
+        <div class="marquee-content">
+            Disclaimer : આ કન્ટેન્ટ મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા નિર્મિત કરવામાં આવ્યું છે.
+        </div>
+    </footer>
+
+    <script>
+        // Game Data structure (LO 6.1 Gujarati Unit 6)
+        const gameData = {
+            act1: {
+                title: "પ્રવૃત્તિ:1 આપેલા શબ્દના નજીકના અર્થ સામે પસંદગી કરો.",
+                questions: [
+                    {
+                        question: "દરિયો શબ્દનો નજીકનો અર્થ કયો છે?",
+                        options: ["સાગર", "રાજા", "સૂર્ય", "રણ"],
+                        correct: 0,
+                        explanation: "દરિયો એટલે સમુદ્ર અથવા સાગર થાય છે."
+                    },
+                    {
+                        question: "અતળ શબ્દનો નજીકનો અર્થ કયો છે?",
+                        options: ["નકામું", "ખોટું", "ઊંડું", "ભીડ"],
+                        correct: 2,
+                        explanation: "અતળ એટલે તળ વિનાનું અથવા ખૂબ જ ઊંડું."
+                    },
+                    {
+                        question: "ઘેલછા શબ્દનો નજીકનો અર્થ કયો છે?",
+                        options: ["ગાંડપણ", "નોતરું", "રુદન", "માછીમાર"],
+                        correct: 0,
+                        explanation: "ઘેલછા એટલે ધૂન અથવા ગાંડપણ."
+                    },
+                    {
+                        question: "વાયુ શબ્દનો નજીકનો અર્થ કયો છે?",
+                        options: ["સપનું", "પર્વત", "પવન", "વેગ"],
+                        correct: 2,
+                        explanation: "વાયુ નો સમાન અર્થ પવન અથવા સમીર થાય છે."
+                    },
+                    {
+                        question: "આશકા શબ્દનો નજીકનો અર્થ કયો છે?",
+                        options: ["આસ્થા", "બાજરી", "ખરીદી", "દેવની આરતી"],
+                        correct: 3,
+                        explanation: "આશકા એટલે દેવની આરતી કે પૂજાની જ્યોત/પ્રસાદી."
+                    }
+                ]
+            },
+            act2: {
+                title: "પ્રવૃત્તિ:2 શબ્દોના અર્થના આધારે યોગ્ય વિકલ્પ પસંદ કરો.",
+                questions: [
+                    {
+                        question: "'સમ' (અર્થ: સરખું, સમાન) માટે યોગ્ય વાક્ય પસંદ કરો:",
+                        options: [
+                            "બે મિત્રોમાં ઘણી બધી બાબતો સમ છે.",
+                            "મેં ભગવાનના સમ ખાઈને કહ્યું તો પણ તેણે માન્યું નહીં."
+                        ],
+                        correct: 0,
+                        explanation: "અહીં 'સમ' નો અર્થ સરખું કે સમાન થાય છે."
+                    },
+                    {
+                        question: "'પાણી' (અર્થ: જળ, નીર) માટે યોગ્ય વાક્ય પસંદ કરો:",
+                        options: [
+                            "મારા પ્રશ્નનો જવાબ ખોટો પડતા હું શરમ ના મારે પાણી-પાણી થઈ ગઈ.",
+                            "મને તરસ લાગતા મેં પાણી પીધું."
+                        ],
+                        correct: 1,
+                        explanation: "અહીં 'પાણી' નો અર્થ પીવાનું જળ અથવા નીર છે."
+                    },
+                    {
+                        question: "'અંતર' (અર્થ: અંતઃકરણ, મન) માટે યોગ્ય વાક્ય પસંદ કરો:",
+                        options: [
+                            "મીરાંના અંતરમાં હંમેશા શ્રીકૃષ્ણ રહેતા.",
+                            "કાશ્મીર થી કન્યાકુમારી નું અંતર કાપવું ખૂબ મુશ્કેલ છે."
+                        ],
+                        correct: 0,
+                        explanation: "અહીં 'અંતર' નો અર્થ મન કે અંતઃકરણ થાય છે."
+                    }
+                ]
+            },
+            act3: {
+                title: "પ્રવૃત્તિ:3 સંદર્ભ પરથી અર્થ તારવો.",
+                questions: [
+                    {
+                        question: "\"સૈનિકો અવિરામ આગળ વધતા રહ્યા.\" વાક્યમાં 'અવિરામ' નો અર્થ શું થાય?",
+                        options: ["અટકી ગયા", "સતત", "ધીમા", "પાછા ફર્યા"],
+                        correct: 1,
+                        explanation: "અવિરામ એટલે કે વિરામ લીધા વગર, સતત."
+                    },
+                    {
+                        question: "\"રાજાએ પરાક્રમ બતાવ્યું.\" વાક્યમાં 'પરાક્રમ' નો અર્થ શું થાય?",
+                        options: ["બહાદુરી", "આળસ", "ડર", "દુઃખ"],
+                        correct: 0,
+                        explanation: "પરાક્રમ એટલે શૌર્ય અથવા બહાદુરી."
+                    },
+                    {
+                        question: "\"અંતે સેનાને વિજય મળ્યો.\" વાક્યમાં 'વિજય' નો અર્થ શું થાય?",
+                        options: ["હાર", "જીત", "આરામ", "વરસાદ"],
+                        correct: 1,
+                        explanation: "વિજય એટલે જીત અથવા સફળતા."
+                    },
+                    {
+                        question: "\"યુદ્ધ રણભૂમિમાં થયું.\" વાક્યમાં 'રણભૂમિ' નો અર્થ શું થાય?",
+                        options: ["શાળા", "રણમેદાન", "બજાર", "હોસ્પિટલ"],
+                        correct: 1,
+                        explanation: "રણભૂમિ એટલે લડાઈનું મેદાન કે રણમેદાન."
+                    },
+                    {
+                        question: "\"સૈનિકોએ દેશનું રક્ષણ કર્યું.\" અહીં 'રક્ષણ' નો અર્થ શું થાય?",
+                        options: ["બચાવ", "નુકસાન", "વેચાણ", "સફર"],
+                        correct: 0,
+                        explanation: "રક્ષણ એટલે સંભાળ અથવા બચાવ કરવો."
+                    }
+                ]
+            }
+        };
+
+        // Student Profile & Game States
+        let studentProfile = {
+            name: '',
+            school: '',
+            grade: '7',
+            place: ''
+        };
+
+        let currentTab = 'act1';
+        let currentQuestionIndices = { act1: 0, act2: 0, act3: 0 };
+        let userAnswers = { act1: {}, act2: {}, act3: {} };
+        let scores = { act1: 0, act2: 0, act3: 0 };
+        let unlockedTabs = { act1: true, act2: false, act3: false, cert: false };
+        let isAudioMuted = false;
+
+        // TTS State
+        let isReadingTTS = false;
+        let currentUtterance = null;
+
+        function handleStartGame(e) {
+            e.preventDefault();
+            studentProfile.name = document.getElementById('studentName').value.trim();
+            studentProfile.school = document.getElementById('schoolName').value.trim();
+            studentProfile.grade = document.getElementById('studentGrade').value;
+            studentProfile.place = document.getElementById('studentPlace').value.trim();
+
+            if (!studentProfile.name || !studentProfile.school || !studentProfile.place) return;
+
+            // Update UI elements
+            document.getElementById('dashStudentInfo').textContent = `${studentProfile.name} (ધોરણ ${studentProfile.grade})`;
+            document.getElementById('certStudentName').textContent = studentProfile.name;
+            document.getElementById('certSchoolName').textContent = studentProfile.school;
+            document.getElementById('certGrade').textContent = studentProfile.grade;
+            document.getElementById('certPlace').textContent = studentProfile.place;
+
+            // Set current date on certificate
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('en-GB');
+            document.getElementById('certDate').textContent = dateStr;
+
+            // Shuffle questions for fresh session
+            shuffleAllQuestions();
+
+            // Transition screens
+            document.getElementById('frontScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('hidden');
+            document.getElementById('gameScreen').classList.add('flex');
+
+            // Render first question
+            renderCurrentQuestion();
+        }
+
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function shuffleAllQuestions() {
+            ['act1', 'act2', 'act3'].forEach(actKey => {
+                shuffleArray(gameData[actKey].questions);
+                gameData[actKey].questions.forEach(q => {
+                    const originalCorrectText = q.options[q.correct];
+                    shuffleArray(q.options);
+                    q.correct = q.options.indexOf(originalCorrectText);
+                });
+            });
+        }
+
+        function renderCurrentQuestion() {
+            stopTTS(); // Auto stop audio on question change
+
+            if (currentTab === 'cert') {
+                showCertificateView();
+                return;
+            }
+
+            document.getElementById('activityContainer').classList.remove('hidden');
+            document.getElementById('certificateSection').classList.add('hidden');
+
+            const actObj = gameData[currentTab];
+            const qIdx = currentQuestionIndices[currentTab];
+            const qObj = actObj.questions[qIdx];
+
+            // Update Instruction & Progress
+            document.getElementById('actInstruction').textContent = actObj.title;
+            document.getElementById('questionProgress').textContent = `પ્રશ્ન ${qIdx + 1} / ${actObj.questions.length}`;
+
+            // Remove question numbers if present in text
+            let cleanQuestion = qObj.question.replace(/^[0-9]+\.\s*/, '');
+            document.getElementById('questionText').textContent = cleanQuestion;
+
+            // Render 3D Options
+            const optContainer = document.getElementById('optionsContainer');
+            optContainer.innerHTML = '';
+
+            const answeredChoice = userAnswers[currentTab][qIdx];
+
+            qObj.options.forEach((optText, optIdx) => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-option-3d p-4 rounded-2xl text-left font-bold text-base sm:text-lg flex items-center gap-3 transition w-full';
+                
+                // Option Icon
+                const optLetter = String.fromCharCode(65 + optIdx); // A, B, C, D in English
+                btn.innerHTML = `<span class="w-8 h-8 rounded-full bg-amber-400 text-emerald-950 flex items-center justify-center font-extrabold text-sm shadow">${optLetter}</span>
+                                 <span class="flex-grow">${optText}</span>`;
+
+                if (answeredChoice !== undefined) {
+                    btn.disabled = true;
+                    if (optIdx === qObj.correct) {
+                        btn.classList.add('option-correct');
+                    } else if (optIdx === answeredChoice) {
+                        btn.classList.add('option-wrong');
+                    }
+                } else {
+                    btn.onclick = () => handleAnswerSelect(optIdx);
+                }
+
+                optContainer.appendChild(btn);
+            });
+
+            // Button states
+            document.getElementById('btnPrev').disabled = (qIdx === 0);
+            document.getElementById('btnPrev').style.opacity = (qIdx === 0) ? '0.5' : '1';
+
+            document.getElementById('btnNext').disabled = (qIdx === actObj.questions.length - 1);
+            document.getElementById('btnNext').style.opacity = (qIdx === actObj.questions.length - 1) ? '0.5' : '1';
+
+            updateScoreDisplay();
+        }
+
+        function handleAnswerSelect(selectedIdx) {
+            const qIdx = currentQuestionIndices[currentTab];
+            if (userAnswers[currentTab][qIdx] !== undefined) return; // 1 attempt per question
+
+            userAnswers[currentTab][qIdx] = selectedIdx;
+            const qObj = gameData[currentTab].questions[qIdx];
+
+            const totalQuestionsInAct = gameData[currentTab].questions.length;
+
+            if (selectedIdx === qObj.correct) {
+                scores[currentTab] += 1;
+                playVictoryChime();
+                triggerBalloons();
+                renderCurrentQuestion();
+
+                // Auto move to next question after 1.5 seconds if correct
+                setTimeout(() => {
+                    if (qIdx < totalQuestionsInAct - 1) {
+                        currentQuestionIndices[currentTab]++;
+                        renderCurrentQuestion();
+                    } else {
+                        checkActivityCompletion();
+                    }
+                }, 1500);
+
+            } else {
+                playThumbsDownSound();
+                renderCurrentQuestion();
+                showThumbsDownModal(qObj.options[qObj.correct], qObj.explanation);
+            }
+        }
+
+        function checkActivityCompletion() {
+            const totalQuestionsInAct = gameData[currentTab].questions.length;
+            const answeredCount = Object.keys(userAnswers[currentTab]).length;
+
+            if (answeredCount === totalQuestionsInAct) {
+                unlockNextTab();
+                showActivityCompleteModal();
+            }
+        }
+
+        function closeThumbsDownAndNext() {
+            document.getElementById('thumbsDownModal').classList.add('hidden');
+            const qIdx = currentQuestionIndices[currentTab];
+            const totalQuestionsInAct = gameData[currentTab].questions.length;
+
+            if (qIdx < totalQuestionsInAct - 1) {
+                currentQuestionIndices[currentTab]++;
+                renderCurrentQuestion();
+            } else {
+                checkActivityCompletion();
+            }
+        }
+
+        function unlockNextTab() {
+            if (currentTab === 'act1') {
+                unlockedTabs.act2 = true;
+                document.getElementById('lock-act2').className = 'fa-solid fa-lock-open text-xs ml-1 text-green-300';
+            } else if (currentTab === 'act2') {
+                unlockedTabs.act3 = true;
+                document.getElementById('lock-act3').className = 'fa-solid fa-lock-open text-xs ml-1 text-green-300';
+            } else if (currentTab === 'act3') {
+                unlockedTabs.cert = true;
+                document.getElementById('lock-cert').className = 'fa-solid fa-graduation-cap text-xs ml-1 text-yellow-300';
+            }
+        }
+
+        function showActivityCompleteModal() {
+            let nextMsg = "પ્રવૃત્તિ પૂર્ણ થયેલ છે! હવે નવી પ્રવૃત્તિ પર જાઓ.";
+            if (currentTab === 'act3') {
+                nextMsg = "તમામ પ્રવૃત્તિઓ પૂર્ણ થયેલ છે! હવે તમારું પ્રમાણપત્ર મેળવો.";
+            }
+            document.getElementById('activityCompleteText').textContent = nextMsg;
+            document.getElementById('activityCompleteModal').classList.remove('hidden');
+        }
+
+        function proceedToNextActivity() {
+            document.getElementById('activityCompleteModal').classList.add('hidden');
+            if (currentTab === 'act1') switchTab('act2');
+            else if (currentTab === 'act2') switchTab('act3');
+            else if (currentTab === 'act3') switchTab('cert');
+        }
+
+        function switchTab(tabKey) {
+            if (!unlockedTabs[tabKey]) {
+                alert('મહેરબાની કરીને પહેલાંની પ્રવૃત્તિ પૂર્ણ કરો!');
+                return;
+            }
+            currentTab = tabKey;
+
+            // Update Tab UI active states
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = 'tab-btn px-4 py-2.5 rounded-xl font-bold text-sm sm:text-base flex items-center gap-2 bg-emerald-900 text-emerald-200 hover:bg-emerald-800';
+            });
+            const activeBtn = document.getElementById(`tab-${tabKey}`);
+            if (activeBtn) {
+                activeBtn.className = 'tab-btn px-4 py-2.5 rounded-xl font-bold text-sm sm:text-base flex items-center gap-2 bg-amber-500 text-emerald-950 shadow-md';
+            }
+
+            renderCurrentQuestion();
+        }
+
+        function nextQuestion() {
+            const actObj = gameData[currentTab];
+            if (currentQuestionIndices[currentTab] < actObj.questions.length - 1) {
+                currentQuestionIndices[currentTab]++;
+                renderCurrentQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndices[currentTab] > 0) {
+                currentQuestionIndices[currentTab]--;
+                renderCurrentQuestion();
+            }
+        }
+
+        function retryCurrentQuestion() {
+            const qIdx = currentQuestionIndices[currentTab];
+            const previousAnswer = userAnswers[currentTab][qIdx];
+            
+            if (previousAnswer !== undefined) {
+                const qObj = gameData[currentTab].questions[qIdx];
+                if (previousAnswer === qObj.correct) {
+                    scores[currentTab] = Math.max(0, scores[currentTab] - 1);
+                }
+                delete userAnswers[currentTab][qIdx];
+            }
+            renderCurrentQuestion();
+        }
+
+        function updateScoreDisplay() {
+            const totalScore = scores.act1 + scores.act2 + scores.act3;
+            document.getElementById('scoreDisplay').textContent = `${totalScore} / 13`;
+        }
+
+        function showExplanation() {
+            const qIdx = currentQuestionIndices[currentTab];
+            const qObj = gameData[currentTab].questions[qIdx];
+            document.getElementById('explanationText').textContent = qObj.explanation;
+            document.getElementById('explanationModal').classList.remove('hidden');
+        }
+
+        function closeExplanation() {
+            document.getElementById('explanationModal').classList.add('hidden');
+        }
+
+        function showThumbsDownModal(correctAnswer, explanation) {
+            document.getElementById('thumbsDownMsg').innerHTML = `<strong>સાચો જવાબ:</strong> ${correctAnswer}<br><strong>સમજૂતી:</strong> ${explanation}`;
+            document.getElementById('thumbsDownModal').classList.remove('hidden');
+        }
+
+        function showCertificateView() {
+            document.getElementById('activityContainer').classList.add('hidden');
+            document.getElementById('certificateSection').classList.remove('hidden');
+
+            const totalScore = scores.act1 + scores.act2 + scores.act3;
+            const percentage = (totalScore / 13) * 100;
+
+            document.getElementById('certScore').textContent = `${totalScore} / 13 (${Math.round(percentage)}%)`;
+
+            const badgeEl = document.getElementById('certGradeBadge');
+            if (percentage >= 50) {
+                badgeEl.textContent = '🏆 શાનદાર પ્રદર્શન';
+                badgeEl.className = 'text-lg sm:text-xl font-bold text-emerald-700';
+            } else {
+                badgeEl.textContent = '📚 હજુ વધુ મહેનત કરો';
+                badgeEl.className = 'text-lg sm:text-xl font-bold text-amber-700';
+            }
+        }
+
+        function downloadCertificateImage() {
+            const certElem = document.getElementById('certificateContainer');
+            html2canvas(certElem, { scale: 2 }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `Certificate_${studentProfile.name.replace(/\s+/g, '_')}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+
+        // Audio Mute Toggle
+        function toggleAudioMute() {
+            isAudioMuted = !isAudioMuted;
+            document.getElementById('muteIcon').className = isAudioMuted ? 'fa-solid fa-volume-xmark text-red-400' : 'fa-solid fa-volume-high text-yellow-400';
+            document.getElementById('muteText').textContent = isAudioMuted ? 'અવાજ બંધ' : 'અવાજ ચાલુ';
+            if (isAudioMuted) stopTTS();
+        }
+
+        // Victory Chime using Web Audio API
+        function playVictoryChime() {
+            if (isAudioMuted) return;
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                const ctx = new AudioCtx();
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                
+                notes.forEach((freq, idx) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    
+                    const startTime = ctx.currentTime + (idx * 0.1);
+                    gain.gain.setValueAtTime(0, startTime);
+                    gain.gain.linearRampToValueAtTime(0.3, startTime + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.6);
+
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(startTime);
+                    osc.stop(startTime + 0.6);
+                });
+            } catch (e) {
+                console.log("Audio not supported", e);
+            }
+        }
+
+        // Thumbs Down Sound
+        function playThumbsDownSound() {
+            if (isAudioMuted) return;
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                const ctx = new AudioCtx();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(220, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.4);
+
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.4);
+            } catch (e) {
+                console.log("Audio not supported", e);
+            }
+        }
+
+        function toggleReadQuestionTTS() {
+            if (isReadingTTS) {
+                stopTTS();
+            } else {
+                startTTS();
+            }
+        }
+
+        function startTTS() {
+            if (isAudioMuted) return;
+
+            const qIdx = currentQuestionIndices[currentTab];
+            const qObj = gameData[currentTab].questions[qIdx];
+            const textToRead = `${qObj.question} વિકલ્પો છે: ${qObj.options.join(', ')}`;
+
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Clear previous queue
+
+                currentUtterance = new SpeechSynthesisUtterance(textToRead);
+                currentUtterance.lang = 'gu-IN';
+                currentUtterance.rate = 0.95;
+                currentUtterance.pitch = 1.0;
+
+                const voices = window.speechSynthesis.getVoices();
+                const guVoice = voices.find(v => v.lang.includes('gu') || v.name.includes('Gujarati'));
+                if (guVoice) currentUtterance.voice = guVoice;
+
+                currentUtterance.onstart = () => {
+                    isReadingTTS = true;
+                    updateTTSButtonUI(true);
+                };
+
+                currentUtterance.onend = () => {
+                    isReadingTTS = false;
+                    updateTTSButtonUI(false);
+                };
+
+                currentUtterance.onerror = () => {
+                    isReadingTTS = false;
+                    updateTTSButtonUI(false);
+                };
+
+                window.speechSynthesis.speak(currentUtterance);
+            } else {
+                alert('તમારા બ્રાઉઝરમાં અવાજ વાંચવાની સુવિધા ઉપલબ્ધ નથી.');
+            }
+        }
+
+        function stopTTS() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            isReadingTTS = false;
+            updateTTSButtonUI(false);
+        }
+
+        function updateTTSButtonUI(reading) {
+            const btnTTS = document.getElementById('btnTTS');
+            const icon = document.getElementById('ttsIcon');
+            const text = document.getElementById('ttsText');
+
+            if (reading) {
+                btnTTS.className = 'px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow transition';
+                icon.className = 'fa-solid fa-circle-stop';
+                text.textContent = 'વાંચવાનું બંધ કરો';
+            } else {
+                btnTTS.className = 'px-4 py-2 bg-purple-700 hover:bg-purple-800 text-white font-bold rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow transition';
+                icon.className = 'fa-solid fa-volume-high';
+                text.textContent = 'પ્રશ્ન સાંભળો';
+            }
+        }
+
+        function triggerBalloons() {
+            const canvas = document.getElementById('balloonCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const balloons = [];
+            const colors = ['#f43f5e', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899'];
+
+            for (let i = 0; i < 30; i++) {
+                balloons.push({
+                    x: Math.random() * canvas.width,
+                    y: canvas.height + Math.random() * 200,
+                    radius: 20 + Math.random() * 15,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: 3 + Math.random() * 4,
+                    swing: Math.random() * 2,
+                    swingSpeed: 0.05 + Math.random() * 0.05
+                });
+            }
+
+            let animationFrame;
+            const startTime = Date.now();
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let alive = false;
+
+                balloons.forEach(b => {
+                    b.y -= b.speed;
+                    b.x += Math.sin(b.y * b.swingSpeed) * b.swing;
+
+                    if (b.y + b.radius > 0) alive = true;
+
+                    // Draw balloon
+                    ctx.beginPath();
+                    ctx.ellipse(b.x, b.y, b.radius, b.radius * 1.25, 0, 0, Math.PI * 2);
+                    ctx.fillStyle = b.color;
+                    ctx.fill();
+
+                    // String
+                    ctx.beginPath();
+                    ctx.moveTo(b.x, b.y + b.radius * 1.25);
+                    ctx.lineTo(b.x, b.y + b.radius * 1.25 + 20);
+                    ctx.strokeStyle = '#cbd5e1';
+                    ctx.stroke();
+                });
+
+                if (alive && (Date.now() - startTime < 4000)) {
+                    animationFrame = requestAnimationFrame(animate);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    cancelAnimationFrame(animationFrame);
+                }
+            }
+
+            animate();
+        }
+
+        // Initialize voices on load
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.getVoices();
+            };
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ગુજરાતી E-Content - ધોરણ 7</title>
+    <!-- html2canvas and jsPDF libraries for Certificate Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --primary-green: #064e3b;
+            --accent-gold: #fbbf24;
+            --gold-border: #d97706;
+            --light-cream: #fffbeb;
+            --dark-emerald: #022c22;
+            --btn-purple: #7c3aed;
+            --btn-rose: #e11d48;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #012218;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #04392b;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        /* Front Screen Styling */
+        .front-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            flex-grow: 1;
+            background: radial-gradient(circle, #065f46 0%, #022c22 100%);
+        }
+
+        .badge-title {
+            background: linear-gradient(180deg, #d97706, #78350f);
+            color: #fff;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            border: 1px solid var(--accent-gold);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .main-header-title {
+            color: var(--accent-gold);
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            line-height: 1.4;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .sub-header-title {
+            color: #a7f3d0;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 18px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--accent-gold);
+            border-radius: 30px;
+            color: #facc15;
+            font-size: 1.1rem;
+            font-weight: bold;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-control::placeholder {
+            color: #ca8a04;
+            font-weight: normal;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 10px var(--accent-gold);
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .row-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .row-group .form-group {
+            flex: 1;
+        }
+
+        .btn-start {
+            margin-top: 15px;
+            padding: 14px;
+            background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+            color: #000;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: 2px solid #fff;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            transition: transform 0.2s, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-start:hover {
+            transform: scale(1.02);
+            background: linear-gradient(180deg, #fbbf24 0%, #b45309 100%);
+        }
+
+        /* Dashboard & Header */
+        .dashboard-header {
+            background-color: #011d14;
+            border-bottom: 3px solid var(--accent-gold);
+            padding: 12px;
+            text-align: center;
+        }
+
+        .dh-small { font-size: 0.85rem; color: #9ca3af; }
+        .dh-medium { font-size: 1.05rem; color: var(--accent-gold); font-weight: bold; margin: 3px 0; }
+        .dh-large { font-size: 1.3rem; color: #34d399; font-weight: bold; }
+
+        .score-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #022c22;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--gold-border);
+            font-weight: bold;
+            color: var(--accent-gold);
+        }
+
+        /* Tabs System */
+        .tabs-container {
+            display: flex;
+            background: #064e3b;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            background: #064e3b;
+            border: none;
+            color: #9ca3af;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-right: 1px solid #04392b;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active { background: var(--accent-gold); color: #000; }
+        .tab-btn.disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* Main Game Area */
+        .game-area {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .light-card {
+            background-color: var(--light-cream);
+            border: 4px solid var(--gold-border);
+            border-radius: 15px;
+            width: 100%;
+            max-width: 900px;
+            padding: 25px;
+            color: var(--dark-emerald);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #064e3b;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            width: 100%;
+        }
+
+        .btn-option {
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            border: 2px solid var(--gold-border);
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #065f46;
+            cursor: pointer;
+            box-shadow: 3px 5px 10px rgba(0,0,0,0.15);
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .btn-option:hover:not(:disabled) {
+            transform: translateY(-2px);
+            background: #fef3c7;
+        }
+
+        .btn-option.correct { background: #22c55e !important; color: white !important; }
+        .btn-option.wrong { background: #ef4444 !important; color: white !important; }
+
+        .action-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .btn-action {
+            padding: 10px 18px;
+            border-radius: 20px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .btn-tts { background-color: var(--btn-purple); }
+        .btn-tts.speaking { background-color: var(--btn-rose); }
+        .btn-explain { background-color: #0284c7; }
+        .btn-nav { background-color: #4b5563; }
+
+        /* Matching Specifics */
+        .match-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f3f4f6;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .match-target {
+            width: 50%;
+            padding: 10px;
+            background: #e5e7eb;
+            border: 2px dashed #9ca3af;
+            border-radius: 6px;
+            text-align: center;
+            min-height: 45px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .bank-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .bank-item {
+            background: var(--accent-gold);
+            color: #000;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .bank-item.selected { outline: 3px solid #0284c7; }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: var(--accent-gold);
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 1px solid var(--gold-border);
+        }
+
+        .scroll-text {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+            font-weight: bold;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            color: #000;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        /* Certificate */
+        #certificate-view {
+            background: #fff;
+            color: #000;
+            padding: 30px;
+            border: 10px double #d97706;
+            margin: 20px auto;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <!-- FRONT SCREEN -->
+    <div id="front-screen" class="front-screen">
+        <div class="badge-title">રાજ્ય કક્ષાનું શ્રેષ્ઠ શૈક્ષણિક ઈ-કન્ટેન્ટ</div>
+        <div class="main-header-title">
+            મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત<br>
+            ગુજરાતી E-Content ધોરણ 6 થી 8
+        </div>
+        <div class="sub-header-title">ધોરણ:7 ગુજરાતી (સત્ર-1) એકમ-5 તમે સાપથી ડરો છો કે?</div>
+
+        <div class="form-container">
+            <div class="form-group">
+                <label>👤 વિદ્યાર્થીનું નામ:</label>
+                <input type="text" id="std-name" class="form-control" placeholder="તમારું પૂરું નામ લખો...">
+            </div>
+            <div class="form-group">
+                <label>🏫 શાળાનું નામ:</label>
+                <input type="text" id="sch-name" class="form-control" placeholder="તમારી શાળાનું નામ લખો...">
+            </div>
+            <div class="row-group">
+                <div class="form-group">
+                    <label>📚 ધોરણ પસંદ કરો:</label>
+                    <select id="std-grade" class="form-control">
+                        <option value="6">ધોરણ 6</option>
+                        <option value="7" selected>ધોરણ 7</option>
+                        <option value="8">ધોરણ 8</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>📍 સ્થળ / ગામ:</label>
+                    <input type="text" id="std-place" class="form-control" placeholder="તમારું સ્થળ/ગામ...">
+                </div>
+            </div>
+            <button class="btn-start" onclick="startGame()">▶ રમત શરૂ કરો</button>
+        </div>
+    </div>
+
+    <!-- MAIN GAME SCREEN -->
+    <div id="game-screen" style="display: none; flex-direction: column; flex-grow: 1;">
+        <div class="dashboard-header">
+            <div class="dh-small">મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8</div>
+            <div class="dh-medium">LO: 3.1 વિગતો શોધે છે.</div>
+            <div class="dh-large">ધોરણ:7 ગુજરાતી (સત્ર-1) એકમ-5 તમે સાપથી ડરો છો કે?</div>
+        </div>
+
+        <div class="score-bar">
+            <div>વિદ્યાર્થી: <span id="disp-user-name" style="color: #fff;">-</span></div>
+            <div>કુલ સ્કોર: <span id="disp-score" style="color: #facc15;">0</span></div>
+        </div>
+
+        <div class="tabs-container">
+            <button id="tab-act1" class="tab-btn active" onclick="switchActivity(1)">પ્રવૃત્તિ 1 (જોડકાં)</button>
+            <button id="tab-act2" class="tab-btn disabled" onclick="switchActivity(2)">પ્રવૃત્તિ 2 (ઓળખો)</button>
+            <button id="tab-act3" class="tab-btn disabled" onclick="switchActivity(3)">પ્રવૃત્તિ 3 (હા/ના)</button>
+            <button id="tab-cert" class="tab-btn disabled" onclick="showCertificate()">પ્રમાણપત્ર</button>
+        </div>
+
+        <div class="game-area">
+            <div id="activity-card" class="light-card"></div>
+
+            <div class="action-bar" id="action-bar">
+                <button id="btn-tts" class="btn-action btn-tts" onclick="toggleReadQuestionTTS()">🔊 પ્રશ્ન સાંભળો</button>
+                <button class="btn-action btn-explain" onclick="showExplanation()">💡 સમજૂતી</button>
+                <button class="btn-action btn-nav" onclick="prevQuestion()">◄ પાછળનો પ્રશ્ન</button>
+                <button class="btn-action btn-nav" onclick="nextQuestion()">આગળનો પ્રશ્ન ►</button>
+                <button class="btn-action btn-nav" style="background-color: #d97706;" onclick="resetCurrentQuestion()">🔄 ફરી પ્રયાસ કરો</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CERTIFICATE SCREEN -->
+    <div id="cert-screen" style="display: none; padding: 20px; text-align: center;">
+        <div id="certificate-view">
+            <div style="font-size:0.9rem; color:#064e3b; font-weight:bold;">મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8</div>
+            <h1 style="color:#d97706; margin: 15px 0;">પ્રમાણપત્ર</h1>
+            <p>આથી પ્રમાણિત કરવામાં આવે છે કે,</p>
+            <h2 id="cert-user-name" style="color: #064e3b; margin: 10px 0;">-</h2>
+            <p>શાળા: <span id="cert-sch-name">-</span> | સ્થળ: <span id="cert-place">-</span></p>
+            <p style="margin:15px 0;">તેમણે <b>ધોરણ:7 ગુજરાતી (સત્ર-1) એકમ-5 તમે સાપથી ડરો છો કે?</b> ની તમામ પ્રવૃત્તિઓ સફળતાપૂર્વક પૂર્ણ કરેલ છે.<br>LO: 3.1 વિગતો શોધે છે.</p>
+            <p style="font-size: 1.2rem;">મેળવેલ ગુણ: <b id="cert-score">0</b> / <b id="cert-total">0</b></p>
+            <h3 id="cert-performance" style="margin:15px 0;">-</h3>
+            <p style="font-size: 0.9rem; color: #6b7280;">તારીખ: <span id="cert-date"></span></p>
+        </div>
+        <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
+            <button class="btn-start" style="font-size: 1rem; padding: 10px 20px;" onclick="downloadCertImage()">🖼️ Image ડાઉનલોડ</button>
+            <button class="btn-start" style="font-size: 1rem; padding: 10px 20px;" onclick="downloadCertPDF()">📄 PDF ડાઉનલોડ</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="scroll-text">Disclaimer : આ કન્ટેન્ટ મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા નિર્મિત કરવામાં આવ્યું છે</div>
+    </footer>
+</div>
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <h3 id="modal-title" style="color: #064e3b; margin-bottom: 10px;">માહિતી</h3>
+        <p id="modal-msg" style="margin-bottom: 20px; font-size: 1.1rem;"></p>
+        <button class="btn-start" style="margin: 0 auto; padding: 8px 25px; font-size: 1rem;" onclick="closeModal()">ઓકે</button>
+    </div>
+</div>
+
+<script>
+    const act1Data = [
+        { q: "સોનલ બા પાસે દોડી ગઈ.", options: ["નાગપંચમી કેમ ઉજવાય છે તે પૂછ્યું.", "તેના મોમાં પાણી આવી ગયું.", "ભાભી શું કરે છે તે જોવા", "બીક લાગવા લાગી.", "સાપથી ડરવા લાગી"], ans: "ભાભી શું કરે છે તે જોવા", exp: "સોનલ ભાભી શું કરી રહ્યા છે તે જોવા માટે ઉત્સુકતાથી બા પાસે દોડી ગઈ હતી." },
+        { q: "સોનલને કુલર બહુ ભાવતી હતી.", options: ["નાગપંચમી કેમ ઉજવાય છે તે પૂછ્યું.", "તેના મોમાં પાણી આવી ગયું.", "ભાભી શું કરે છે તે જોવા", "બીક લાગવા લાગી.", "સાપથી ડરવા લાગી"], ans: "તેના મોમાં પાણી આવી ગયું.", exp: "પોતાની ભાવતી વાનગી કુલર જોઈ સોનલના મોંમાં પાણી આવી ગયું." },
+        { q: "બાએ કહ્યું કે આજે નાગ પંચમી છે.", options: ["નાગપંચમી કેમ ઉજવાય છે તે પૂછ્યું.", "તેના મોમાં પાણી આવી ગયું.", "ભાભી શું કરે છે તે જોવા", "બીક લાગવા લાગી.", "સાપથી ડરવા લાગી"], ans: "નાગપંચમી કેમ ઉજવાય છે તે પૂછ્યું.", exp: "નાગ પંચમી વિશે સાંભળીને સોનલે તેના વિશે વધુ જાણવા પૂછપરછ કરી." },
+        { q: "સોનલના ભાઈએ નાગ વિશે બીજી વાતો કરવાનું કહ્યું.", options: ["નાગપંચમી કેમ ઉજવાય છે તે પૂછ્યું.", "તેના મોમાં પાણી આવી ગયું.", "ભાભી શું કરે છે તે જોવા", "બીક લાગવા લાગી.", "સાપથી ડરવા લાગી"], ans: "બીક લાગવા લાગી.", exp: "સાપની ડરામણી વાતો સાંભળીને તેને બીક લાગવા લાગી." },
+        { q: "ભાભીએ કહ્યું કે પરીક્ષિત રાજાને સાપ કરડ્યો હતો.", options: ["નાગપંચમી કેમ ઉજવાય છે તે પૂછ્યું.", "તેના મોમાં પાણી આવી ગયું.", "ભાભી શું કરે છે તે જોવા", "બીક લાગવા લાગી.", "સાપથી ડરવા લાગી"], ans: "સાપથી ડરવા લાગી", exp: "પરીક્ષિત રાજાની વાર્તા સાંભળી તે સાપથી વધુ ડરવા લાગી." }
+    ];
+
+    const act2Data = [
+        { q: "પરીક્ષિત રાજાને ડંખ મારેલ.", options: ["વાસુકિ", "કાલિય", "શેષનાગ", "તક્ષક", "કર્કોટક"], ans: "તક્ષક", exp: "પૌરાણિક કથા મુજબ તક્ષક નાગે રાજા પરીક્ષિતને ડંખ માર્યો હતો." },
+        { q: "મારા માથા પર પૃથ્વી રહેલી છે.", options: ["વાસુકિ", "કાલિય", "શેષનાગ", "તક્ષક", "કર્કોટક"], ans: "શેષનાગ", exp: "માન્યતા મુજબ શેષનાગે પોતાની ફેણ પર પૃથ્વીને ધારણ કરી રાખી છે." },
+        { q: "હું નાગનો રાજા છું.", options: ["વાસુકિ", "કાલિય", "શેષનાગ", "તક્ષક", "કર્કોટક"], ans: "વાસુકિ", exp: "વાસુકિને નાગોના રાજા તરીકે ઓળખવામાં આવે છે." },
+        { q: "મને નારદ મુનિએ શાપ આપેલ.", options: ["વાસુકિ", "કાલિય", "શેષનાગ", "તક્ષક", "કર્કોટક"], ans: "કર્કોટક", exp: "કર્કોટક નાગને નારદ મુનિ દ્વારા શાપ મળ્યો હતો." },
+        { q: "મારો ઉદ્ધાર ભગવાન કૃષ્ણે કર્યો.", options: ["વાસુકિ", "કાલિય", "શેષનાગ", "તક્ષક", "કર્કોટક"], ans: "કાલિય", exp: "યમુના નદીમાં કાલિય નાગનું મર્દન કરીને કૃષ્ણ ભગવાને તેનો ઉદ્ધાર કર્યો હતો." }
+    ];
+
+    const act3Data = [
+        { q: "સાપ પોતાની જાતને કરડી શકે છે.", options: ["હા", "ના"], ans: "ના", exp: "સાપ સામાન્ય રીતે પોતાની જાતને ડંખ મારતા નથી." },
+        { q: "બધા જ સાપ ઝેરી હોય છે અને કરડવાથી માણસ મરી જાય છે.", options: ["હા", "ના"], ans: "ના", exp: "બધા સાપ ઝેરી હોતા નથી, મોટાભાગના સાપ અઝેરી હોય છે." },
+        { q: "સાપ જમીન પર ચાલે છે અને હવામાં ઉડે છે.", options: ["હા", "ના"], ans: "ના", exp: "સાપ પેટ ઘસીને ચાલે છે, તે ઉડી શકતા નથી." },
+        { q: "સાપને જીભ બહુ ઉપયોગી હોય છે.", options: ["હા", "ના"], ans: "હા", exp: "સાપ જીભ દ્વારા જ આસપાસની ગંધ અનુભવે છે." }
+    ];
+
+    let userData = { name: "", school: "", grade: "7", place: "" };
+    let currentActivity = 1;
+    let currentQIndex = 0;
+    let totalScore = 0;
+    let actQuestions = [];
+    let actUnlocked = { 1: true, 2: false, 3: false };
+    let isSpeaking = false;
+    let selectedBankItem = null;
+    let audioCtx = null;
+
+    function shuffle(array) {
+        let arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function startGame() {
+        const name = document.getElementById('std-name').value.trim();
+        const school = document.getElementById('sch-name').value.trim();
+        const place = document.getElementById('std-place').value.trim();
+
+        if (!name || !school || !place) {
+            alert("કૃપા કરીને બધી વિગતો ભરો!");
+            return;
+        }
+
+        // Initialize AudioContext on user gesture
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        userData = { name, school, grade: document.getElementById('std-grade').value, place };
+
+        document.getElementById('disp-user-name').innerText = userData.name;
+        document.getElementById('front-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'flex';
+
+        loadActivity(1);
+    }
+
+    function loadActivity(actNum) {
+        stopTTS();
+        currentActivity = actNum;
+        currentQIndex = 0;
+
+        if (actNum === 1) actQuestions = shuffle(act1Data);
+        else if (actNum === 2) actQuestions = shuffle(act2Data);
+        else if (actNum === 3) actQuestions = shuffle(act3Data);
+
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        stopTTS();
+        const card = document.getElementById('activity-card');
+        const qData = actQuestions[currentQIndex];
+
+        if (currentActivity === 1) {
+            let optionsShuffled = shuffle(qData.options);
+            card.innerHTML = `
+                <div class="question-text">પ્રવૃત્તિ 1: યોગ્ય જોડકાં જોડો</div>
+                <div class="match-row">
+                    <div style="font-weight:bold; width: 45%;">${qData.q}</div>
+                    <div class="match-target" id="match-target" onclick="placeMatchAnswer('${qData.ans}')">અહીં ક્લિક કરીને જવાબ મૂકો</div>
+                </div>
+                <div style="margin-top: 15px; font-weight: bold; text-align: center;">વિકલ્પોમાંથી પસંદ કરો:</div>
+                <div class="bank-container">
+                    ${optionsShuffled.map(opt => `<div class="bank-item" onclick="selectBankItem(this, '${opt}')">${opt}</div>`).join('')}
+                </div>
+            `;
+        } else {
+            let optionsShuffled = shuffle(qData.options);
+            card.innerHTML = `
+                <div class="question-text">${qData.q}</div>
+                <div class="options-grid">
+                    ${optionsShuffled.map(opt => `<button class="btn-option" onclick="checkAnswer(this, '${opt}', '${qData.ans}')">${opt}</button>`).join('')}
+                </div>
+            `;
+        }
+    }
+
+    function selectBankItem(el, val) {
+        document.querySelectorAll('.bank-item').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedBankItem = val;
+    }
+
+    function placeMatchAnswer(correctAns) {
+        if (!selectedBankItem) {
+            showModal("સૂચના", "કૃપા કરીને પહેલા નીચેથી વિકલ્પ પસંદ કરો.");
+            return;
+        }
+        const target = document.getElementById('match-target');
+        target.innerText = selectedBankItem;
+
+        if (selectedBankItem === correctAns) {
+            target.style.borderColor = "#22c55e";
+            target.style.backgroundColor = "#dcfce7";
+            playVictory();
+            totalScore += 10;
+            document.getElementById('disp-score').innerText = totalScore;
+            setTimeout(() => { nextQuestion(); }, 1200);
+        } else {
+            target.style.borderColor = "#ef4444";
+            target.style.backgroundColor = "#fee2e2";
+            playWrongSound();
+            showExplanationPopUp(actQuestions[currentQIndex].exp, correctAns);
+        }
+        selectedBankItem = null;
+    }
+
+    function checkAnswer(btn, selected, correct) {
+        document.querySelectorAll('.btn-option').forEach(b => b.disabled = true);
+
+        if (selected === correct) {
+            btn.classList.add('correct');
+            playVictory();
+            totalScore += 10;
+            document.getElementById('disp-score').innerText = totalScore;
+            setTimeout(() => { nextQuestion(); }, 1200);
+        } else {
+            btn.classList.add('wrong');
+            playWrongSound();
+            showExplanationPopUp(actQuestions[currentQIndex].exp, correct);
+        }
+    }
+
+    function nextQuestion() {
+        stopTTS();
+        if (currentQIndex < actQuestions.length - 1) {
+            currentQIndex++;
+            renderQuestion();
+        } else {
+            if (currentActivity < 3) {
+                actUnlocked[currentActivity + 1] = true;
+                document.getElementById(`tab-act${currentActivity + 1}`).classList.remove('disabled');
+                showModal("અભિનંદન!", `પ્રવૃત્તિ ${currentActivity} પૂર્ણ થયેલ છે.`, () => {
+                    switchActivity(currentActivity + 1);
+                });
+            } else {
+                document.getElementById('tab-cert').classList.remove('disabled');
+                showModal("ખૂબ સરસ!", "બધી જ પ્રવૃત્તિઓ પૂર્ણ થઈ ગઈ છે!", () => {
+                    showCertificate();
+                });
+            }
+        }
+    }
+
+    function prevQuestion() {
+        if (currentQIndex > 0) {
+            currentQIndex--;
+            renderQuestion();
+        }
+    }
+
+    function resetCurrentQuestion() {
+        renderQuestion();
+    }
+
+    function switchActivity(actNum) {
+        if (!actUnlocked[actNum]) return;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(`tab-act${actNum}`).classList.add('active');
+        document.getElementById('cert-screen').style.display = 'none';
+        document.getElementById('activity-card').style.display = 'block';
+        document.getElementById('action-bar').style.display = 'flex';
+        loadActivity(actNum);
+    }
+
+    function playVictory() {
+        if (!audioCtx) return;
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime + idx * 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.1 + 0.3);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(audioCtx.currentTime + idx * 0.1);
+            osc.stop(audioCtx.currentTime + idx * 0.1 + 0.3);
+        });
+    }
+
+    function playWrongSound() {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.3);
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+    }
+
+    function toggleReadQuestionTTS() {
+        if (isSpeaking) {
+            stopTTS();
+        } else {
+            startTTS();
+        }
+    }
+
+    function startTTS() {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const msg = new SpeechSynthesisUtterance(actQuestions[currentQIndex].q);
+            msg.lang = 'gu-IN';
+            msg.onend = stopTTS;
+            msg.onerror = stopTTS;
+
+            window.speechSynthesis.speak(msg);
+            isSpeaking = true;
+
+            const btn = document.getElementById('btn-tts');
+            btn.classList.add('speaking');
+            btn.innerHTML = '⏹️ વાંચવાનું બંધ કરો';
+        }
+    }
+
+    function stopTTS() {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+        }
+        isSpeaking = false;
+        const btn = document.getElementById('btn-tts');
+        if (btn) {
+            btn.classList.remove('speaking');
+            btn.innerHTML = '🔊 પ્રશ્ન સાંભળો';
+        }
+    }
+
+    function showExplanation() {
+        showModal("પ્રશ્ન સમજૂતી", actQuestions[currentQIndex].exp);
+    }
+
+    function showExplanationPopUp(expText, correctAns) {
+        showModal("જવાબ ખોટો છે!", `સાચો જવાબ: <b>${correctAns}</b><br><br><b>સમજૂતી:</b> ${expText}`, () => {
+            nextQuestion();
+        });
+    }
+
+    function showModal(title, msg, onClose) {
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-msg').innerHTML = msg;
+        document.getElementById('modal').style.display = 'flex';
+        window.currentModalCallback = onClose;
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+        if (window.currentModalCallback) {
+            const cb = window.currentModalCallback;
+            window.currentModalCallback = null;
+            cb();
+        }
+    }
+
+    function showCertificate() {
+        stopTTS();
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab-cert').classList.add('active');
+        
+        document.getElementById('activity-card').style.display = 'none';
+        document.getElementById('action-bar').style.display = 'none';
+        document.getElementById('cert-screen').style.display = 'block';
+
+        const maxScore = (act1Data.length + act2Data.length + act3Data.length) * 10;
+        document.getElementById('cert-user-name').innerText = userData.name;
+        document.getElementById('cert-sch-name').innerText = userData.school;
+        document.getElementById('cert-place').innerText = userData.place;
+        document.getElementById('cert-score').innerText = totalScore;
+        document.getElementById('cert-total').innerText = maxScore;
+        document.getElementById('cert-date').innerText = new Date().toLocaleDateString('gu-IN');
+
+        const percentage = (totalScore / maxScore) * 100;
+        const statusEl = document.getElementById('cert-performance');
+        if (percentage >= 50) {
+            statusEl.innerText = "🌟 શાનદાર પ્રદર્શન 🌟";
+            statusEl.style.color = "#15803d";
+        } else {
+            statusEl.innerText = "💪 હજુ વધુ મહેનત કરો 💪";
+            statusEl.style.color = "#b91c1c";
+        }
+    }
+
+    function downloadCertImage() {
+        html2canvas(document.getElementById('certificate-view')).then(canvas => {
+            const link = document.createElement('a');
+            link.download = `${userData.name}_Certificate.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    }
+
+    function downloadCertPDF() {
+        html2canvas(document.getElementById('certificate-view'), { scale: 2 }).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('l', 'mm', 'a4');
+            pdf.addImage(imgData, 'PNG', 0, 10, pdf.internal.pageSize.getWidth(), 0);
+            pdf.save(`${userData.name}_Certificate.pdf`);
+        });
+    }
+</script>
+</body>
+</html>

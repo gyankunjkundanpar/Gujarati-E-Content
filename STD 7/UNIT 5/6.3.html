@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ધોરણ:7 ગુજરાતી (સત્ર-1) એકમ-5 તમે સાપથી ડરો છો કે?</title>
+    
+    <!-- html2pdf, html2canvas & FontAwesome for Certificate generation & Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark-green: #0a3a2a;
+            --header-green: #05291d;
+            --gold: #d4af37;
+            --light-gold: #f3e5ab;
+            --gold-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            --btn-gold: linear-gradient(180deg, #e6c200 0%, #c49a00 100%);
+            --light-bg: #fffdf5;
+            --text-emerald: #064e3b;
+            --correct-green: #22c55e;
+            --wrong-red: #ef4444;
+            --purple-btn: #8b5cf6;
+            --rose-btn: #f43f5e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark-green);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 16:9 Aspect Ratio & Responsive Container */
+        .app-container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        /* FRONT SCREEN STYLING (Matching Prompt Image) */
+        #front-screen {
+            background: linear-gradient(180deg, #0d4a36 0%, #05291d 100%);
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 800px;
+            margin: auto;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .badge-top {
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--gold);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .front-title {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .front-subtitle {
+            color: #4ade80;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .unit-title {
+            color: var(--light-gold);
+            font-size: 16px;
+            margin-bottom: 25px;
+            background: rgba(0,0,0,0.2);
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #ffffff;
+            font-size: 15px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--gold);
+            border-radius: 25px;
+            background: rgba(5, 41, 29, 0.8);
+            color: #ffd700; /* ઘાટો પીળો / સોનેરી રંગ */
+            font-size: 16px;
+            font-weight: bold;
+            outline: none;
+        }
+
+        .form-group input::placeholder {
+            color: #e6c200;
+            opacity: 0.6;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .btn-start {
+            background: var(--btn-gold);
+            color: #000;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+
+        .btn-start:hover {
+            transform: scale(1.02);
+        }
+
+        /* HEADER & DASHBOARD STYLING */
+        header {
+            background-color: var(--header-green);
+            border-bottom: 3px solid var(--gold);
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .header-top { font-size: 13px; color: var(--light-gold); font-weight: bold; }
+        .header-lo { font-size: 16px; color: #4ade80; margin: 4px 0; font-weight: bold; }
+        .header-chapter { font-size: 22px; color: #ffd700; font-weight: bold; }
+
+        .dashboard {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.3);
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .dash-item { font-size: 16px; font-weight: bold; color: #fff; }
+        .dash-item span { color: var(--gold); }
+
+        /* TABS SYSTEM */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            background: #05291d;
+            border: 2px solid var(--gold);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .tab-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* LIGHT CARD GAME CONTAINER */
+        .light-card {
+            background-color: var(--light-bg);
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            padding: 25px;
+            color: var(--text-emerald);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .question-box {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #042f2e;
+            background: #f0fdf4;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 6px solid var(--gold);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .option-card {
+            background: #ffffff;
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-emerald);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .option-card:hover {
+            transform: translateY(-3px);
+            background: #fef3c7;
+        }
+
+        .option-card.correct {
+            background-color: #dcfce7 !important;
+            border-color: var(--correct-green) !important;
+            color: #14532d !important;
+        }
+
+        .option-card.wrong {
+            background-color: #fee2e2 !important;
+            border-color: var(--wrong-red) !important;
+            color: #7f1d1d !important;
+        }
+
+        /* Controls / Buttons */
+        .controls-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .btn-ctrl {
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+            color: white;
+        }
+
+        .btn-explain { background-color: #0284c7; }
+        .btn-tts { background-color: var(--purple-btn); }
+        .btn-tts.speaking { background-color: var(--rose-btn); }
+        .btn-nav { background-color: #475569; }
+        .btn-retry { background-color: #d97706; }
+
+        /* MATCHING ACTIVITY STYLES */
+        .matching-container {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .match-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .match-item {
+            background: #fff;
+            border: 2px dashed var(--gold);
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .match-option-btn {
+            background: #e0f2fe;
+            border: 2px solid #0284c7;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .match-option-btn.selected {
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* POPUP MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            color: #000;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 4px solid var(--gold);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .modal-content h3 { margin-bottom: 15px; color: var(--bg-dark-green); }
+        .modal-content p { font-size: 16px; margin-bottom: 20px; line-height: 1.5; }
+
+        /* BALLOONS & ANIMATIONS */
+        .balloon {
+            position: absolute;
+            width: 40px; height: 50px;
+            background: red;
+            border-radius: 50%;
+            animation: floatUp 4s linear forwards;
+            bottom: -60px;
+            z-index: 999;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(20deg); opacity: 0; }
+        }
+
+        .thumbs-down-anim {
+            font-size: 80px;
+            color: var(--wrong-red);
+            animation: popShake 0.6s ease-in-out;
+        }
+
+        @keyframes popShake {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2) rotate(-15deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        /* FOOTER (SCROLLING TEXT) */
+        footer {
+            background: #05291d;
+            border-top: 2px solid var(--gold);
+            color: var(--light-gold);
+            padding: 8px 0;
+            margin-top: 15px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 25s linear infinite;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* CERTIFICATE STYLING */
+        #certificate-container {
+            display: none;
+            background: #fff;
+            color: #000;
+            padding: 30px;
+            border: 10px solid var(--bg-dark-green);
+            outline: 5px solid var(--gold);
+            border-radius: 10px;
+            max-width: 850px;
+            margin: 20px auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .cert-header { font-size: 16px; font-weight: bold; color: var(--bg-dark-green); }
+        .cert-title { font-size: 28px; font-weight: bold; color: var(--gold); margin: 15px 0; text-decoration: underline; }
+        .cert-body { font-size: 18px; line-height: 1.8; margin: 20px 0; }
+        .cert-badge { font-size: 22px; font-weight: bold; color: #15803d; margin: 15px 0; }
+
+        .cert-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding: 0 30px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .options-grid { grid-template-columns: 1fr; }
+            .matching-container { flex-direction: column; }
+            .form-row { flex-direction: column; gap: 0; }
+            .front-title { font-size: 16px; }
+            .front-subtitle { font-size: 18px; }
+            .question-box { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- FRONT SCREEN -->
+    <div id="front-screen">
+        <div class="badge-top">⚙ રાજ્ય કક્ષાનું શ્રેષ્ઠ શૈક્ષણિક ઈ-કન્ટેન્ટ</div>
+        <div class="front-title">
+            મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત
+        </div>
+        <div class="front-subtitle">ગુજરાતી E-Content ધોરણ 6 થી 8</div>
+        <div class="unit-title">ધોરણ:7 ગુજરાતી (સત્ર-1) એકમ-5 તમે સાપથી ડરો છો કે?</div>
+
+        <form id="student-form" onsubmit="startGame(event)">
+            <div class="form-group">
+                <label><i class="fa-solid fa-user"></i> વિદ્યાર્થીનું નામ:</label>
+                <input type="text" id="stu-name" placeholder="તમારું પૂરું નામ લખો..." required>
+            </div>
+            <div class="form-group">
+                <label><i class="fa-solid fa-school"></i> શાળાનું નામ:</label>
+                <input type="text" id="stu-school" placeholder="તમારી શાળાનું નામ લખો..." required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label><i class="fa-solid fa-layer-group"></i> ધોરણ પસંદ કરો:</label>
+                    <select id="stu-grade" required>
+                        <option value="7">ધોરણ 7</option>
+                        <option value="6">ધોરણ 6</option>
+                        <option value="8">ધોરણ 8</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-location-dot"></i> સ્થળ / ગામ:</label>
+                    <input type="text" id="stu-place" placeholder="તમારું સ્થળ/ગામ..." required>
+                </div>
+            </div>
+            <button type="submit" class="btn-start"><i class="fa-solid fa-play"></i> રમત શરૂ કરો</button>
+        </form>
+    </div>
+
+    <!-- MAIN GAME SCREEN (Hidden initially) -->
+    <div id="game-screen" style="display: none; flex-direction: column; height: 100%;">
+        
+        <header>
+            <div class="header-top">મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8</div>
+            <div class="header-lo">LO: 6.3 શબ્દોનો અંગવિસ્તાર કરે છે.</div>
+            <div class="header-chapter">એકમ-5 તમે સાપથી ડરો છો કે?</div>
+
+            <div class="dashboard">
+                <div class="dash-item"><i class="fa-solid fa-user"></i> નામ: <span id="dash-name">-</span></div>
+                <div class="dash-item"><i class="fa-solid fa-star"></i> સ્કોર: <span id="dash-score">0</span></div>
+            </div>
+        </header>
+
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab-btn active" id="tab-act1" onclick="switchActivity(1)">પ્રવૃત્તિ 1</button>
+            <button class="tab-btn disabled" id="tab-act2" onclick="switchActivity(2)">પ્રવૃત્તિ 2</button>
+            <button class="tab-btn disabled" id="tab-act3" onclick="switchActivity(3)">પ્રવૃત્તિ 3</button>
+        </div>
+
+        <!-- LIGHT CARD CONTENT AREA -->
+        <div class="light-card">
+            
+            <div id="activity-area">
+                <!-- Dynamic Content Loaded Here -->
+            </div>
+
+            <!-- CONTROLS -->
+            <div class="controls-bar">
+                <button class="btn-ctrl btn-explain" onclick="showExplanation()"><i class="fa-solid fa-lightbulb"></i> સમજૂતી</button>
+                <button class="btn-ctrl btn-tts" id="btn-tts" onclick="toggleReadQuestionTTS()"><i class="fa-solid fa-volume-high"></i> <span id="tts-text">પ્રશ્ન સાંભળો</span></button>
+                <button class="btn-ctrl btn-retry" onclick="retryQuestion()"><i class="fa-solid fa-rotate-right"></i> ફરી પ્રયાસ કરો</button>
+                <button class="btn-ctrl btn-nav" onclick="prevQuestion()"><i class="fa-solid fa-arrow-left"></i> પાછળનો પ્રશ્ન</button>
+                <button class="btn-ctrl btn-nav" onclick="nextQuestion()"><i class="fa-solid fa-arrow-right"></i> આગળનો પ્રશ્ન</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CERTIFICATE SCREEN (Hidden initially) -->
+    <div id="certificate-container">
+        <div class="cert-header">
+            મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ<br>
+            દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8
+        </div>
+        <div class="cert-title">પ્રમાણપત્ર</div>
+        <div class="cert-body">
+            પ્રમાણિત કરવામાં આવે છે કે વિદ્યાર્થી/વિદ્યાર્થીની <b><span id="cert-name"></span></b>,<br>
+            શાળા: <b><span id="cert-school"></span></b>, સ્થળ: <b><span id="cert-place"></span></b> એ<br>
+            <b>ધોરણ:7 ગુજરાતી (સત્ર-1) એકમ-5 તમે સાપથી ડરો છો કે?</b> ની તમામ પ્રવૃત્તિઓ સફળતાપૂર્વક પૂર્ણ કરેલ છે.<br>
+            જેમાં તેમણે કુલ <b><span id="cert-total"></span></b> માંથી <b><span id="cert-score"></span></b> ગુણ મેળવેલ છે.
+        </div>
+        <div class="cert-badge" id="cert-performance"></div>
+        <div class="cert-footer">
+            <div>તારીખ: <span id="cert-date"></span></div>
+            <div>ડાયેટ ભુજ - કચ્છ</div>
+        </div>
+        <div style="margin-top: 20px;">
+            <button class="btn-ctrl btn-explain" onclick="downloadCertPDF()"><i class="fa-solid fa-file-pdf"></i> PDF ડાઉનલોડ કરો</button>
+            <button class="btn-ctrl btn-retry" onclick="downloadCertImage()"><i class="fa-solid fa-image"></i> ઇમેજ ડાઉનલોડ કરો</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- GENERAL POPUP MODAL -->
+<div class="modal" id="popModal">
+    <div class="modal-content" id="modal-body">
+        <!-- Dynamic Popup Content -->
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="marquee">
+        Disclaimer : આ કન્ટેન્ટ મહારાણીશ્રી ગંગાબાસાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા નિર્મિત કરવામાં આવ્યું છે.
+    </div>
+</footer>
+
+<script>
+    // STUDENT DATA
+    let studentInfo = { name: "", school: "", grade: "7", place: "" };
+    let totalScore = 0;
+
+    // GAME STATE VARIABLES
+    let currentActivity = 1;
+    let act1Index = 0;
+    let act2Index = 0;
+    let act3Completed = false;
+
+    // UNLOCK STATUS
+    let act2Unlocked = false;
+    let act3Unlocked = false;
+
+    // DATA FOR ACTIVITY 1: Multiple Choice Questions (Word Prefixing Concept)
+    const act1DataOriginal = [
+        {
+            q: "આપેલા મૂળ શબ્દ 'જ્ઞાન' માં યોગ્ય પ્રત્યય ઉમેરીને નવો શબ્દ બનાવો.",
+            options: ["અજ્ઞાન", "કુજ્ઞાન", "સુજ્ઞાન", "વિજ્ઞાન"],
+            ans: "અજ્ઞાન",
+            explain: "'જ્ઞાન' શબ્દની આગળ 'અ' પ્રત્યય લગાવવાથી 'અજ્ઞાન' શબ્દ બને છે."
+        },
+        {
+            q: "આપેલા મૂળ શબ્દ 'પુત્ર' માં યોગ્ય પ્રત્યય ઉમેરીને નવો શબ્દ બનાવો.",
+            options: ["કુપુત્ર", "અપુત્ર", "સુપુત્ર", "સપુત્ર"],
+            ans: "કુપુત્ર",
+            explain: "'પુત્ર' શબ્દની આગળ 'કુ' (ખરાબ) પ્રત્યય લગાવવાથી 'કુપુત્ર' શબ્દ બને છે."
+        },
+        {
+            q: "આપેલા મૂળ શબ્દ 'ખંડ' માં યોગ્ય પ્રત્યય ઉમેરીને નવો શબ્દ બનાવો.",
+            options: ["અખંડ", "કુખંડ", "બેખંડ", "નિઃખંડ"],
+            ans: "અખંડ",
+            explain: "'ખંડ' શબ્દની આગળ 'અ' પ્રત્યય જોડવાથી 'અખંડ' શબ્દ બને છે."
+        },
+        {
+            q: "આપેલા મૂળ શબ્દ 'સંગ' માં યોગ્ય પ્રત્યય ઉમેરીને નવો શબ્દ બનાવો.",
+            options: ["કુસંગ", "અસંગ", "બેસંગ", "અણસંગ"],
+            ans: "કુસંગ",
+            explain: "'સંગ' શબ્દની આગળ 'કુ' પ્રત્યય જોડવાથી 'કુસંગ' (ખરાબ સોબત) શબ્દ બને છે."
+        }
+    ];
+
+    // DATA FOR ACTIVITY 2: Exact Prompt Specification (1 Question at a time)
+    const act2DataOriginal = [
+        { stem: "જ્ઞાન", options: ["અજ્ઞાન", "કુજ્ઞાન"], ans: "અજ્ઞાન", explain: "જ્ઞાન + અ = અજ્ઞાન" },
+        { stem: "પુત્ર", options: ["કુપુત્ર", "અપુત્ર"], ans: "કુપુત્ર", explain: "પુત્ર + કુ = કુપુત્ર" },
+        { stem: "ખંડ", options: ["અખંડ", "કુખંડ"], ans: "અખંડ", explain: "ખંડ + અ = અખંડ" },
+        { stem: "સંગ", options: ["કુસંગ", "અસંગ"], ans: "કુસંગ", explain: "સંગ + કુ = કુસંગ" }
+    ];
+
+    // DATA FOR ACTIVITY 3: Interactive Matching Activity
+    const act3DataLeft = ["જ્ઞાન", "પુત્ર", "ખંડ", "સંગ"];
+    const act3DataRightCorrect = { "જ્ઞાન": "અજ્ઞાન", "પુત્ર": "કુપુત્ર", "ખંડ": "અખંડ", "સંગ": "કુસંગ" };
+    let act3UserMatches = {};
+    let act3SelectedRight = null;
+
+    // Shuffled Arrays
+    let act1Data = [];
+    let act2Data = [];
+
+    // Helper: Shuffle Array
+    function shuffle(array) {
+        let arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    // START GAME
+    function startGame(e) {
+        e.preventDefault();
+        studentInfo.name = document.getElementById('stu-name').value;
+        studentInfo.school = document.getElementById('stu-school').value;
+        studentInfo.grade = document.getElementById('stu-grade').value;
+        studentInfo.place = document.getElementById('stu-place').value;
+
+        document.getElementById('dash-name').innerText = studentInfo.name;
+        document.getElementById('front-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'flex';
+
+        // Shuffle questions
+        act1Data = shuffle(act1DataOriginal);
+        act2Data = shuffle(act2DataOriginal);
+
+        loadActivity(1);
+    }
+
+    // TABS SWITCHING
+    function switchActivity(actNum) {
+        if(actNum === 2 && !act2Unlocked) {
+            showModal("સૂચના", "કૃપા કરીને પહેલા પ્રવૃત્તિ 1 પૂર્ણ કરો!");
+            return;
+        }
+        if(actNum === 3 && !act3Unlocked) {
+            showModal("સૂચના", "કૃપા કરીને પ્રવૃત્તિ 2 પૂર્ણ કરો!");
+            return;
+        }
+
+        stopTTS();
+        currentActivity = actNum;
+        
+        document.querySelectorAll('.tab-btn').forEach((b, i) => {
+            if(i + 1 === actNum) b.classList.add('active');
+            else b.classList.remove('active');
+        });
+
+        loadActivity(actNum);
+    }
+
+    // LOAD ACTIVITY CONTENT
+    function loadActivity(actNum) {
+        stopTTS();
+        const area = document.getElementById('activity-area');
+
+        if (actNum === 1) {
+            let qData = act1Data[act1Index];
+            let shuffledOpts = shuffle(qData.options);
+
+            let html = `
+                <div class="question-box">${qData.q}</div>
+                <div class="options-grid">
+            `;
+            shuffledOpts.forEach(opt => {
+                html += `<div class="option-card" onclick="checkAct1Ans(this, '${opt}', '${qData.ans}')">
+                            <i class="fa-solid fa-cube" style="color: var(--gold);"></i> ${opt}
+                         </div>`;
+            });
+            html += `</div>`;
+            area.innerHTML = html;
+
+        } else if (actNum === 2) {
+            let qData = act2Data[act2Index];
+            let shuffledOpts = shuffle(qData.options);
+
+            let html = `
+                <div class="question-box">મૂળ શબ્દ: <b>${qData.stem}</b> માંથી સાચો વિસ્તૃત શબ્દ પસંદ કરો:</div>
+                <div class="options-grid">
+            `;
+            shuffledOpts.forEach(opt => {
+                html += `<div class="option-card" onclick="checkAct2Ans(this, '${opt}', '${qData.ans}')">
+                            <i class="fa-solid fa-cube" style="color: var(--gold);"></i> ${opt}
+                         </div>`;
+            });
+            html += `</div>`;
+            area.innerHTML = html;
+
+        } else if (actNum === 3) {
+            // MATCHING ACTIVITY
+            let shuffledRight = shuffle(Object.values(act3DataRightCorrect));
+
+            let html = `
+                <div class="question-box">વિભાગ 'બ' માંથી જવાબ પસંદ કરી વિભાગ 'અ' માં યોગ્ય જગ્યાએ ગોઠવો:</div>
+                <div class="matching-container">
+                    <div class="match-column" id="col-left">
+                        <h4>વિભાગ (અ)</h4>
+            `;
+            act3DataLeft.forEach(left => {
+                let matchedVal = act3UserMatches[left] || "અહીં ક્લિક કરી મૂકો";
+                html += `
+                    <div class="match-item" onclick="placeMatch('${left}')">
+                        <span>${left}</span>
+                        <span style="color: var(--text-emerald); font-weight:bold;">➔ ${matchedVal}</span>
+                    </div>
+                `;
+            });
+            html += `</div><div class="match-column" id="col-right"><h4>વિભાગ (બ)</h4>`;
+            shuffledRight.forEach(right => {
+                let isSelected = act3SelectedRight === right ? 'selected' : '';
+                html += `
+                    <div class="match-option-btn ${isSelected}" onclick="selectRightMatch('${right}')">
+                        ${right}
+                    </div>
+                `;
+            });
+            html += `</div></div>
+            <div style="text-align:center; margin-top:15px;">
+                <button class="btn-ctrl btn-explain" style="margin:auto;" onclick="checkAct3All()"><i class="fa-solid fa-check"></i> જોડકાં ચકાસો</button>
+            </div>`;
+            area.innerHTML = html;
+        }
+    }
+
+    // CHECK ANSWERS - ACT 1
+    function checkAct1Ans(element, selected, correct) {
+        let cards = document.querySelectorAll('.option-card');
+        cards.forEach(c => c.style.pointerEvents = 'none');
+
+        if (selected === correct) {
+            element.classList.add('correct');
+            playAudioChime();
+            triggerBalloons();
+            totalScore += 10;
+            updateScore();
+
+            setTimeout(() => {
+                if (act1Index < act1Data.length - 1) {
+                    act1Index++;
+                    loadActivity(1);
+                } else {
+                    act2Unlocked = true;
+                    document.getElementById('tab-act2').classList.remove('disabled');
+                    showModal("ખૂબ સરસ!", "પ્રવૃત્તિ 1 પૂર્ણ થયેલ છે. હવે નવી પ્રવૃત્તિ 2 પર જાઓ.", () => switchActivity(2));
+                }
+            }, 1500);
+        } else {
+            element.classList.add('wrong');
+            playWrongSound();
+            showThumbsDown();
+            setTimeout(() => {
+                showModal("ખોટો જવાબ!", `સાચો જવાબ: <b>${correct}</b><br>સમજૂતી: ${act1Data[act1Index].explain}`, () => {
+                    if (act1Index < act1Data.length - 1) {
+                        act1Index++;
+                        loadActivity(1);
+                    } else {
+                        act2Unlocked = true;
+                        document.getElementById('tab-act2').classList.remove('disabled');
+                        switchActivity(2);
+                    }
+                });
+            }, 1000);
+        }
+    }
+
+    // CHECK ANSWERS - ACT 2
+    function checkAct2Ans(element, selected, correct) {
+        let cards = document.querySelectorAll('.option-card');
+        cards.forEach(c => c.style.pointerEvents = 'none');
+
+        if (selected === correct) {
+            element.classList.add('correct');
+            playAudioChime();
+            triggerBalloons();
+            totalScore += 10;
+            updateScore();
+
+            setTimeout(() => {
+                if (act2Index < act2Data.length - 1) {
+                    act2Index++;
+                    loadActivity(2);
+                } else {
+                    act3Unlocked = true;
+                    document.getElementById('tab-act3').classList.remove('disabled');
+                    showModal("શાબાશ!", "પ્રવૃત્તિ 2 પૂર્ણ થયેલ છે. હવે નવી પ્રવૃત્તિ 3 પર જાઓ.", () => switchActivity(3));
+                }
+            }, 1500);
+        } else {
+            element.classList.add('wrong');
+            playWrongSound();
+            showThumbsDown();
+            setTimeout(() => {
+                showModal("ખોટો જવાબ!", `સાચો જવાબ: <b>${correct}</b><br>સમજૂતી: ${act2Data[act2Index].explain}`, () => {
+                    if (act2Index < act2Data.length - 1) {
+                        act2Index++;
+                        loadActivity(2);
+                    } else {
+                        act3Unlocked = true;
+                        document.getElementById('tab-act3').classList.remove('disabled');
+                        switchActivity(3);
+                    }
+                });
+            }, 1000);
+        }
+    }
+
+    // MATCHING LOGIC - ACT 3
+    function selectRightMatch(val) {
+        act3SelectedRight = val;
+        loadActivity(3);
+    }
+
+    function placeMatch(leftKey) {
+        if (act3SelectedRight) {
+            act3UserMatches[leftKey] = act3SelectedRight;
+            act3SelectedRight = null;
+            loadActivity(3);
+        } else {
+            showModal("સૂચના", "પહેલાં વિભાગ 'બ' માંથી શબ્દ પસંદ કરો.");
+        }
+    }
+
+    function checkAct3All() {
+        let isAllCorrect = true;
+        act3DataLeft.forEach(left => {
+            if (act3UserMatches[left] === act3DataRightCorrect[left]) {
+                totalScore += 5;
+            } else {
+                isAllCorrect = false;
+            }
+        });
+        updateScore();
+
+        if (isAllCorrect) {
+            playAudioChime();
+            triggerBalloons();
+            showModal("અભિનંદન!", "તમે બધી પ્રવૃત્તિઓ પૂર્ણ કરી લીધી છે!", showCertificate);
+        } else {
+            playWrongSound();
+            showModal("પ્રવૃત્તિ પૂર્ણ", "તમે પ્રવૃત્તિ પૂર્ણ કરી છે. ચાલો પરિણામ જોઈએ!", showCertificate);
+        }
+    }
+
+    // SCORE & NAVIGATION CONTROLS
+    function updateScore() {
+        document.getElementById('dash-score').innerText = totalScore;
+    }
+
+    function retryQuestion() {
+        loadActivity(currentActivity);
+    }
+
+    function prevQuestion() {
+        if (currentActivity === 1 && act1Index > 0) {
+            act1Index--;
+            loadActivity(1);
+        } else if (currentActivity === 2 && act2Index > 0) {
+            act2Index--;
+            loadActivity(2);
+        }
+    }
+
+    function nextQuestion() {
+        if (currentActivity === 1 && act1Index < act1Data.length - 1) {
+            act1Index++;
+            loadActivity(1);
+        } else if (currentActivity === 2 && act2Index < act2Data.length - 1) {
+            act2Index++;
+            loadActivity(2);
+        }
+    }
+
+    function showExplanation() {
+        if (currentActivity === 1) {
+            showModal("સમજૂતી", act1Data[act1Index].explain);
+        } else if (currentActivity === 2) {
+            showModal("સમજૂતી", act2Data[act2Index].explain);
+        } else {
+            showModal("સમજૂતી", "યોગ્ય ઉત્તર સામે સાચો વિકલ્પ પસંદ કરીને જોડો.");
+        }
+    }
+
+    // TTS SPEECH SYNTHESIS (Chirp 3 HD Gujarati Simulation via Web Speech API)
+    let isSpeaking = false;
+    let synth = window.speechSynthesis;
+    let currentUtterance = null;
+
+    function toggleReadQuestionTTS() {
+        if (isSpeaking) {
+            stopTTS();
+        } else {
+            let textToRead = "";
+            if (currentActivity === 1) textToRead = act1Data[act1Index].q;
+            else if (currentActivity === 2) textToRead = "મૂળ શબ્દ " + act2Data[act2Index].stem + " માંથી સાચો વિસ્તૃત શબ્દ પસંદ કરો.";
+            else textToRead = "વિભાગ બ માંથી જવાબ પસંદ કરી વિભાગ અ માં યોગ્ય જગ્યાએ ગોઠવો.";
+
+            currentUtterance = new SpeechSynthesisUtterance(textToRead);
+            currentUtterance.lang = 'gu-IN';
+            currentUtterance.rate = 0.95;
+            currentUtterance.pitch = 1.0;
+
+            currentUtterance.onend = function() {
+                resetTTSBtn();
+            };
+
+            synth.speak(currentUtterance);
+            isSpeaking = true;
+
+            let btn = document.getElementById('btn-tts');
+            btn.classList.add('speaking');
+            document.getElementById('tts-text').innerText = "વાંચવાનું બંધ કરો";
+        }
+    }
+
+    function stopTTS() {
+        if (synth && synth.speaking) {
+            synth.cancel();
+        }
+        resetTTSBtn();
+    }
+
+    function resetTTSBtn() {
+        isSpeaking = false;
+        let btn = document.getElementById('btn-tts');
+        if (btn) {
+            btn.classList.remove('speaking');
+            document.getElementById('tts-text').innerText = "પ્રશ્ન સાંભળો";
+        }
+    }
+
+    // AUDIO EFFECTS (Synthesized Web Audio API Chime & Beep)
+    function playAudioChime() {
+        try {
+            let ctx = new (window.AudioContext || window.webkitAudioContext)();
+            let notes = [523.25, 659.25, 783.99, 1046.50]; // Victory Chime
+            notes.forEach((freq, index) => {
+                let osc = ctx.createOscillator();
+                let gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.1, ctx.currentTime + index * 0.1);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + index * 0.1 + 0.3);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(ctx.currentTime + index * 0.1);
+                osc.stop(ctx.currentTime + index * 0.1 + 0.3);
+            });
+        } catch(e){}
+    }
+
+    function playWrongSound() {
+        try {
+            let ctx = new (window.AudioContext || window.webkitAudioContext)();
+            let osc = ctx.createOscillator();
+            let gain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.value = 150;
+            gain.gain.setValueAtTime(0.2, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.4);
+        } catch(e){}
+    }
+
+    // ANIMATIONS
+    function triggerBalloons() {
+        for(let i=0; i<12; i++) {
+            let b = document.createElement('div');
+            b.className = 'balloon';
+            b.style.left = Math.random() * 90 + '%';
+            b.style.backgroundColor = ['#f43f5e','#3b82f6','#10b981','#f59e0b','#8b5cf6'][Math.floor(Math.random()*5)];
+            document.body.appendChild(b);
+            setTimeout(() => b.remove(), 4000);
+        }
+    }
+
+    function showThumbsDown() {
+        let modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `<div class="thumbs-down-anim"><i class="fa-solid fa-thumbs-down"></i></div>`;
+        document.getElementById('popModal').style.display = 'flex';
+        setTimeout(() => {
+            document.getElementById('popModal').style.display = 'none';
+        }, 1000);
+    }
+
+    // MODAL DIALOG
+    function showModal(title, message, callback = null) {
+        let modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+            <h3>${title}</h3>
+            <p>${message}</p>
+            <button class="btn-ctrl btn-explain" style="margin:auto;" id="modal-ok-btn">બરાબર</button>
+        `;
+        document.getElementById('popModal').style.display = 'flex';
+
+        document.getElementById('modal-ok-btn').onclick = function() {
+            document.getElementById('popModal').style.display = 'none';
+            if (callback) callback();
+        };
+    }
+
+    // CERTIFICATE GENERATION
+    function showCertificate() {
+        document.getElementById('game-screen').style.display = 'none';
+        let cert = document.getElementById('certificate-container');
+        cert.style.display = 'block';
+
+        let maxScore = (act1Data.length * 10) + (act2Data.length * 10) + (act3DataLeft.length * 5);
+        let percentage = (totalScore / maxScore) * 100;
+
+        document.getElementById('cert-name').innerText = studentInfo.name;
+        document.getElementById('cert-school').innerText = studentInfo.school;
+        document.getElementById('cert-place').innerText = studentInfo.place;
+        document.getElementById('cert-total').innerText = maxScore;
+        document.getElementById('cert-score').innerText = totalScore;
+
+        let today = new Date().toLocaleDateString('gu-IN');
+        document.getElementById('cert-date').innerText = today;
+
+        let perfElem = document.getElementById('cert-performance');
+        if (percentage >= 50) {
+            perfElem.innerText = "🌟 શાનદાર પ્રદર્શન 🌟";
+            perfElem.style.color = "#15803d";
+        } else {
+            perfElem.innerText = "👍 હજુ વધુ મહેનત કરો 👍";
+            perfElem.style.color = "#d97706";
+        }
+    }
+
+    function downloadCertPDF() {
+        let element = document.getElementById('certificate-container');
+        html2pdf().from(element).save('Certificate.pdf');
+    }
+
+    function downloadCertImage() {
+        let element = document.getElementById('certificate-container');
+        html2canvas(element).then(canvas => {
+            let link = document.createElement('a');
+            link.download = 'Certificate.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    }
+</script>
+
+</body>
+</html>

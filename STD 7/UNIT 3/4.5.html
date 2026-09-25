@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ગુજરાતી E-Content - ધોરણ 6 થી 8</title>
+    <!-- html2pdf.js Certification Download for PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Canvas-Confetti for victory effects -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --bg-purple: #2c003e;
+            --bg-dark-blue: #0f172a;
+            --primary-gold: #fbbf24;
+            --gold-border: #d97706;
+            --pink-accent: #ec4899;
+            --emerald-dark: #064e3b;
+            --cream-light: #fffbeb;
+            --card-border: #f59e0b;
+            --white: #ffffff;
+            --correct-green: #22c55e;
+            --wrong-red: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Shruti', 'Gujarati', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-purple), #1e1b4b, #31103f);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 1280px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgba(15, 23, 42, 0.6);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        /* Front Screen Styling */
+        #front-screen {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #2a0845, #6441a5);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .front-card {
+            background: rgba(15, 23, 42, 0.85);
+            border: 3px solid var(--primary-gold);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        .front-title {
+            color: var(--primary-gold);
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: #e2e8f0;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--gold-border);
+            border-radius: 10px;
+            background: #1e293b;
+            color: #fde047; /* Bright Golden Yellow */
+            font-size: 1.1rem;
+            font-weight: bold;
+            outline: none;
+        }
+
+        .form-control::placeholder {
+            color: #a1a1aa;
+            font-weight: normal;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, var(--primary-gold), var(--pink-accent));
+            color: #000;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-start:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.6);
+        }
+
+        /* Header / Dashboard */
+        header {
+            background: #090d16;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid var(--primary-gold);
+        }
+
+        .header-title-small {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        .header-lo {
+            font-size: 1.05rem;
+            color: var(--pink-accent);
+            font-weight: bold;
+            margin: 4px 0;
+        }
+
+        .header-chapter {
+            font-size: 1.3rem;
+            color: var(--primary-gold);
+            font-weight: bold;
+        }
+
+        .dashboard {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .student-info {
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        .score-badge {
+            background: var(--primary-gold);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* Tabs System */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            background: #1e1b4b;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .tab-btn {
+            background: #312e81;
+            color: #fff;
+            border: 2px solid var(--gold-border);
+            padding: 8px 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            opacity: 0.6;
+        }
+
+        .tab-btn.active {
+            background: var(--pink-accent);
+            opacity: 1;
+            box-shadow: 0 0 10px var(--pink-accent);
+        }
+
+        .tab-btn.disabled {
+            cursor: not-allowed;
+            filter: grayscale(100%);
+        }
+
+        /* Content Container / Light Card */
+        .content-area {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .light-card {
+            background: var(--cream-light);
+            border: 4px solid var(--card-border);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 900px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            color: var(--emerald-dark);
+            position: relative;
+        }
+
+        .activity-instruction {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #431407;
+            background: #fef3c7;
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 5px solid var(--gold-border);
+            margin-bottom: 20px;
+        }
+
+        .question-box {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--emerald-dark);
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff;
+            border: 2px solid var(--gold-border);
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-explain {
+            background: #0284c7;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 0 #0369a1;
+        }
+
+        /* Options Grid (3D Icons Look) */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            border: 3px solid var(--gold-border);
+            border-radius: 15px;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--emerald-dark);
+            cursor: pointer;
+            box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .option-btn.correct {
+            background: var(--correct-green) !important;
+            color: white !important;
+            border-color: #15803d !important;
+            animation: pulse 0.5s;
+        }
+
+        .option-btn.wrong {
+            background: var(--wrong-red) !important;
+            color: white !important;
+            border-color: #b91c1c !important;
+            animation: shake 0.4s;
+        }
+
+        /* Match Activity Styling */
+        .match-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .match-col {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .match-item {
+            background: #fff;
+            border: 2px solid var(--gold-border);
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .match-item.selected {
+            background: #fef08a;
+            border-color: var(--pink-accent);
+        }
+
+        .match-item.matched {
+            background: #bbf7d0;
+            border-color: var(--correct-green);
+            cursor: default;
+        }
+
+        /* Control Buttons Navigation */
+        .controls-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .ctrl-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+
+        .btn-tts { background: #8b5cf6; }
+        .btn-tts.speaking { background: #f43f5e; }
+        .btn-retry { background: #f59e0b; }
+        .btn-nav { background: #3b82f6; }
+
+        /* Popups / Modals */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            border: 3px solid var(--gold-border);
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            color: var(--emerald-dark);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .modal-btn {
+            background: var(--pink-accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        .thumbs-down-anim {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            z-index: 300;
+            display: none;
+            animation: popFade 1s forwards;
+        }
+
+        @keyframes popFade {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        /* Certificate View */
+        #certificate-view {
+            display: none;
+            background: #fff;
+            padding: 30px;
+            border: 10px double var(--gold-border);
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+            margin: 20px auto;
+            text-align: center;
+            color: #1e293b;
+            position: relative;
+        }
+
+        .cert-header {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #475569;
+            margin-bottom: 15px;
+        }
+
+        .cert-title {
+            font-size: 2rem;
+            color: #b45309;
+            margin-bottom: 15px;
+            font-family: Georgia, serif;
+        }
+
+        .cert-body {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+
+        .cert-badge {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #15803d;
+            margin: 15px 0;
+        }
+
+        .cert-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        /* Footer Marquee */
+        footer {
+            background: #020617;
+            color: var(--primary-gold);
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 2px solid var(--gold-border);
+        }
+
+        .marquee-text {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            font-weight: bold;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Responsive Ratio (16:9 Adaptability) */
+        @media (min-width: 900px) {
+            .main-wrapper {
+                min-height: 720px;
+                height: 100vh;
+                max-height: 900px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+    <!-- FRONT SCREEN -->
+    <div id="front-screen">
+        <div class="front-card">
+            <div class="front-title">
+                મહારાણીશ્રી ગંગાબા સાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content (ધોરણ 6 થી 8)
+            </div>
+            <form id="start-form" onsubmit="startGame(event)">
+                <div class="form-group">
+                    <label>વિદ્યાર્થીનું નામ:</label>
+                    <input type="text" id="student-name" class="form-control" required placeholder="તમારું નામ લખો">
+                </div>
+                <div class="form-group">
+                    <label>શાળાનું નામ:</label>
+                    <input type="text" id="school-name" class="form-control" required placeholder="શાળાનું નામ લખો">
+                </div>
+                <div class="form-group">
+                    <label>ધોરણ:</label>
+                    <select id="grade-select" class="form-control" required>
+                        <option value="6">ધોરણ 6</option>
+                        <option value="7" selected>ધોરણ 7</option>
+                        <option value="8">ધોરણ 8</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>સ્થળ:</label>
+                    <input type="text" id="location-name" class="form-control" required placeholder="ગામ / શહેરનું નામ">
+                </div>
+                <button type="submit" class="btn-start">રમત શરૂ કરો 🚀</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- HEADER / DASHBOARD -->
+    <header>
+        <div class="header-title-small">મહારાણીશ્રી ગંગાબા સાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content ધોરણ 6 થી 8</div>
+        <div class="header-lo">LO: 4.5 શબ્દ, શબ્દસમૂહ, કહેવત અને રૂઢિપ્રયોગનો ઉપયોગ કરીને અર્થપૂર્ણ વાક્ય અને રચના કરે છે.</div>
+        <div class="header-chapter">ધોરણ: 7 ગુજરાતી (સત્ર-1) એકમ-3 અમારી કામધેનુ</div>
+        
+        <div class="dashboard">
+            <div class="student-info">વિદ્યાર્થી: <span id="disp-name">-</span> | શાળા: <span id="disp-school">-</span></div>
+            <div class="score-badge">કુલ સ્કોર: <span id="score-val">0</span></div>
+        </div>
+    </header>
+
+    <!-- TABS SYSTEM -->
+    <div class="tabs-container">
+        <button class="tab-btn active" id="tab-1" onclick="switchActivity(1)">પ્રવૃત્તિ 1</button>
+        <button class="tab-btn disabled" id="tab-2" onclick="switchActivity(2)">પ્રવૃત્તિ 2</button>
+        <button class="tab-btn disabled" id="tab-3" onclick="switchActivity(3)">પ્રવૃત્તિ 3</button>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="content-area">
+        <!-- Game Play Area -->
+        <div id="game-card" class="light-card">
+            <div id="act-instruction" class="activity-instruction">સૂચના...</div>
+            
+            <div id="question-container">
+                <div class="question-box">
+                    <span id="q-text">પ્રશ્ન અહી દેખાશે...</span>
+                    <button class="btn-explain" onclick="showExplanation()">સમજૂતી 💡</button>
+                </div>
+
+                <!-- MCQs Grid Container -->
+                <div id="options-container" class="options-grid"></div>
+
+                <!-- Matching Container for Activity 3 -->
+                <div id="match-container" class="match-container" style="display:none;">
+                    <div class="match-col" id="match-col-a"></div>
+                    <div class="match-col" id="match-col-b"></div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls-container">
+                <button class="ctrl-btn btn-tts" id="tts-btn" onclick="toggleReadQuestionTTS()">
+                    <span>🔊</span> <span id="tts-text">પ્રશ્ન સાંભળો</span>
+                </button>
+                <button class="ctrl-btn btn-retry" onclick="retryQuestion()">ફરી પ્રયાસ કરો</button>
+                <div style="display: flex; gap: 5px;">
+                    <button class="ctrl-btn btn-nav" onclick="prevQuestion()">પાછળનો પ્રશ્ન</button>
+                    <button class="ctrl-btn btn-nav" onclick="nextQuestion()">આગળનો પ્રશ્ન</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CERTIFICATE DISPLAY -->
+        <div id="certificate-view">
+            <div class="cert-header">મહારાણીશ્રી ગંગાબા સાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા પ્રસ્તુત ગુજરાતી E-Content</div>
+            <div class="cert-title">📜 પ્રમાણપત્ર 📜</div>
+            <p>આથી પ્રમાણપત્ર આપવામાં આવે છે કે,</p>
+            <div class="cert-body">
+                વિદ્યાર્થી: <strong id="cert-student" style="color:#b45309;">-</strong><br>
+                શાળા: <strong id="cert-school">-</strong> | સ્થળ: <strong id="cert-loc">-</strong><br>
+                ધોરણ: <strong id="cert-grade">-</strong> ગુજરાતી (સત્ર-1) એકમ-3 "અમારી કામધેનુ"<br>
+                LO: 4.5 શબ્દ અને શબ્દસમૂહનો યોગ્ય ઉપયોગ.
+            </div>
+            <div>મેળવેલ ગુણ: <strong id="cert-score">0</strong> / <strong id="cert-total">0</strong></div>
+            <div class="cert-badge" id="cert-performance">શાનદાર પ્રદર્શન</div>
+            <div class="cert-footer">
+                <div>તારીખ: <span id="cert-date"></span></div>
+                <div>ડી.આઈ.ઈ.ટી. ભુજ - કચ્છ</div>
+            </div>
+            <div style="margin-top:20px; display:flex; gap:10px; justify-content:center;">
+                <button class="modal-btn" onclick="downloadCertPDF()">PDF ડાઉનલોડ કરો</button>
+                <button class="modal-btn" style="background:#22c55e;" onclick="window.print()">પ્રિન્ટ / Image ડાઉનલોડ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="marquee-text">
+            Disclaimer : આ કન્ટેન્ટ મહારાણીશ્રી ગંગાબા સાહેબ જિલ્લા શિક્ષણ અને તાલીમ ભવન, ભુજ - કચ્છ દ્વારા નિર્મિત કરવામાં આવ્યું છે.
+        </div>
+    </footer>
+</div>
+
+<!-- Thumbs Down Display -->
+<div id="thumbs-down" class="thumbs-down-anim">👎</div>
+
+<!-- Explanation / Generic Modal -->
+<div id="info-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-title" id="modal-title">સમજૂતી</div>
+        <p id="modal-body" style="font-size: 1.1rem; line-height: 1.5; color:#334155;"></p>
+        <button class="modal-btn" onclick="closeModal()">બંધ કરો</button>
+    </div>
+</div>
+
+<script>
+    /* Data Definitions */
+    const activities = {
+        1: {
+            instruction: "પ્રવૃત્તિ: 1 કૌંસમાંથી શબ્દસમૂહ માટે યોગ્ય એક શબ્દ પસંદ કરો.",
+            questions: [
+                { q: "દેવની આરતી", ans: "આશકા", options: ["બાફણું", "ઘૂઘરી", "આશકા", "વટસાવિત્રી", "કામધેનુ"], exp: "દેવની આરતી કે પૂજા પછી લેવાતી જ્યોત/પ્રસાદને આશકા કહે છે." },
+                { q: "ઈચ્છા અનુસાર દૂધ આપનારી ગાય", ans: "કામધેનુ", options: ["બાફણું", "ઘૂઘરી", "આશકા", "વટસાવિત્રી", "કામધેનુ"], exp: "પૌરાણિક માન્યતા મુજબ મનોકામના પૂર્ણ કરતી ગાય એટલે કામધેનુ." },
+                { q: "બાફેલું અનાજ", ans: "બાફણું", options: ["બાફણું", "ઘૂઘરી", "આશકા", "વટસાવિત્રી", "કામધેનુ"], exp: "બાફીને તૈયાર કરેલા અનાજને બાફણું કહેવાય છે." },
+                { q: "બાફેલી જાર, બાજરી", ans: "ઘૂઘરી", options: ["બાફણું", "ઘૂઘરી", "આશકા", "વટસાવિત્રી", "કામધેનુ"], exp: "બાફેલી જાર કે બાજરીના દાણાને ઘૂઘરી કહે છે." },
+                { q: "વડનું પૂજન કરવાનો દિવસ", ans: "વટસાવિત્રી", options: ["બાફણું", "ઘૂઘરી", "આશકા", "વટસાવિત્રી", "કામધેનુ"], exp: "જે દિવસે વડ સાવિત્રીનું વ્રત અને વડનું પૂજન થાય છે." }
+            ]
+        },
+        2: {
+            instruction: "પ્રવૃત્તિ: 2 કૌંસમાં આપેલા વિકલ્પોમાંથી યોગ્ય વાનગી પસંદ કરો.",
+            questions: [
+                { q: "ચોખા ચણાની દાળના લોટનું ખીરુ બનાવી આથો લાવીને બનતી વાનગી", ans: "ઢોકળા", options: ["પૂરી", "પિઝા", "વરાળિયું", "ઢોકળા", "નૂડલ્સ"], exp: "આથો લાવી વરાળથી બાફીને ઢોકળા બનાવવામાં આવે છે." },
+                { q: "ઘણા બધા શાકભાજી અને વરાળથી પકવીને બનાવતી વાનગી", ans: "વરાળિયું", options: ["પૂરી", "પિઝા", "વરાળિયું", "ઢોકળા", "નૂડલ્સ"], exp: "વરાળથી શાકભાજી બાફીને બનતી વાનગી એટલે વરાળિયું." },
+                { q: "લોટ બાંધીને ગોળાકારમાં તળીને ખવાતી વાનગી", ans: "પૂરી", options: ["પૂરી", "પિઝા", "વરાળિયું", "ઢોકળા", "નૂડલ્સ"], exp: "ઘઉંના લોટની કણકમાંથી ગોળ વણી તળીને પૂરી બને છે." },
+                { q: "સેવને પાણીમાં ઉકાળીને મસાલા નાખીને ખવાતી વાનગી", ans: "નૂડલ્સ", options: ["પૂરી", "પિઝા", "વરાળિયું", "ઢોકળા", "નૂડલ્સ"], exp: "બાફેલી સેવ જેવા ચાઇનીઝ ખોરાકને નૂડલ્સ કહે છે." },
+                { q: "રોટલા પર સોસ શાકભાજી ચીઝ નાખીને શેકીને બનતી વાનગી", ans: "પિઝા", options: ["પૂરી", "પિઝા", "વરાળિયું", "ઢોકળા", "નૂડલ્સ"], exp: "બેઝ પર ચીઝ અને વેજીટેબલ્સ રાખી બેક કરાતી વાનગી એટલે પિઝા." }
+            ]
+        },
+        3: {
+            instruction: "પ્રવૃત્તિ: 3 યોગ્ય જોડકાં જોડો (અ વિભાગના શબ્દ સામે બ વિભાગ પર ક્લિક કરો).",
+            pairs: [
+                { a: "નિશ્ચિત સમય", b: "ટંક" },
+                { a: "બે પ્રસુતિ વચ્ચેનો ગાળો", b: "ઉબેલ" },
+                { a: "પશુના શરીરે માલિશ કરવી", b: "ખરેરો કરવો" },
+                { a: "આગળનો જન્મ", b: "પૂર્વજન્મ" },
+                { a: "બધું સસ્તું હોવું", b: "સોંઘારત" }
+            ]
+        }
+    };
+
+    /* State Variables */
+    let currentActivity = 1;
+    let currentQIndex = 0;
+    let score = 0;
+    let unlockedActivities = [1];
+    let selectedMatchA = null;
+    let matchResults = {};
+    let isSpeaking = false;
+    let speechSynthesisUtterance = null;
+
+    /* Start Game */
+    function startGame(e) {
+        e.preventDefault();
+        const student = document.getElementById('student-name').value;
+        const school = document.getElementById('school-name').value;
+        
+        document.getElementById('disp-name').innerText = student;
+        document.getElementById('disp-school').innerText = school;
+        document.getElementById('front-screen').style.display = 'none';
+
+        loadActivity(1);
+    }
+
+    /* Helper: Array Shuffle */
+    function shuffle(array) {
+        let arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    /* Load Activity */
+    function loadActivity(actNum) {
+        stopTTS();
+        currentActivity = actNum;
+        currentQIndex = 0;
+
+        // Tab CSS update
+        for (let i = 1; i <= 3; i++) {
+            const tab = document.getElementById(`tab-${i}`);
+            if (i === actNum) tab.className = "tab-btn active";
+            else if (unlockedActivities.includes(i)) tab.className = "tab-btn";
+            else tab.className = "tab-btn disabled";
+        }
+
+        document.getElementById('act-instruction').innerText = activities[actNum].instruction;
+
+        if (actNum === 1 || actNum === 2) {
+            document.getElementById('options-container').style.display = 'grid';
+            document.getElementById('match-container').style.display = 'none';
+            // Shuffle questions once per load
+            activities[actNum].shuffledQ = shuffle(activities[actNum].questions);
+            renderQuestion();
+        } else if (actNum === 3) {
+            document.getElementById('options-container').style.display = 'none';
+            document.getElementById('match-container').style.display = 'flex';
+            renderMatching();
+        }
+    }
+
+    /* Render MCQ Questions */
+    function renderQuestion() {
+        stopTTS();
+        const data = activities[currentActivity].shuffledQ[currentQIndex];
+        document.getElementById('q-text').innerText = data.q;
+
+        const optContainer = document.getElementById('options-container');
+        optContainer.innerHTML = '';
+
+        const shuffledOpts = shuffle(data.options);
+        shuffledOpts.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `<span>⭐</span> ${opt}`;
+            btn.onclick = () => checkAnswer(opt, btn, data.ans);
+            optContainer.appendChild(btn);
+        });
+    }
+
+    /* Check MCQ Answer */
+    function checkAnswer(selected, btn, correct) {
+        const btns = document.querySelectorAll('.option-btn');
+        btns.forEach(b => b.disabled = true);
+
+        if (selected === correct) {
+            btn.classList.add('correct');
+            playAudioTone(true);
+            triggerBalloons();
+            score += 10;
+            document.getElementById('score-val').innerText = score;
+
+            setTimeout(() => {
+                nextQuestion();
+            }, 1500);
+        } else {
+            btn.classList.add('wrong');
+            playAudioTone(false);
+            showThumbsDown();
+
+            setTimeout(() => {
+                showModal("ખોટો જવાબ!", `સાચો જવાબ છે: <b>${correct}</b><br><br>સમજૂતી: ${activities[currentActivity].shuffledQ[currentQIndex].exp}`);
+            }, 800);
+        }
+    }
+
+    /* Retry Question */
+    function retryQuestion() {
+        if (currentActivity === 3) {
+            renderMatching();
+        } else {
+            renderQuestion();
+        }
+    }
+
+    /* Render Matching Activity 3 */
+    function renderMatching() {
+        stopTTS();
+        document.getElementById('q-text').innerText = "નીચે આપેલા અ અને બ વિભાગને યોગ્ય રીતે જોડો.";
+        const colA = document.getElementById('match-col-a');
+        const colB = document.getElementById('match-col-b');
+        colA.innerHTML = '<h4 style="text-align:center; margin-bottom:10px;">અ વિભાગ</h4>';
+        colB.innerHTML = '<h4 style="text-align:center; margin-bottom:10px;">બ વિભાગ</h4>';
+
+        const pairs = activities[3].pairs;
+        const shuffledB = shuffle(pairs.map(p => p.b));
+        matchResults = {};
+        selectedMatchA = null;
+
+        pairs.forEach((pair, idx) => {
+            const itemA = document.createElement('div');
+            itemA.className = 'match-item';
+            itemA.innerText = pair.a;
+            itemA.id = `match-a-${idx}`;
+            itemA.onclick = () => selectMatchA(idx, pair.a, itemA);
+            colA.appendChild(itemA);
+        });
+
+        shuffledB.forEach((bVal, idx) => {
+            const itemB = document.createElement('div');
+            itemB.className = 'match-item';
+            itemB.innerText = bVal;
+            itemB.onclick = () => selectMatchB(bVal, itemB);
+            colB.appendChild(itemB);
+        });
+    }
+
+    function selectMatchA(idx, text, elem) {
+        document.querySelectorAll('#match-col-a .match-item').forEach(el => el.classList.remove('selected'));
+        if (elem.classList.contains('matched')) return;
+        selectedMatchA = { idx, text, elem };
+        elem.classList.add('selected');
+    }
+
+    function selectMatchB(bVal, elem) {
+        if (!selectedMatchA) {
+            showModal("સૂચના", "પહેલાં 'અ' વિભાગમાંથી વિકલ્પ પસંદ કરો.");
+            return;
+        }
+        if (elem.classList.contains('matched')) return;
+
+        const correctB = activities[3].pairs[selectedMatchA.idx].b;
+
+        if (bVal === correctB) {
+            elem.classList.add('matched');
+            selectedMatchA.elem.classList.remove('selected');
+            selectedMatchA.elem.classList.add('matched');
+            playAudioTone(true);
+            triggerBalloons();
+            score += 10;
+            document.getElementById('score-val').innerText = score;
+            matchResults[selectedMatchA.idx] = true;
+            selectedMatchA = null;
+
+            if (Object.keys(matchResults).length === activities[3].pairs.length) {
+                setTimeout(() => {
+                    completeActivity();
+                }, 1000);
+            }
+        } else {
+            playAudioTone(false);
+            showThumbsDown();
+            showModal("ખોટો જવાબ", `માલિશ/જોડકું યોગ્ય નથી. ફરી પ્રયાસ કરો.`);
+        }
+    }
+
+    /* Navigation */
+    function nextQuestion() {
+        if (currentActivity === 3) {
+            completeActivity();
+            return;
+        }
+        const totalQ = activities[currentActivity].shuffledQ.length;
+        if (currentQIndex < totalQ - 1) {
+            currentQIndex++;
+            renderQuestion();
+        } else {
+            completeActivity();
+        }
+    }
+
+    function prevQuestion() {
+        if (currentActivity !== 3 && currentQIndex > 0) {
+            currentQIndex--;
+            renderQuestion();
+        }
+    }
+
+    function switchActivity(actNum) {
+        if (unlockedActivities.includes(actNum)) {
+            loadActivity(actNum);
+        } else {
+            showModal("લોક છે", "આગળની પ્રવૃત્તિ પૂર્ણ કર્યા પછી આ ખુલશે!");
+        }
+    }
+
+    /* Complete Activity Popup */
+    function completeActivity() {
+        if (currentActivity < 3) {
+            const nextAct = currentActivity + 1;
+            if (!unlockedActivities.includes(nextAct)) unlockedActivities.push(nextAct);
+            showModal("પ્રવૃત્તિ પૂર્ણ! 🎉", `તમે પ્રવૃત્તિ ${currentActivity} સફળતાપૂર્વક પૂર્ણ કરી છે. હવે નવી પ્રવૃત્તિ પર જાઓ.`, () => {
+                loadActivity(nextAct);
+            });
+        } else {
+            showCertificate();
+        }
+    }
+
+    /* Show Explanation */
+    function showExplanation() {
+        if (currentActivity === 3) {
+            showModal("સમજૂતી", "અ વિભાગના શબ્દ માટે યોગ્ય અર્થ કે સાચું વિધાન બ વિભાગમાંથી પસંદ કરીને જોડો.");
+        } else {
+            const exp = activities[currentActivity].shuffledQ[currentQIndex].exp;
+            showModal("પ્રશ્નની સમજૂતી", exp);
+        }
+    }
+
+    /* Web Speech API (TTS Gujarati) */
+    function toggleReadQuestionTTS() {
+        if (isSpeaking) {
+            stopTTS();
+        } else {
+            const textToRead = currentActivity === 3 
+                ? "નીચે આપેલા અ અને બ વિભાગને યોગ્ય રીતે જોડો." 
+                : activities[currentActivity].shuffledQ[currentQIndex].q;
+
+            speechSynthesisUtterance = new SpeechSynthesisUtterance(textToRead);
+            speechSynthesisUtterance.lang = 'gu-IN';
+            speechSynthesisUtterance.rate = 0.95;
+
+            speechSynthesisUtterance.onend = () => stopTTS();
+            speechSynthesisUtterance.onerror = () => stopTTS();
+
+            window.speechSynthesis.speak(speechSynthesisUtterance);
+            isSpeaking = true;
+
+            const ttsBtn = document.getElementById('tts-btn');
+            ttsBtn.classList.add('speaking');
+            document.getElementById('tts-text').innerText = "વાંચવાનું બંધ કરો";
+        }
+    }
+
+    function stopTTS() {
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        isSpeaking = false;
+        const ttsBtn = document.getElementById('tts-btn');
+        if (ttsBtn) {
+            ttsBtn.classList.remove('speaking');
+            document.getElementById('tts-text').innerText = "પ્રશ્ન સાંભળો";
+        }
+    }
+
+    /* Audio Sound Effects */
+    function playAudioTone(isCorrect) {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        if (isCorrect) {
+            // Victory Chime / Marimba
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+            osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
+            osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2); // G5
+            gain.gain.setValueAtTime(0.3, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.5);
+        } else {
+            // Wrong sound Tone
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(200, ctx.currentTime);
+            osc.frequency.setValueAtTime(140, ctx.currentTime + 0.15);
+            gain.gain.setValueAtTime(0.3, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.4);
+        }
+    }
+
+    /* Animations & FX */
+    function triggerBalloons() {
+        confetti({
+            particleCount: 60,
+            spread: 70,
+            origin: { y: 0.7 }
+        });
+    }
+
+    function showThumbsDown() {
+        const td = document.getElementById('thumbs-down');
+        td.style.display = 'block';
+        setTimeout(() => td.style.display = 'none', 1000);
+    }
+
+    /* Generic Modal Window */
+    let modalCallback = null;
+    function showModal(title, body, callback = null) {
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-body').innerHTML = body;
+        document.getElementById('info-modal').style.display = 'flex';
+        modalCallback = callback;
+    }
+
+    function closeModal() {
+        document.getElementById('info-modal').style.display = 'none';
+        if (modalCallback) {
+            modalCallback();
+            modalCallback = null;
+        }
+    }
+
+    /* Show Certificate */
+    function showCertificate() {
+        document.getElementById('game-card').style.display = 'none';
+        const certView = document.getElementById('certificate-view');
+        certView.style.display = 'block';
+
+        const name = document.getElementById('student-name').value;
+        const school = document.getElementById('school-name').value;
+        const loc = document.getElementById('location-name').value;
+        const grade = document.getElementById('grade-select').value;
+
+        document.getElementById('cert-student').innerText = name;
+        document.getElementById('cert-school').innerText = school;
+        document.getElementById('cert-loc').innerText = loc;
+        document.getElementById('cert-grade').innerText = grade;
+
+        const maxScore = 150; // Total potential score
+        document.getElementById('cert-score').innerText = score;
+        document.getElementById('cert-total').innerText = maxScore;
+
+        const percentage = (score / maxScore) * 100;
+        const badgeElem = document.getElementById('cert-performance');
+
+        if (percentage >= 50) {
+            badgeElem.innerText = "🌟 શાનદાર પ્રદર્શન 🌟";
+            badgeElem.style.color = "#15803d";
+        } else {
+            badgeElem.innerText = "👍 હજુ વધુ મહેનત કરો";
+            badgeElem.style.color = "#b91c1c";
+        }
+
+        const today = new Date().toLocaleDateString('gu-IN');
+        document.getElementById('cert-date').innerText = today;
+    }
+
+    /* Download PDF */
+    function downloadCertPDF() {
+        const element = document.getElementById('certificate-view');
+        const opt = {
+            margin:       0.5,
+            filename:     'Certificate_Gujarati_EContent.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+        };
+        html2pdf().set(opt).from(element).save();
+    }
+</script>
+</body>
+</html>
